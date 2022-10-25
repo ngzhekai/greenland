@@ -10,6 +10,7 @@ BIN=greenland
 
 make: main
 	doxygen Doxyfile
+	astyle --project $(SRCDIR)/*.c
 
 main: main.o
 	$(CC) $(CFLAGS) main.o -o greenland 
