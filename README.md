@@ -16,6 +16,7 @@ regarding them from a server.
 - Make
 - GCC
 - Doxygen
+- Astyle
 
 ## Building
 
