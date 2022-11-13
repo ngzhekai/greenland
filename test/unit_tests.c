@@ -6,8 +6,8 @@
 
 START_TEST(test_tree_create)
 {
-  struct Tree *t;
-  
+  struct Tree* t;
+
   t = tree_create("foo", 0, 1);
 
   ck_assert_str_eq(tree_get_species(t), "foo");
@@ -18,13 +18,13 @@ START_TEST(test_tree_create)
 }
 END_TEST
 
-Suite *tree_suit(void);
+Suite* tree_suit(void);
 
 int main(void)
 {
   int num_failed;
-  Suite *s;
-  SRunner *sr;
+  Suite* s;
+  SRunner* sr;
 
   s = tree_suit();
   sr = srunner_create(s);
@@ -37,12 +37,12 @@ int main(void)
 
 Suite* tree_suit(void)
 {
-  Suite *s;
-  TCase *tc_core;
-  
+  Suite* s;
+  TCase* tc_core;
+
   s = suite_create("Tree");
   tc_core = tcase_create("Core");
-  
+
   tcase_add_test(tc_core, test_tree_create);
   suite_add_tcase(s, tc_core);
 

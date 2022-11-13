@@ -13,7 +13,7 @@ struct Tree* tree_create(const char* sp, uint_least8_t st, unsigned long d)
   return new_tree;
 }
 
-void tree_free(struct Tree *t)
+void tree_free(struct Tree* t)
 {
   free(t->species);
   free(t);
@@ -24,7 +24,7 @@ char* tree_get_species(const struct Tree* t)
   return t->species;
 }
 
-uint_least8_t tree_get_status (const struct Tree* t)
+uint_least8_t tree_get_status(const struct Tree* t)
 {
   return t->status;
 }
