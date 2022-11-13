@@ -1,0 +1,52 @@
+.TH "Tree" 3 "Sun Nov 13 2022" "greenland" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Tree
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <tree\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char * \fBspecies\fP"
+.br
+.ti -1c
+.RI "uint_least8_t \fBstatus\fP"
+.br
+.ti -1c
+.RI "unsigned long \fBdays_alived\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBTree\fP data class that stores information about a tree including its species, its status, and the amount of days it has lived\&. 
+.PP
+Definition at line \fB14\fP of file \fBtree\&.h\fP\&.
+.SH "Field Documentation"
+.PP 
+.SS "unsigned long Tree::days_alived"
+Amount of days the tree has lived 
+.PP
+Definition at line \fB20\fP of file \fBtree\&.h\fP\&.
+.PP
+Referenced by \fBtree_create()\fP, and \fBtree_get_days_alived()\fP\&.
+.SS "char* Tree::species"
+Species name of the tree 
+.PP
+Definition at line \fB16\fP of file \fBtree\&.h\fP\&.
+.PP
+Referenced by \fBtree_create()\fP, \fBtree_free()\fP, and \fBtree_get_species()\fP\&.
+.SS "uint_least8_t Tree::status"
+Status of the tree 
+.PP
+Definition at line \fB18\fP of file \fBtree\&.h\fP\&.
+.PP
+Referenced by \fBtree_create()\fP, and \fBtree_get_status()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for greenland from the source code\&.

@@ -1,0 +1,180 @@
+.TH "lib/tree.h" 3 "Sun Nov 13 2022" "greenland" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/tree.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBTree\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBTree\fP * \fBtree_create\fP (const char *sp, uint_least8_t st, unsigned long d)"
+.br
+.ti -1c
+.RI "void \fBtree_free\fP (struct \fBTree\fP *t)"
+.br
+.ti -1c
+.RI "char * \fBtree_get_species\fP (const struct \fBTree\fP *t)"
+.br
+.ti -1c
+.RI "uint_least8_t \fBtree_get_status\fP (const struct \fBTree\fP *t)"
+.br
+.ti -1c
+.RI "unsigned long \fBtree_get_days_alived\fP (const struct \fBTree\fP *t)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBDate\fP
+.RS 4
+2022-11-11 23:27:54 PM +0800 
+.RE
+.PP
+
+.PP
+Definition in file \fBtree\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "struct \fBTree\fP * tree_create (const char * sp, uint_least8_t st, unsigned long d)"
+Create a \fBTree\fP data class
+.PP
+\fBParameters\fP
+.RS 4
+\fIsp\fP Species name for the \fBTree\fP 
+.br
+\fIst\fP Current status for the \fBTree\fP 
+.br
+\fId\fP Days alived for the \fBTree\fP
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A \fBTree\fP data class that contains the information about its species name, current status and the amount of days alived\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB5\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+6 {
+7   struct Tree* new_tree = malloc(sizeof(struct Tree));
+8   new_tree->species = calloc(strlen(sp) + 1, sizeof(char));
+9   strncpy(new_tree->species, sp, strlen(sp) + 1);
+10   new_tree->status = st;
+11   new_tree->days_alived = d;
+12 
+13   return new_tree;
+14 }
+.fi
+.PP
+References \fBTree::days_alived\fP, \fBTree::species\fP, and \fBTree::status\fP\&.
+.SS "void tree_free (struct \fBTree\fP * t)"
+Destroy a \fBTree\fP data class
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A tree data class to be destroyed 
+.RE
+.PP
+
+.PP
+Definition at line \fB16\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+17 {
+18   free(t->species);
+19   free(t);
+20 }
+.fi
+.PP
+References \fBTree::species\fP\&.
+.SS "unsigned long tree_get_days_alived (const struct \fBTree\fP * t)"
+Get \fBTree\fP's the amount of days it has lived
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A pointer to a \fBTree\fP
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A non-negative number of days the \fBTree\fP has lived 
+.RE
+.PP
+
+.PP
+Definition at line \fB32\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+33 {
+34   return t->days_alived;
+35 }
+.fi
+.PP
+References \fBTree::days_alived\fP\&.
+.SS "char * tree_get_species (const struct \fBTree\fP * t)"
+Get \fBTree\fP's species name
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A pointer to a \fBTree\fP
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A string that describes the \fBTree\fP's species name 
+.RE
+.PP
+
+.PP
+Definition at line \fB22\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+23 {
+24   return t->species;
+25 }
+.fi
+.PP
+References \fBTree::species\fP\&.
+.SS "uint_least8_t tree_get_status (const struct \fBTree\fP * t)"
+Get \fBTree\fP's current status
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A pointer to a \fBTree\fP
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A non-negative number indicates the \fBTree\fP's current status 
+.RE
+.PP
+
+.PP
+Definition at line \fB27\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+28 {
+29   return t->status;
+30 }
+.fi
+.PP
+References \fBTree::status\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for greenland from the source code\&.
