@@ -12,11 +12,14 @@ make: main
 	doxygen Doxyfile
 	astyle --project $(SRCDIR)/*.c
 
-main: main.o
-	$(CC) $(CFLAGS) main.o -o greenland 
+main: tree.o main.o
+	$(CC) $(CFLAGS) main.o tree.o -o greenland 
 
 main.o: $(SRCDIR)/main.c
 	$(CC) $(CFLAGS) -c $(SRCDIR)/main.c
+
+tree.o: $(LIBDIR)/tree.h $(LIBDIR)/tree.c
+	$(CC) $(CFLAGS) -c $(LIBDIR)/tree.h $(LIBDIR)/tree.c
 
 clean:
 	rm *.o $(BIN)
