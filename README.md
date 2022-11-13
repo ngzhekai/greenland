@@ -17,6 +17,7 @@ regarding them from a server.
 - GCC
 - Doxygen
 - Astyle
+- Check (unit testing)
 
 ## Building
 
