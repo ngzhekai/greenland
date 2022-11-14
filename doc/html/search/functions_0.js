@@ -5,6 +5,9 @@ var searchData=
   ['tree_5fget_5fdays_5falived_2',['tree_get_days_alived',['../tree_8h.html#a3c7047870c47f0511f50c5e7871ab313',1,'tree.c']]],
   ['tree_5fget_5fspecies_3',['tree_get_species',['../tree_8h.html#a9216e8ce9a0431b17980e5415aec1a6f',1,'tree.c']]],
   ['tree_5fget_5fstatus_4',['tree_get_status',['../tree_8h.html#acbe63ea329cf4f420173313f1e31cbbf',1,'tree.c']]],
-  ['trstat_5fis_5fvalid_5',['trstat_is_valid',['../tree__state_8h.html#a9ff517b70239fd389043d491dbab8000',1,'tree_state.c']]],
-  ['trstat_5fto_5fstring_6',['trstat_to_string',['../tree__state_8h.html#ada7e378cd47e8a33564f60af1da7944a',1,'tree_state.c']]]
+  ['tree_5fset_5fdays_5falived_5',['tree_set_days_alived',['../tree_8h.html#a6b61e0a2714b378913056752044f795f',1,'tree.c']]],
+  ['tree_5fset_5fspecies_6',['tree_set_species',['../tree_8h.html#ad3a799947b9ffe0d115ce1bb60bc6e5a',1,'tree.c']]],
+  ['tree_5fset_5fstatus_7',['tree_set_status',['../tree_8h.html#adb1e310653ddd74bb442df28c09064a5',1,'tree.c']]],
+  ['trstat_5fis_5fvalid_8',['trstat_is_valid',['../tree__state_8h.html#a9ff517b70239fd389043d491dbab8000',1,'tree_state.c']]],
+  ['trstat_5fto_5fstring_9',['trstat_to_string',['../tree__state_8h.html#ada7e378cd47e8a33564f60af1da7944a',1,'tree_state.c']]]
 ];

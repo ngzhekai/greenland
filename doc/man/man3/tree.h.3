@@ -36,6 +36,15 @@ lib/tree.h
 .ti -1c
 .RI "unsigned long \fBtree_get_days_alived\fP (const struct \fBTree\fP *t)"
 .br
+.ti -1c
+.RI "void \fBtree_set_species\fP (struct \fBTree\fP *t, const char *sp)"
+.br
+.ti -1c
+.RI "void \fBtree_set_status\fP (struct \fBTree\fP *t, \fBtree_state\fP st)"
+.br
+.ti -1c
+.RI "void \fBtree_set_days_alived\fP (struct \fBTree\fP *t, unsigned long d)"
+.br
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -80,22 +89,17 @@ Definition at line \fB7\fP of file \fBtree\&.c\fP\&.
 .nf
 8 {
 9   struct Tree* new_tree = malloc(sizeof(struct Tree));
-10   new_tree->species = calloc(strlen(sp) + 1, sizeof(char));
-11   strncpy(new_tree->species, sp, strlen(sp) + 1);
-12   assert(trstat_is_valid(st));
-13   new_tree->status = st;
-14 
-15   if (new_tree->status == DEAD) {
-16     new_tree->days_alived = 0;
-17   } else {
-18     new_tree->days_alived = d;
-19   }
-20 
-21   return new_tree;
-22 }
+10   assert(trstat_is_valid(st));
+11   new_tree->species = NULL;
+12   tree_set_species(new_tree, sp);
+13   tree_set_status(new_tree, st);
+14   tree_set_days_alived(new_tree, d);
+15 
+16   return new_tree;
+17 }
 .fi
 .PP
-References \fBTree::days_alived\fP, \fBTree::species\fP, and \fBTree::status\fP\&.
+References \fBTree::species\fP, \fBtree_set_days_alived()\fP, \fBtree_set_species()\fP, and \fBtree_set_status()\fP\&.
 .SS "void tree_free (struct \fBTree\fP * t)"
 Destroy a \fBTree\fP data class
 .PP
@@ -106,13 +110,13 @@ Destroy a \fBTree\fP data class
 .PP
 
 .PP
-Definition at line \fB24\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB19\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-25 {
-26   free(t->species);
-27   free(t);
-28 }
+20 {
+21   free(t->species);
+22   free(t);
+23 }
 .fi
 .PP
 References \fBTree::species\fP\&.
@@ -131,12 +135,12 @@ A non-negative integer of days the \fBTree\fP has lived
 .PP
 
 .PP
-Definition at line \fB40\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB35\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-41 {
-42   return t->days_alived;
-43 }
+36 {
+37   return t->days_alived;
+38 }
 .fi
 .PP
 References \fBTree::days_alived\fP\&.
@@ -155,12 +159,12 @@ A string that describes the \fBTree\fP's species name
 .PP
 
 .PP
-Definition at line \fB30\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB25\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-31 {
-32   return t->species;
-33 }
+26 {
+27   return t->species;
+28 }
 .fi
 .PP
 References \fBTree::species\fP\&.
@@ -179,15 +183,95 @@ A non-negative integer indicates the \fBTree\fP's current status
 .PP
 
 .PP
-Definition at line \fB35\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB30\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-36 {
-37   return t->status;
-38 }
+31 {
+32   return t->status;
+33 }
 .fi
 .PP
 References \fBTree::status\fP\&.
+.PP
+Referenced by \fBtree_set_days_alived()\fP\&.
+.SS "void tree_set_days_alived (struct \fBTree\fP * t, unsigned long d)"
+Set \fBTree\fP's the amount of days it has lived
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A modified \fBTree\fP with changed days of lived 
+.br
+\fId\fP A non-negative integer indicates day(s) 
+.RE
+.PP
+
+.PP
+Definition at line \fB55\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+56 {
+57   if (tree_get_status(t) == DEAD) {
+58     t->days_alived = 0;
+59   } else {
+60     t->days_alived = d;
+61   }
+62 }
+.fi
+.PP
+References \fBTree::days_alived\fP, and \fBtree_get_status()\fP\&.
+.PP
+Referenced by \fBtree_create()\fP\&.
+.SS "void tree_set_species (struct \fBTree\fP * t, const char * sp)"
+Set \fBTree\fP's species name
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A modified \fBTree\fP with changed species name 
+.br
+\fIsp\fP A string indicates a species name 
+.RE
+.PP
+
+.PP
+Definition at line \fB40\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+41 {
+42   if (t->species) {
+43     free(t->species);
+44   }
+45 
+46   t->species = calloc(strlen(sp) + 1, sizeof(char));
+47   strncpy(t->species, sp, strlen(sp) + 1);
+48 }
+.fi
+.PP
+References \fBTree::species\fP\&.
+.PP
+Referenced by \fBtree_create()\fP\&.
+.SS "void tree_set_status (struct \fBTree\fP * t, \fBtree_state\fP st)"
+Set \fBTree\fP's current status
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A modified \fBTree\fP with changed status 
+.br
+\fIst\fP A \fBTree\fP State enum 
+.RE
+.PP
+
+.PP
+Definition at line \fB50\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+51 {
+52   t->status = st;
+53 }
+.fi
+.PP
+References \fBTree::status\fP\&.
+.PP
+Referenced by \fBtree_create()\fP\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for greenland from the source code\&.
