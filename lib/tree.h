@@ -70,4 +70,28 @@ tree_state tree_get_status(const struct Tree* t);
  */
 unsigned long tree_get_days_alived(const struct Tree* t);
 
+/**
+ * Set Tree's species name
+ *
+ * @param[out] t A modified Tree with changed species name
+ * @param[in] sp A string indicates a species name
+ */
+void tree_set_species(struct Tree* t, const char* sp);
+
+/**
+ * Set Tree's current status
+ *
+ * @param[out] t A modified Tree with changed status
+ * @param[in] st A Tree State enum
+ */
+void tree_set_status(struct Tree* t, tree_state st);
+
+/**
+ * Set Tree's the amount of days it has lived
+ *
+ * @param[out] t A modified Tree with changed days of lived
+ * @param[in] d A non-negative integer indicates day(s)
+ */
+void tree_set_days_alived(struct Tree* t, unsigned long d);
+
 #endif
