@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 START_TEST(test_tree_create)
 {
@@ -15,6 +16,23 @@ START_TEST(test_tree_create)
   ck_assert(tree_get_days_alived(t) == (unsigned long) 1);
 
   tree_free(t);
+}
+END_TEST
+
+START_TEST(test_trstate_to_string)
+{
+  ck_assert_str_eq(trstat_to_string(DEAD), "DEAD");
+  ck_assert_str_eq(trstat_to_string(PLANTED), "PLANTED");
+  ck_assert_str_eq(trstat_to_string(SICK), "SICK");
+  ck_assert_str_eq(trstat_to_string(TREAMENT), "TREAMENT");
+  ck_assert(trstat_to_string(-1) == (char*) 0);
+}
+END_TEST
+
+START_TEST(test_trstate_is_valid)
+{
+  ck_assert(trstat_is_valid(DEAD) == true);
+  ck_assert(trstat_is_valid(-1) == false);
 }
 END_TEST
 
@@ -44,6 +62,8 @@ Suite* tree_suit(void)
   tc_core = tcase_create("Core");
 
   tcase_add_test(tc_core, test_tree_create);
+  tcase_add_test(tc_core, test_trstate_to_string);
+  tcase_add_test(tc_core, test_trstate_is_valid);
   suite_add_tcase(s, tc_core);
 
   return s;
