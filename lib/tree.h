@@ -23,9 +23,10 @@ struct Tree {
 /**
  * Create a Tree data class
  *
- * @param[in] sp Species name for the Tree
- * @param[in] st Current status for the Tree
- * @param[in] d Days alived for the Tree
+ * @param[in] sp A string specifies the species name for the Tree
+ * @param[in] st A non-negative integer specifies the current status for the
+ *               Tree
+ * @param[in] d A non-negative integer specifies the days alived of the Tree
  *
  * @return A Tree data class that contains the information about its species
  * name, current status and the amount of days alived.
@@ -53,7 +54,7 @@ char* tree_get_species(const struct Tree* t);
  *
  * @param[in] t A pointer to a Tree
  *
- * @return A non-negative number indicates the Tree's current status
+ * @return A non-negative integer indicates the Tree's current status
  */
 uint_least8_t tree_get_status(const struct Tree* t);
 
@@ -62,7 +63,7 @@ uint_least8_t tree_get_status(const struct Tree* t);
  *
  * @param[in] t A pointer to a Tree
  *
- * @return A non-negative number of days the Tree has lived
+ * @return A non-negative integer of days the Tree has lived
  */
 unsigned long tree_get_days_alived(const struct Tree* t);
 
