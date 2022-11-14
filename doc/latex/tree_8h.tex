@@ -1,6 +1,7 @@
 \hypertarget{tree_8h}{}\doxysection{lib/tree.h File Reference}
 \label{tree_8h}\index{lib/tree.h@{lib/tree.h}}
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}tree\+\_\+state.\+h\char`\"{}}\newline
 \doxysubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
@@ -9,13 +10,13 @@ struct \mbox{\hyperlink{structTree}{Tree}}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structTree}{Tree}} $\ast$ \mbox{\hyperlink{tree_8h_abd73cc0c4e9f9fd7f9fb5805fbd7fa89}{tree\+\_\+create}} (const char $\ast$sp, uint\+\_\+least8\+\_\+t st, unsigned long d)
+struct \mbox{\hyperlink{structTree}{Tree}} $\ast$ \mbox{\hyperlink{tree_8h_a3c93fc37ff11fde84dabff8147e3e23e}{tree\+\_\+create}} (const char $\ast$sp, \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\+\_\+state}} st, unsigned long d)
 \item 
 void \mbox{\hyperlink{tree_8h_abe0ccadb97878d927c2630d5003efc4f}{tree\+\_\+free}} (struct \mbox{\hyperlink{structTree}{Tree}} $\ast$t)
 \item 
 char $\ast$ \mbox{\hyperlink{tree_8h_a9216e8ce9a0431b17980e5415aec1a6f}{tree\+\_\+get\+\_\+species}} (const struct \mbox{\hyperlink{structTree}{Tree}} $\ast$t)
 \item 
-uint\+\_\+least8\+\_\+t \mbox{\hyperlink{tree_8h_ad0d18189ce2aeb589ae66012eb6c4856}{tree\+\_\+get\+\_\+status}} (const struct \mbox{\hyperlink{structTree}{Tree}} $\ast$t)
+\mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\+\_\+state}} \mbox{\hyperlink{tree_8h_acbe63ea329cf4f420173313f1e31cbbf}{tree\+\_\+get\+\_\+status}} (const struct \mbox{\hyperlink{structTree}{Tree}} $\ast$t)
 \item 
 unsigned long \mbox{\hyperlink{tree_8h_a3c7047870c47f0511f50c5e7871ab313}{tree\+\_\+get\+\_\+days\+\_\+alived}} (const struct \mbox{\hyperlink{structTree}{Tree}} $\ast$t)
 \end{DoxyCompactItemize}
@@ -32,11 +33,11 @@ Definition in file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{tree_8h_abd73cc0c4e9f9fd7f9fb5805fbd7fa89}\label{tree_8h_abd73cc0c4e9f9fd7f9fb5805fbd7fa89}} 
+\mbox{\Hypertarget{tree_8h_a3c93fc37ff11fde84dabff8147e3e23e}\label{tree_8h_a3c93fc37ff11fde84dabff8147e3e23e}} 
 \index{tree.h@{tree.h}!tree\_create@{tree\_create}}
 \index{tree\_create@{tree\_create}!tree.h@{tree.h}}
 \doxysubsubsection{\texorpdfstring{tree\_create()}{tree\_create()}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structTree}{Tree}} $\ast$ tree\+\_\+create (\begin{DoxyParamCaption}\item[{const char $\ast$}]{sp,  }\item[{uint\+\_\+least8\+\_\+t}]{st,  }\item[{unsigned long}]{d }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structTree}{Tree}} $\ast$ tree\+\_\+create (\begin{DoxyParamCaption}\item[{const char $\ast$}]{sp,  }\item[{\mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\+\_\+state}}}]{st,  }\item[{unsigned long}]{d }\end{DoxyParamCaption})}
 
 Create a \mbox{\hyperlink{structTree}{Tree}} data class
 
@@ -44,34 +45,43 @@ Create a \mbox{\hyperlink{structTree}{Tree}} data class
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em sp} & A string specifies the species name for the \mbox{\hyperlink{structTree}{Tree}} \\
 \hline
-\mbox{\texttt{ in}}  & {\em st} & A non-\/negative integer specifies the current status for the \mbox{\hyperlink{structTree}{Tree}} \\
+\mbox{\texttt{ in}}  & {\em st} & A \mbox{\hyperlink{structTree}{Tree}} State enum specifies the current status for the \mbox{\hyperlink{structTree}{Tree}} \\
 \hline
 \mbox{\texttt{ in}}  & {\em d} & A non-\/negative integer specifies the days alived of the \mbox{\hyperlink{structTree}{Tree}}\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A \mbox{\hyperlink{structTree}{Tree}} data class that contains the information about its species name, current status and the amount of days alived. 
+A \mbox{\hyperlink{structTree}{Tree}} data class that contains the information about its species name, current status and the amount of days alived.
 \end{DoxyReturn}
+\begin{DoxyAttention}{Attention}
+st must be valid 
+\end{DoxyAttention}
 
 
-Definition at line \mbox{\hyperlink{tree_8c_source_l00005}{5}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
+Definition at line \mbox{\hyperlink{tree_8c_source_l00007}{7}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00006 \{}
-\DoxyCodeLine{00007   \textcolor{keyword}{struct }\mbox{\hyperlink{structTree}{Tree}}* new\_tree = malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{structTree}{Tree}}));}
-\DoxyCodeLine{00008   new\_tree-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}} = calloc(strlen(sp) + 1, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
-\DoxyCodeLine{00009   strncpy(new\_tree-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}}, sp, strlen(sp) + 1);}
-\DoxyCodeLine{00010   new\_tree-\/>\mbox{\hyperlink{structTree_a253ad41a937d9fa7f8ed55c10f58fccd}{status}} = st;}
-\DoxyCodeLine{00011   new\_tree-\/>\mbox{\hyperlink{structTree_a508880eed4c5861ddfede1ca2d17df96}{days\_alived}} = d;}
-\DoxyCodeLine{00012 }
-\DoxyCodeLine{00013   \textcolor{keywordflow}{return} new\_tree;}
-\DoxyCodeLine{00014 \}}
+\DoxyCodeLine{00008 \{}
+\DoxyCodeLine{00009   \textcolor{keyword}{struct }\mbox{\hyperlink{structTree}{Tree}}* new\_tree = malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{structTree}{Tree}}));}
+\DoxyCodeLine{00010   new\_tree-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}} = calloc(strlen(sp) + 1, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00011   strncpy(new\_tree-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}}, sp, strlen(sp) + 1);}
+\DoxyCodeLine{00012   assert(trstat\_is\_valid(st));}
+\DoxyCodeLine{00013   new\_tree-\/>\mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}} = st;}
+\DoxyCodeLine{00014 }
+\DoxyCodeLine{00015   \textcolor{keywordflow}{if} (new\_tree-\/>\mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}} == DEAD) \{}
+\DoxyCodeLine{00016     new\_tree-\/>\mbox{\hyperlink{structTree_a508880eed4c5861ddfede1ca2d17df96}{days\_alived}} = 0;}
+\DoxyCodeLine{00017   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{00018     new\_tree-\/>\mbox{\hyperlink{structTree_a508880eed4c5861ddfede1ca2d17df96}{days\_alived}} = d;}
+\DoxyCodeLine{00019   \}}
+\DoxyCodeLine{00020 }
+\DoxyCodeLine{00021   \textcolor{keywordflow}{return} new\_tree;}
+\DoxyCodeLine{00022 \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{tree_8h_source_l00020}{Tree\+::days\+\_\+alived}}, \mbox{\hyperlink{tree_8h_source_l00016}{Tree\+::species}}, and \mbox{\hyperlink{tree_8h_source_l00018}{Tree\+::status}}.
+References \mbox{\hyperlink{tree_8h_source_l00021}{Tree\+::days\+\_\+alived}}, \mbox{\hyperlink{tree_8h_source_l00017}{Tree\+::species}}, and \mbox{\hyperlink{tree_8h_source_l00019}{Tree\+::status}}.
 
 \mbox{\Hypertarget{tree_8h_abe0ccadb97878d927c2630d5003efc4f}\label{tree_8h_abe0ccadb97878d927c2630d5003efc4f}} 
 \index{tree.h@{tree.h}!tree\_free@{tree\_free}}
@@ -88,19 +98,19 @@ Destroy a \mbox{\hyperlink{structTree}{Tree}} data class
 \end{DoxyParams}
 
 
-Definition at line \mbox{\hyperlink{tree_8c_source_l00016}{16}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
+Definition at line \mbox{\hyperlink{tree_8c_source_l00024}{24}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00017 \{}
-\DoxyCodeLine{00018   free(t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}});}
-\DoxyCodeLine{00019   free(t);}
-\DoxyCodeLine{00020 \}}
+\DoxyCodeLine{00025 \{}
+\DoxyCodeLine{00026   free(t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}});}
+\DoxyCodeLine{00027   free(t);}
+\DoxyCodeLine{00028 \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{tree_8h_source_l00016}{Tree\+::species}}.
+References \mbox{\hyperlink{tree_8h_source_l00017}{Tree\+::species}}.
 
 \mbox{\Hypertarget{tree_8h_a3c7047870c47f0511f50c5e7871ab313}\label{tree_8h_a3c7047870c47f0511f50c5e7871ab313}} 
 \index{tree.h@{tree.h}!tree\_get\_days\_alived@{tree\_get\_days\_alived}}
@@ -120,18 +130,18 @@ A non-\/negative integer of days the \mbox{\hyperlink{structTree}{Tree}} has liv
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{tree_8c_source_l00032}{32}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
+Definition at line \mbox{\hyperlink{tree_8c_source_l00040}{40}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00033 \{}
-\DoxyCodeLine{00034   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_a508880eed4c5861ddfede1ca2d17df96}{days\_alived}};}
-\DoxyCodeLine{00035 \}}
+\DoxyCodeLine{00041 \{}
+\DoxyCodeLine{00042   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_a508880eed4c5861ddfede1ca2d17df96}{days\_alived}};}
+\DoxyCodeLine{00043 \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{tree_8h_source_l00020}{Tree\+::days\+\_\+alived}}.
+References \mbox{\hyperlink{tree_8h_source_l00021}{Tree\+::days\+\_\+alived}}.
 
 \mbox{\Hypertarget{tree_8h_a9216e8ce9a0431b17980e5415aec1a6f}\label{tree_8h_a9216e8ce9a0431b17980e5415aec1a6f}} 
 \index{tree.h@{tree.h}!tree\_get\_species@{tree\_get\_species}}
@@ -151,24 +161,24 @@ A string that describes the \mbox{\hyperlink{structTree}{Tree}}\textquotesingle{
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{tree_8c_source_l00022}{22}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
+Definition at line \mbox{\hyperlink{tree_8c_source_l00030}{30}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00023 \{}
-\DoxyCodeLine{00024   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}};}
-\DoxyCodeLine{00025 \}}
+\DoxyCodeLine{00031 \{}
+\DoxyCodeLine{00032   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}};}
+\DoxyCodeLine{00033 \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{tree_8h_source_l00016}{Tree\+::species}}.
+References \mbox{\hyperlink{tree_8h_source_l00017}{Tree\+::species}}.
 
-\mbox{\Hypertarget{tree_8h_ad0d18189ce2aeb589ae66012eb6c4856}\label{tree_8h_ad0d18189ce2aeb589ae66012eb6c4856}} 
+\mbox{\Hypertarget{tree_8h_acbe63ea329cf4f420173313f1e31cbbf}\label{tree_8h_acbe63ea329cf4f420173313f1e31cbbf}} 
 \index{tree.h@{tree.h}!tree\_get\_status@{tree\_get\_status}}
 \index{tree\_get\_status@{tree\_get\_status}!tree.h@{tree.h}}
 \doxysubsubsection{\texorpdfstring{tree\_get\_status()}{tree\_get\_status()}}
-{\footnotesize\ttfamily uint\+\_\+least8\+\_\+t tree\+\_\+get\+\_\+status (\begin{DoxyParamCaption}\item[{const struct \mbox{\hyperlink{structTree}{Tree}} $\ast$}]{t }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\+\_\+state}} tree\+\_\+get\+\_\+status (\begin{DoxyParamCaption}\item[{const struct \mbox{\hyperlink{structTree}{Tree}} $\ast$}]{t }\end{DoxyParamCaption})}
 
 Get \mbox{\hyperlink{structTree}{Tree}}\textquotesingle{}s current status
 
@@ -182,16 +192,16 @@ A non-\/negative integer indicates the \mbox{\hyperlink{structTree}{Tree}}\textq
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{tree_8c_source_l00027}{27}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
+Definition at line \mbox{\hyperlink{tree_8c_source_l00035}{35}} of file \mbox{\hyperlink{tree_8c_source}{tree.\+c}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00028 \{}
-\DoxyCodeLine{00029   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_a253ad41a937d9fa7f8ed55c10f58fccd}{status}};}
-\DoxyCodeLine{00030 \}}
+\DoxyCodeLine{00036 \{}
+\DoxyCodeLine{00037   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}};}
+\DoxyCodeLine{00038 \}}
 
 \end{DoxyCode}
 
 
-References \mbox{\hyperlink{tree_8h_source_l00018}{Tree\+::status}}.
+References \mbox{\hyperlink{tree_8h_source_l00019}{Tree\+::status}}.
 

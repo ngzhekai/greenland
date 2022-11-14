@@ -8,6 +8,8 @@ lib/tree.h
 .PP
 \fC#include <stdint\&.h>\fP
 .br
+\fC#include 'tree_state\&.h'\fP
+.br
 
 .SS "Data Structures"
 
@@ -20,7 +22,7 @@ lib/tree.h
 
 .in +1c
 .ti -1c
-.RI "struct \fBTree\fP * \fBtree_create\fP (const char *sp, uint_least8_t st, unsigned long d)"
+.RI "struct \fBTree\fP * \fBtree_create\fP (const char *sp, \fBtree_state\fP st, unsigned long d)"
 .br
 .ti -1c
 .RI "void \fBtree_free\fP (struct \fBTree\fP *t)"
@@ -29,7 +31,7 @@ lib/tree.h
 .RI "char * \fBtree_get_species\fP (const struct \fBTree\fP *t)"
 .br
 .ti -1c
-.RI "uint_least8_t \fBtree_get_status\fP (const struct \fBTree\fP *t)"
+.RI "\fBtree_state\fP \fBtree_get_status\fP (const struct \fBTree\fP *t)"
 .br
 .ti -1c
 .RI "unsigned long \fBtree_get_days_alived\fP (const struct \fBTree\fP *t)"
@@ -49,37 +51,48 @@ lib/tree.h
 Definition in file \fBtree\&.h\fP\&.
 .SH "Function Documentation"
 .PP 
-.SS "struct \fBTree\fP * tree_create (const char * sp, uint_least8_t st, unsigned long d)"
+.SS "struct \fBTree\fP * tree_create (const char * sp, \fBtree_state\fP st, unsigned long d)"
 Create a \fBTree\fP data class
 .PP
 \fBParameters\fP
 .RS 4
 \fIsp\fP A string specifies the species name for the \fBTree\fP 
 .br
-\fIst\fP A non-negative integer specifies the current status for the \fBTree\fP 
+\fIst\fP A \fBTree\fP State enum specifies the current status for the \fBTree\fP 
 .br
 \fId\fP A non-negative integer specifies the days alived of the \fBTree\fP
 .RE
 .PP
 \fBReturns\fP
 .RS 4
-A \fBTree\fP data class that contains the information about its species name, current status and the amount of days alived\&. 
+A \fBTree\fP data class that contains the information about its species name, current status and the amount of days alived\&.
+.RE
+.PP
+\fBAttention\fP
+.RS 4
+st must be valid 
 .RE
 .PP
 
 .PP
-Definition at line \fB5\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB7\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-6 {
-7   struct Tree* new_tree = malloc(sizeof(struct Tree));
-8   new_tree->species = calloc(strlen(sp) + 1, sizeof(char));
-9   strncpy(new_tree->species, sp, strlen(sp) + 1);
-10   new_tree->status = st;
-11   new_tree->days_alived = d;
-12 
-13   return new_tree;
-14 }
+8 {
+9   struct Tree* new_tree = malloc(sizeof(struct Tree));
+10   new_tree->species = calloc(strlen(sp) + 1, sizeof(char));
+11   strncpy(new_tree->species, sp, strlen(sp) + 1);
+12   assert(trstat_is_valid(st));
+13   new_tree->status = st;
+14 
+15   if (new_tree->status == DEAD) {
+16     new_tree->days_alived = 0;
+17   } else {
+18     new_tree->days_alived = d;
+19   }
+20 
+21   return new_tree;
+22 }
 .fi
 .PP
 References \fBTree::days_alived\fP, \fBTree::species\fP, and \fBTree::status\fP\&.
@@ -93,13 +106,13 @@ Destroy a \fBTree\fP data class
 .PP
 
 .PP
-Definition at line \fB16\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB24\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-17 {
-18   free(t->species);
-19   free(t);
-20 }
+25 {
+26   free(t->species);
+27   free(t);
+28 }
 .fi
 .PP
 References \fBTree::species\fP\&.
@@ -118,12 +131,12 @@ A non-negative integer of days the \fBTree\fP has lived
 .PP
 
 .PP
-Definition at line \fB32\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB40\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-33 {
-34   return t->days_alived;
-35 }
+41 {
+42   return t->days_alived;
+43 }
 .fi
 .PP
 References \fBTree::days_alived\fP\&.
@@ -142,16 +155,16 @@ A string that describes the \fBTree\fP's species name
 .PP
 
 .PP
-Definition at line \fB22\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB30\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-23 {
-24   return t->species;
-25 }
+31 {
+32   return t->species;
+33 }
 .fi
 .PP
 References \fBTree::species\fP\&.
-.SS "uint_least8_t tree_get_status (const struct \fBTree\fP * t)"
+.SS "\fBtree_state\fP tree_get_status (const struct \fBTree\fP * t)"
 Get \fBTree\fP's current status
 .PP
 \fBParameters\fP
@@ -166,12 +179,12 @@ A non-negative integer indicates the \fBTree\fP's current status
 .PP
 
 .PP
-Definition at line \fB27\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB35\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-28 {
-29   return t->status;
-30 }
+36 {
+37   return t->status;
+38 }
 .fi
 .PP
 References \fBTree::status\fP\&.

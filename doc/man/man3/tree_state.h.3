@@ -1,0 +1,131 @@
+.TH "lib/tree_state.h" 3 "Mon Nov 14 2022" "greenland" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/tree_state.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBtree_state\fP \fBtree_state\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBtree_state\fP { \fBDEAD\fP, \fBPLANTED\fP, \fBSICK\fP, \fBTREAMENT\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBtrstat_to_string\fP (\fBtree_state\fP st)"
+.br
+.ti -1c
+.RI "bool \fBtrstat_is_valid\fP (\fBtree_state\fP st)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBDate\fP
+.RS 4
+2022-11-14 10:32:23 AM +0800 
+.RE
+.PP
+
+.PP
+Definition in file \fBtree_state\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef enum \fBtree_state\fP \fBtree_state\fP"
+An enum define the state of a \fBTree\fP 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBtree_state\fP"
+An enum define the state of a \fBTree\fP 
+.PP
+Definition at line \fB14\fP of file \fBtree_state\&.h\fP\&.
+.PP
+.nf
+14 { DEAD, PLANTED, SICK, TREAMENT } tree_state;
+.fi
+.SH "Function Documentation"
+.PP 
+.SS "bool trstat_is_valid (\fBtree_state\fP st)"
+Test whether the tree state is valid
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP a tree state
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true the tree state is valid, false if it is not 
+.RE
+.PP
+
+.PP
+Definition at line \fB23\fP of file \fBtree_state\&.c\fP\&.
+.PP
+.nf
+24 {
+25   if (!(trstat_to_string(st))) {
+26     return false;
+27   }
+28 
+29   return true;
+30 }
+.fi
+.SS "const char * trstat_to_string (\fBtree_state\fP st)"
+Convert tree state into readable string
+.PP
+\fBParameters\fP
+.RS 4
+\fIst\fP A tree state
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A string that specifies the state of the \fBTree\fP, NULL if the state is unknown 
+.RE
+.PP
+
+.PP
+Definition at line \fB3\fP of file \fBtree_state\&.c\fP\&.
+.PP
+.nf
+4 {
+5   switch (st) {
+6     case DEAD:
+7       return "DEAD";
+8 
+9     case PLANTED:
+10       return "PLANTED";
+11 
+12     case SICK:
+13       return "SICK";
+14 
+15     case TREAMENT:
+16       return "TREAMENT";
+17 
+18     default:
+19       return (char*) 0;
+20   }
+21 }
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for greenland from the source code\&.
