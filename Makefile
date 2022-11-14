@@ -11,7 +11,7 @@ BIN=greenland
 
 make: test main
 	doxygen Doxyfile
-	astyle --project $(LIBDIR)/* $(SRCDIR)/*.c $(TESTDIR)/*
+	astyle --project $(LIBDIR)/*.c $(LIBDIR)/*.h $(SRCDIR)/*.c $(TESTDIR)/*.c
 	./tests
 
 test: tree.o test.o
