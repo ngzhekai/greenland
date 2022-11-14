@@ -21,12 +21,12 @@ test.o: $(TESTDIR)/unit_tests.c
 	$(CC) $(CFLAGS) -c $(TESTDIR)/*.c
 
 main: tree.o main.o
-	$(CC) $(CFLAGS) main.o tree.o -o greenland 
+	$(CC) $(CFLAGS) main.o tree.o tree_state.o -o greenland 
 
 main.o: $(SRCDIR)/main.c
 	$(CC) $(CFLAGS) -c $(SRCDIR)/main.c
 
-tree.o: $(LIBDIR)/tree.h $(LIBDIR)/tree.c
+tree.o: tree_state.o $(LIBDIR)/tree.h $(LIBDIR)/tree.c
 	$(CC) $(CFLAGS) -c $(LIBDIR)/tree.h $(LIBDIR)/tree.c
 
 tree_state.o: $(LIBDIR)/tree_state.h $(LIBDIR)/tree_state.c

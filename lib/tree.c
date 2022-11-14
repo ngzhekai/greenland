@@ -1,14 +1,22 @@
 #include "tree.h"
+#include "tree_state.h"
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
-struct Tree* tree_create(const char* sp, uint_least8_t st, unsigned long d)
+struct Tree* tree_create(const char* sp, tree_state st, unsigned long d)
 {
   struct Tree* new_tree = malloc(sizeof(struct Tree));
   new_tree->species = calloc(strlen(sp) + 1, sizeof(char));
   strncpy(new_tree->species, sp, strlen(sp) + 1);
+  assert(trstat_is_valid(st));
   new_tree->status = st;
-  new_tree->days_alived = d;
+
+  if (new_tree->status == DEAD) {
+    new_tree->days_alived = 0;
+  } else {
+    new_tree->days_alived = d;
+  }
 
   return new_tree;
 }
@@ -24,7 +32,7 @@ char* tree_get_species(const struct Tree* t)
   return t->species;
 }
 
-uint_least8_t tree_get_status(const struct Tree* t)
+tree_state tree_get_status(const struct Tree* t)
 {
   return t->status;
 }

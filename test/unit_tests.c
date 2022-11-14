@@ -5,15 +5,29 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-START_TEST(test_tree_create)
+START_TEST(test_tree_create_dead)
 {
   struct Tree* t;
 
-  t = tree_create("foo", 0, 1);
+  t = tree_create("foo", DEAD, 1);
 
   ck_assert_str_eq(tree_get_species(t), "foo");
-  ck_assert(tree_get_status(t) == (uint_least8_t) 0);
-  ck_assert(tree_get_days_alived(t) == (unsigned long) 1);
+  ck_assert(tree_get_status(t) == DEAD);
+  ck_assert(tree_get_days_alived(t) == (unsigned long) 0);
+
+  tree_free(t);
+}
+END_TEST
+
+START_TEST(test_tree_create_normal)
+{
+  struct Tree* t;
+
+  t = tree_create("foo", PLANTED, 10);
+
+  ck_assert_str_eq(tree_get_species(t), "foo");
+  ck_assert(tree_get_status(t) == PLANTED);
+  ck_assert(tree_get_days_alived(t) == (unsigned long) 10);
 
   tree_free(t);
 }
@@ -61,7 +75,8 @@ Suite* tree_suit(void)
   s = suite_create("Tree");
   tc_core = tcase_create("Core");
 
-  tcase_add_test(tc_core, test_tree_create);
+  tcase_add_test(tc_core, test_tree_create_dead);
+  tcase_add_test(tc_core, test_tree_create_normal);
   tcase_add_test(tc_core, test_trstate_to_string);
   tcase_add_test(tc_core, test_trstate_is_valid);
   suite_add_tcase(s, tc_core);
