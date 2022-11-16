@@ -1,4 +1,4 @@
-.TH "lib/tree.h" 3 "Mon Nov 14 2022" "greenland" \" -*- nroff -*-
+.TH "lib/tree.h" 3 "Wed Nov 16 2022" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,6 +18,13 @@ lib/tree.h
 .RI "struct \fBTree\fP"
 .br
 .in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBTree\fP \fBTree\fP"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
@@ -25,25 +32,25 @@ lib/tree.h
 .RI "struct \fBTree\fP * \fBtree_create\fP (const char *sp, \fBtree_state\fP st, unsigned long d)"
 .br
 .ti -1c
-.RI "void \fBtree_free\fP (struct \fBTree\fP *t)"
+.RI "void \fBtree_free\fP (\fBTree\fP *t)"
 .br
 .ti -1c
-.RI "char * \fBtree_get_species\fP (const struct \fBTree\fP *t)"
+.RI "char * \fBtree_get_species\fP (const \fBTree\fP *t)"
 .br
 .ti -1c
-.RI "\fBtree_state\fP \fBtree_get_status\fP (const struct \fBTree\fP *t)"
+.RI "\fBtree_state\fP \fBtree_get_status\fP (const \fBTree\fP *t)"
 .br
 .ti -1c
-.RI "unsigned long \fBtree_get_days_alived\fP (const struct \fBTree\fP *t)"
+.RI "unsigned long \fBtree_get_days_alived\fP (const \fBTree\fP *t)"
 .br
 .ti -1c
-.RI "void \fBtree_set_species\fP (struct \fBTree\fP *t, const char *sp)"
+.RI "void \fBtree_set_species\fP (\fBTree\fP *t, const char *sp)"
 .br
 .ti -1c
-.RI "void \fBtree_set_status\fP (struct \fBTree\fP *t, \fBtree_state\fP st)"
+.RI "void \fBtree_set_status\fP (\fBTree\fP *t, \fBtree_state\fP st)"
 .br
 .ti -1c
-.RI "void \fBtree_set_days_alived\fP (struct \fBTree\fP *t, unsigned long d)"
+.RI "void \fBtree_set_days_alived\fP (\fBTree\fP *t, unsigned long d)"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -58,6 +65,10 @@ lib/tree.h
 
 .PP
 Definition in file \fBtree\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBTree\fP \fBTree\fP"
+\fBTree\fP data class that stores information about a tree including its species, its status, and the amount of days it has lived\&. 
 .SH "Function Documentation"
 .PP 
 .SS "struct \fBTree\fP * tree_create (const char * sp, \fBtree_state\fP st, unsigned long d)"
@@ -88,7 +99,7 @@ Definition at line \fB7\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
 8 {
-9   struct Tree* new_tree = malloc(sizeof(struct Tree));
+9   Tree* new_tree = malloc(sizeof(Tree));
 10   assert(trstat_is_valid(st));
 11   new_tree->species = NULL;
 12   tree_set_species(new_tree, sp);
@@ -99,8 +110,8 @@ Definition at line \fB7\fP of file \fBtree\&.c\fP\&.
 17 }
 .fi
 .PP
-References \fBTree::species\fP, \fBtree_set_days_alived()\fP, \fBtree_set_species()\fP, and \fBtree_set_status()\fP\&.
-.SS "void tree_free (struct \fBTree\fP * t)"
+References \fBTree::species\fP\&.
+.SS "void tree_free (\fBTree\fP * t)"
 Destroy a \fBTree\fP data class
 .PP
 \fBParameters\fP
@@ -120,7 +131,7 @@ Definition at line \fB19\fP of file \fBtree\&.c\fP\&.
 .fi
 .PP
 References \fBTree::species\fP\&.
-.SS "unsigned long tree_get_days_alived (const struct \fBTree\fP * t)"
+.SS "unsigned long tree_get_days_alived (const \fBTree\fP * t)"
 Get \fBTree\fP's the amount of days it has lived
 .PP
 \fBParameters\fP
@@ -144,7 +155,7 @@ Definition at line \fB35\fP of file \fBtree\&.c\fP\&.
 .fi
 .PP
 References \fBTree::days_alived\fP\&.
-.SS "char * tree_get_species (const struct \fBTree\fP * t)"
+.SS "char * tree_get_species (const \fBTree\fP * t)"
 Get \fBTree\fP's species name
 .PP
 \fBParameters\fP
@@ -168,7 +179,7 @@ Definition at line \fB25\fP of file \fBtree\&.c\fP\&.
 .fi
 .PP
 References \fBTree::species\fP\&.
-.SS "\fBtree_state\fP tree_get_status (const struct \fBTree\fP * t)"
+.SS "\fBtree_state\fP tree_get_status (const \fBTree\fP * t)"
 Get \fBTree\fP's current status
 .PP
 \fBParameters\fP
@@ -192,9 +203,7 @@ Definition at line \fB30\fP of file \fBtree\&.c\fP\&.
 .fi
 .PP
 References \fBTree::status\fP\&.
-.PP
-Referenced by \fBtree_set_days_alived()\fP\&.
-.SS "void tree_set_days_alived (struct \fBTree\fP * t, unsigned long d)"
+.SS "void tree_set_days_alived (\fBTree\fP * t, unsigned long d)"
 Set \fBTree\fP's the amount of days it has lived
 .PP
 \fBParameters\fP
@@ -218,10 +227,8 @@ Definition at line \fB55\fP of file \fBtree\&.c\fP\&.
 62 }
 .fi
 .PP
-References \fBTree::days_alived\fP, and \fBtree_get_status()\fP\&.
-.PP
-Referenced by \fBtree_create()\fP\&.
-.SS "void tree_set_species (struct \fBTree\fP * t, const char * sp)"
+References \fBTree::days_alived\fP\&.
+.SS "void tree_set_species (\fBTree\fP * t, const char * sp)"
 Set \fBTree\fP's species name
 .PP
 \fBParameters\fP
@@ -247,9 +254,7 @@ Definition at line \fB40\fP of file \fBtree\&.c\fP\&.
 .fi
 .PP
 References \fBTree::species\fP\&.
-.PP
-Referenced by \fBtree_create()\fP\&.
-.SS "void tree_set_status (struct \fBTree\fP * t, \fBtree_state\fP st)"
+.SS "void tree_set_status (\fBTree\fP * t, \fBtree_state\fP st)"
 Set \fBTree\fP's current status
 .PP
 \fBParameters\fP
@@ -270,8 +275,6 @@ Definition at line \fB50\fP of file \fBtree\&.c\fP\&.
 .fi
 .PP
 References \fBTree::status\fP\&.
-.PP
-Referenced by \fBtree_create()\fP\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for greenland from the source code\&.
