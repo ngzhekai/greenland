@@ -12,14 +12,14 @@
  * Tree data class that stores information about a tree including its species,
  * its status, and the amount of days it has lived.
  */
-struct Tree {
+typedef struct Tree {
   /** Species name of the tree */
   char* species;
   /** Status of the tree */
   tree_state status;
   /** Amount of days the tree has lived */
   unsigned long days_alived;
-};
+} Tree;
 
 /**
  * Create a Tree data class
@@ -41,7 +41,7 @@ struct Tree* tree_create(const char* sp, tree_state st, unsigned long d);
  *
  * @param[in] t A tree data class to be destroyed
  */
-void tree_free(struct Tree* t);
+void tree_free(Tree* t);
 
 /**
  * Get Tree's species name
@@ -50,7 +50,7 @@ void tree_free(struct Tree* t);
  *
  * @return A string that describes the Tree's species name
  */
-char* tree_get_species(const struct Tree* t);
+char* tree_get_species(const Tree* t);
 
 /**
  * Get Tree's current status
@@ -59,7 +59,7 @@ char* tree_get_species(const struct Tree* t);
  *
  * @return A non-negative integer indicates the Tree's current status
  */
-tree_state tree_get_status(const struct Tree* t);
+tree_state tree_get_status(const Tree* t);
 
 /**
  * Get Tree's the amount of days it has lived
@@ -68,7 +68,7 @@ tree_state tree_get_status(const struct Tree* t);
  *
  * @return A non-negative integer of days the Tree has lived
  */
-unsigned long tree_get_days_alived(const struct Tree* t);
+unsigned long tree_get_days_alived(const Tree* t);
 
 /**
  * Set Tree's species name
@@ -76,7 +76,7 @@ unsigned long tree_get_days_alived(const struct Tree* t);
  * @param[out] t A modified Tree with changed species name
  * @param[in] sp A string indicates a species name
  */
-void tree_set_species(struct Tree* t, const char* sp);
+void tree_set_species(Tree* t, const char* sp);
 
 /**
  * Set Tree's current status
@@ -84,7 +84,7 @@ void tree_set_species(struct Tree* t, const char* sp);
  * @param[out] t A modified Tree with changed status
  * @param[in] st A Tree State enum
  */
-void tree_set_status(struct Tree* t, tree_state st);
+void tree_set_status(Tree* t, tree_state st);
 
 /**
  * Set Tree's the amount of days it has lived
@@ -92,6 +92,6 @@ void tree_set_status(struct Tree* t, tree_state st);
  * @param[out] t A modified Tree with changed days of lived
  * @param[in] d A non-negative integer indicates day(s)
  */
-void tree_set_days_alived(struct Tree* t, unsigned long d);
+void tree_set_days_alived(Tree* t, unsigned long d);
 
 #endif
