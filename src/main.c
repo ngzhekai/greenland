@@ -1,8 +1,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef enum MenuOption { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
+#include "../lib/menuoption.h"
 
 int main(void)
 {
@@ -34,15 +33,9 @@ int main(void)
     scanf("%d", (int*) &option);
     system("clear");
 
-    switch (option) {
-      case PLANT_TREE:
-      case QUERY_TREE:
-      case UPDATE_TREE:
-        printf("Option soon to be supported\n");
-        break;
-
-      default:
-        printf("Option %d not supported\n", option);
+    if (moption_handle(option) == -1) {
+      printf("Option %d not supported\n", option);
+      exit(1);
     }
   }
 

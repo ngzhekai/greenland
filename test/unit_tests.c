@@ -1,4 +1,5 @@
 #include "../lib/tree.h"
+#include "../lib/menuoption.h"
 #include <check.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -50,7 +51,17 @@ START_TEST(test_trstate_is_valid)
 }
 END_TEST
 
+START_TEST(test_menuoption_handle)
+{
+  ck_assert_int_eq(moption_handle(PLANT_TREE), 0);
+  ck_assert_int_eq(moption_handle(QUERY_TREE), 0);
+  ck_assert_int_eq(moption_handle(UPDATE_TREE), 0);
+  ck_assert_int_eq(moption_handle(-1), -1);
+}
+END_TEST
+
 Suite* tree_suit(void);
+Suite* menu_suit(void);
 
 int main(void)
 {
@@ -79,6 +90,20 @@ Suite* tree_suit(void)
   tcase_add_test(tc_core, test_tree_create_normal);
   tcase_add_test(tc_core, test_trstate_to_string);
   tcase_add_test(tc_core, test_trstate_is_valid);
+  suite_add_tcase(s, tc_core);
+
+  return s;
+}
+
+Suite* menu_suit(void)
+{
+  Suite* s;
+  TCase* tc_core;
+
+  s = suite_create("Menu");
+  tc_core = tcase_create("Core");
+
+  tcase_add_test(tc_core, test_menuoption_handle);
   suite_add_tcase(s, tc_core);
 
   return s;
