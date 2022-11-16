@@ -1,12 +1,12 @@
 var indexSectionsWithContent =
 {
-  0: "dst",
+  0: "dmst",
   1: "t",
-  2: "t",
-  3: "t",
+  2: "mt",
+  3: "mt",
   4: "ds",
-  5: "t",
-  6: "t"
+  5: "mt",
+  6: "mt"
 };
 
 var indexSectionNames =

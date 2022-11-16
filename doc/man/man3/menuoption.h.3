@@ -1,0 +1,91 @@
+.TH "lib/menuoption.h" 3 "Wed Nov 16 2022" "greenland" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/menuoption.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBMenuOption\fP \fBMenuOption\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBMenuOption\fP { \fBPLANT_TREE\fP = 1, \fBQUERY_TREE\fP, \fBUPDATE_TREE\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmoption_handle\fP (\fBMenuOption\fP mo)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBDate\fP
+.RS 4
+2022-11-16 23:05:32 PM +0800 
+.RE
+.PP
+
+.PP
+Definition in file \fBmenuoption\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef enum \fBMenuOption\fP \fBMenuOption\fP"
+MenuOption defines available options in the client menu 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBMenuOption\fP"
+MenuOption defines available options in the client menu 
+.PP
+Definition at line \fB11\fP of file \fBmenuoption\&.h\fP\&.
+.PP
+.nf
+11 { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
+.fi
+.SH "Function Documentation"
+.PP 
+.SS "int moption_handle (\fBMenuOption\fP mo)"
+Handles menu option
+.PP
+\fBParameters\fP
+.RS 4
+\fImo\fP A MenuOption enum to be handle
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if the handling succeeded, -1 if failed 
+.RE
+.PP
+
+.PP
+Definition at line \fB4\fP of file \fBmenuoption\&.c\fP\&.
+.PP
+.nf
+5 {
+6   switch (mo) {
+7     case PLANT_TREE:
+8     case QUERY_TREE:
+9     case UPDATE_TREE:
+10       printf("Option %d soon to be supported\n", mo);
+11       return 0;
+12 
+13     default:
+14       return -1;
+15   }
+16 }
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for greenland from the source code\&.

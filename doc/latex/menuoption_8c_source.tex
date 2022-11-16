@@ -1,0 +1,22 @@
+\hypertarget{menuoption_8c_source}{}\doxysection{menuoption.\+c}
+\label{menuoption_8c_source}\index{lib/menuoption.c@{lib/menuoption.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{menuoption_8h}{menuoption.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00002}00002 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00004}\mbox{\hyperlink{menuoption_8h_a6f7571f6077ddc1c6fe33f14de4bbf22}{00004}} \textcolor{keywordtype}{int} moption\_handle(\mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{MenuOption}} mo)}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00005}00005 \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00006}00006   \textcolor{keywordflow}{switch} (mo) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00007}00007     \textcolor{keywordflow}{case} PLANT\_TREE:}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00008}00008     \textcolor{keywordflow}{case} QUERY\_TREE:}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00009}00009     \textcolor{keywordflow}{case} UPDATE\_TREE:}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00010}00010       printf(\textcolor{stringliteral}{"{}Option \%d soon to be supported\(\backslash\)n"{}}, mo);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00011}00011       \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00013}00013     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00014}00014       \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00015}00015   \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00016}00016 \}}
+
+\end{DoxyCode}

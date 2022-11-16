@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>greenland: lib Directory Reference</title>
+<title>greenland: lib/menuoption.c Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,26 +74,28 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">lib Directory Reference</div></div>
+  <div class="headertitle"><div class="title">menuoption.c</div></div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="files" name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>menuoption.c</b> <a href="menuoption_8c_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menuoption_8h.html">menuoption.h</a> <a href="menuoption_8h_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>tree.c</b> <a href="tree_8c_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html">tree.h</a> <a href="tree_8h_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><b>tree_state.c</b> <a href="tree__state_8c_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree__state_8h.html">tree_state.h</a> <a href="tree__state_8h_source.html">[code]</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="menuoption_8h.html">menuoption.h</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="menuoption_8h.html#a6f7571f6077ddc1c6fe33f14de4bbf22">    4</a></span><span class="keywordtype">int</span> moption_handle(<a class="code hl_enumeration" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> mo)</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>{</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>  <span class="keywordflow">switch</span> (mo) {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keywordflow">case</span> PLANT_TREE:</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keywordflow">case</span> QUERY_TREE:</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordflow">case</span> UPDATE_TREE:</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>      printf(<span class="stringliteral">&quot;Option %d soon to be supported\n&quot;</span>, mo);</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>      <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>      <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  }</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
+<div class="ttc" id="amenuoption_8h_html"><div class="ttname"><a href="menuoption_8h.html">menuoption.h</a></div></div>
+<div class="ttc" id="amenuoption_8h_html_a5be5e47a3042bc91460d05e47f32120d"><div class="ttname"><a href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a></div><div class="ttdeci">MenuOption</div><div class="ttdef"><b>Definition:</b> <a href="menuoption_8h_source.html#l00011">menuoption.h:11</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
