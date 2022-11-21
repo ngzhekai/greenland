@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 
-int main()
+int main(void)
 {
     // user-defined server's ip and port
     /* Make sure both the client and server are having the same ip and port */
-    char *ip = "127.0.0.1";
+    char ip[] = "127.0.0.1";
     int port = 3939;
 
     int server_socket, client_socket;
