@@ -59,16 +59,11 @@ int main(void)
     // receive the message from the client socket
     bzero(buffer, 1024);
     recv(client_socket, buffer, sizeof(buffer), 0);
-    printf("Client: %s\n", buffer);
+    printf("Client: Request Option %s\n", buffer);
 
     // send the message to the client socket
-    char* msg = malloc(1024);
-    printf("Enter a message: ");
-    fgets(msg, 1024, stdin);
-    bzero(buffer, 1024);
-    strcpy(buffer, msg);
-    free(msg); // de-allocate the memory
-    printf("Server:%s\n", buffer);
+    snprintf(buffer, 1024, "Option has been handled\n");
+    printf("Server: %s\n", buffer);
     send(client_socket, buffer, strlen(buffer), 0);
 
     // close the connection with the client (socket)
