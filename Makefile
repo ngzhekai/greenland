@@ -8,7 +8,7 @@ SRCDIR=src
 LIBDIR=lib
 TESTDIR=test
 DOCDIR=doc
-BIN=greenland
+BIN=greenland_*
 
 make: test client server
 	doxygen Doxyfile
