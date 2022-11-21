@@ -22,7 +22,8 @@ regarding them from a server.
 ## Building
 
 To build the project, just run `make make`, and an executable binary file called
-`greenland` will appear in the filesystem. Run it with `./greenland`.
+`greenland_client` and `greenland_server` will appear in the filesystem. Run it
+with `./greenland_client` and `./greenland_server`.
 
 Or to install in onto the system, you could run `make install` and call
-`greenland` afterwards.
+`greenland_client` and `greenland_server` afterwards.
