@@ -32,7 +32,10 @@ int main()
     addr.sin_port = htons(port);
     addr.sin_addr.s_addr = inet_addr(ip);
 
-    connect(sock, (struct sockaddr *)&addr, sizeof(addr));
+    if (connect(sock, (struct sockaddr *)&addr, sizeof(addr)) == -1) {
+      perror("[-] Connection error!");
+      exit(2);
+    }
     printf("Connected to the server. \n");
 
     // send the message to the server socket
