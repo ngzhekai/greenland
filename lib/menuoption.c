@@ -2,17 +2,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int moption_handle(MenuOption mo)
+char* moption_handle(MenuOption mo)
 {
+  char* msg = malloc(1024);
+
   switch (mo) {
     case PLANT_TREE:
     case QUERY_TREE:
     case UPDATE_TREE:
-      printf("Option %d soon to be supported\n", mo);
-      return 0;
+      sprintf(msg, "Option %d soon to be supported\n", mo);
+      return msg;
 
     default:
-      return -1;
+      sprintf(msg, "Option %d not supported\n", mo);
+      return msg;
   }
 }
 
