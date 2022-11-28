@@ -4,6 +4,7 @@
 #include <strings.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include "../lib/menuoption.h"
 
 int main(void)
 {
@@ -59,10 +60,14 @@ int main(void)
     // receive the message from the client socket
     bzero(buffer, 1024);
     recv(client_socket, buffer, sizeof(buffer), 0);
-    printf("Client: Request Option %s\n", buffer);
+    MenuOption client_menuoption = strtol(buffer, NULL, 10);
+    printf("Client: Request Option %d\n", client_menuoption);
+
+    // handling menu option
+    bzero(buffer, 1024);
+    snprintf(buffer, 1024, "%s", moption_handle(client_menuoption));
 
     // send the message to the client socket
-    snprintf(buffer, 1024, "Option has been handled\n");
     printf("Server: %s\n", buffer);
     send(client_socket, buffer, strlen(buffer), 0);
 

@@ -35,19 +35,30 @@
 int main(void)
 {
   pid_t child_pid;
-  MenuOption option;
+  int pipe1[2];
+
+  if (pipe(pipe1) == -1) {
+    perror("[-] Pipe error!");
+    exit(4);
+  }
 
   if ((child_pid = fork()) == -1) {
     perror("[-] Fork error!");
     exit(3);
   } else if (child_pid == 0) {
+    close(pipe1[0]);  // close read end of the pipe
+
+    char buffer[1024];
+    MenuOption option;
     moption_display(&option);
 
-    if (moption_handle(option) == -1) {
-      printf("Option %d not supported\n", option);
-      exit(4);
-    }
+    bzero(buffer, 1024);
+    sprintf(buffer, "%d", (int) option);
+    write(pipe1[1], buffer, 1024);
+
+    close(pipe1[1]); // close pipe
   } else {
+    close(pipe1[1]);  // close write end of the pipe
 
     // user-defined server's ip and port
     /* Make sure both the client and server are having the same ip and port */
@@ -81,11 +92,10 @@ int main(void)
     }
 
     printf("Connected to the server. \n");
-    wait((int*) 0);
 
     // send the message to the server socket
     bzero(buffer, 1024);
-    snprintf(buffer, 1024, "%d", option);
+    read(pipe1[0], buffer, 1024);
     printf("Client: %s\n", buffer);
     send(sock, buffer, strlen(buffer), 0);
 
@@ -97,6 +107,8 @@ int main(void)
     // close the connection (socket)
     close(sock);
     printf("Disconnected from the server.\n");
+
+    close(pipe1[0]); // close pipe
   }
 
   return 0;

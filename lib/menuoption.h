@@ -17,7 +17,7 @@ typedef enum MenuOption { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
  *
  * @return 0 if the handling succeeded, -1 if failed
  */
-int moption_handle(MenuOption mo);
+char* moption_handle(MenuOption mo);
 
 /**
  * Display menu options
