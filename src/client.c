@@ -108,11 +108,8 @@ int main(void)
     wait((int*) 0);
 
     // send the message to the server socket
-    char* msg = malloc(1024);
-    snprintf(msg, 1024, "%d", option);
     bzero(buffer, 1024);
-    strcpy(buffer, msg);
-    free(msg); // de-allocate the memory
+    snprintf(buffer, 1024, "%d", option);
     printf("Client: %s\n", buffer);
     send(sock, buffer, strlen(buffer), 0);
 
