@@ -41,7 +41,7 @@ int main(void)
 
   if (bind_status < 0) {
     perror("[-] Bind error!");
-    exit(1);
+    exit(2);
   }
 
   printf("[+] Bind to the port number: %d\n", port);
