@@ -2,14 +2,15 @@ CC=gcc
 CFLAGS=-Wall -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 -Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 -Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual -Wshadow \
--Wwrite-strings -Wno-unused-parameter -Wfloat-equal -pedantic -ansi -Werror
+-Wwrite-strings -Wno-unused-parameter -Wno-declaration-after-statement \
+-Wfloat-equal -pedantic -ansi -Werror -std=c17
 SRCDIR=src
 LIBDIR=lib
 TESTDIR=test
 DOCDIR=doc
-BIN=greenland
+BIN=greenland_*
 
-make: test main
+make: test client server
 	doxygen Doxyfile
 	astyle --project $(LIBDIR)/*.c $(LIBDIR)/*.h $(SRCDIR)/*.c $(TESTDIR)/*.c
 	./tests
@@ -20,11 +21,17 @@ test: tree.o menuoption.o test.o
 test.o: $(TESTDIR)/unit_tests.c
 	$(CC) $(CFLAGS) -c $(TESTDIR)/*.c
 
-main: tree.o menuoption.o main.o
-	$(CC) $(CFLAGS) main.o menuoption.o tree.o tree_state.o -o greenland 
+client: tree.o menuoption.o client.o
+	$(CC) $(CFLAGS) client.o menuoption.o tree.o tree_state.o -o greenland_client
 
-main.o: $(SRCDIR)/main.c
-	$(CC) $(CFLAGS) -c $(SRCDIR)/main.c
+client.o: $(SRCDIR)/client.c
+	$(CC) $(CFLAGS) -c $(SRCDIR)/client.c
+
+server: tree.o menuoption.o server.o
+	$(CC) $(CFLAGS) server.o tree.o tree_state.o menuoption.o -o greenland_server
+
+server.o: $(SRCDIR)/server.c
+	$(CC) $(CFLAGS) -c $(SRCDIR)/server.c
 
 tree.o: tree_state.o $(LIBDIR)/tree.h $(LIBDIR)/tree.c
 	$(CC) $(CFLAGS) -c $(LIBDIR)/tree.h $(LIBDIR)/tree.c
