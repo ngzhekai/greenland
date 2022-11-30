@@ -1,4 +1,4 @@
-.TH "Tree" 3 "Wed Nov 16 2022" "greenland" \" -*- nroff -*-
+.TH "Tree" 3 "Wed Nov 30 2022" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,32 +18,32 @@ Tree
 .RI "\fBtree_state\fP \fBstatus\fP"
 .br
 .ti -1c
-.RI "unsigned long \fBdays_alived\fP"
+.RI "struct tm * \fBday_planted\fP"
 .br
 .in -1c
 .SH "Detailed Description"
 .PP 
 \fBTree\fP data class that stores information about a tree including its species, its status, and the amount of days it has lived\&. 
 .PP
-Definition at line \fB15\fP of file \fBtree\&.h\fP\&.
+Definition at line \fB16\fP of file \fBtree\&.h\fP\&.
 .SH "Field Documentation"
 .PP 
-.SS "unsigned long Tree::days_alived"
-Amount of days the tree has lived 
+.SS "struct tm* Tree::day_planted"
+The day when the tree was planted 
 .PP
-Definition at line \fB21\fP of file \fBtree\&.h\fP\&.
+Definition at line \fB22\fP of file \fBtree\&.h\fP\&.
 .PP
-Referenced by \fBtree_get_days_alived()\fP, and \fBtree_set_days_alived()\fP\&.
+Referenced by \fBtree_get_day_planted()\fP, and \fBtree_set_day_planted()\fP\&.
 .SS "char* Tree::species"
 Species name of the tree 
 .PP
-Definition at line \fB17\fP of file \fBtree\&.h\fP\&.
+Definition at line \fB18\fP of file \fBtree\&.h\fP\&.
 .PP
 Referenced by \fBtree_create()\fP, \fBtree_free()\fP, \fBtree_get_species()\fP, and \fBtree_set_species()\fP\&.
 .SS "\fBtree_state\fP Tree::status"
 Status of the tree 
 .PP
-Definition at line \fB19\fP of file \fBtree\&.h\fP\&.
+Definition at line \fB20\fP of file \fBtree\&.h\fP\&.
 .PP
 Referenced by \fBtree_get_status()\fP, and \fBtree_set_status()\fP\&.
 

@@ -6,6 +6,7 @@
 #define TREE_H
 
 #include <stdint.h>
+#include <time.h>
 #include "tree_state.h"
 
 /**
@@ -17,8 +18,8 @@ typedef struct Tree {
   char* species;
   /** Status of the tree */
   tree_state status;
-  /** Amount of days the tree has lived */
-  unsigned long days_alived;
+  /** The day when the tree was planted */
+  struct tm* day_planted;
 } Tree;
 
 /**
@@ -27,14 +28,14 @@ typedef struct Tree {
  * @param[in] sp A string specifies the species name for the Tree
  * @param[in] st A Tree State enum specifies the current status for the
  *               Tree
- * @param[in] d A non-negative integer specifies the days alived of the Tree
+ * @param[in] d A time_t in seconds specifies the days alived of the Tree
  *
  * @return A Tree data class that contains the information about its species
  * name, current status and the amount of days alived.
  *
  * @attention st must be valid
  */
-struct Tree* tree_create(const char* sp, tree_state st, unsigned long d);
+struct Tree* tree_create(const char* sp, tree_state st, time_t d);
 
 /**
  * Destroy a Tree data class
@@ -66,9 +67,9 @@ tree_state tree_get_status(const Tree* t);
  *
  * @param[in] t A pointer to a Tree
  *
- * @return A non-negative integer of days the Tree has lived
+ * @return A pointer to struct tm indicates the day when the Tree was planted
  */
-unsigned long tree_get_days_alived(const Tree* t);
+struct tm* tree_get_day_planted(const Tree* t);
 
 /**
  * Set Tree's species name
@@ -90,8 +91,8 @@ void tree_set_status(Tree* t, tree_state st);
  * Set Tree's the amount of days it has lived
  *
  * @param[out] t A modified Tree with changed days of lived
- * @param[in] d A non-negative integer indicates day(s)
+ * @param[in] d A time_t in seconds
  */
-void tree_set_days_alived(Tree* t, unsigned long d);
+void tree_set_day_planted(Tree* t, time_t d);
 
 #endif

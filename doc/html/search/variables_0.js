@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['days_5falived_0',['days_alived',['../structTree.html#a508880eed4c5861ddfede1ca2d17df96',1,'Tree']]]
+  ['day_5fplanted_0',['day_planted',['../structTree.html#a4e216d45ddb33692b49dffd18c7c693b',1,'Tree']]]
 ];

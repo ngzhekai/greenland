@@ -5,16 +5,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 START_TEST(test_tree_create_dead)
 {
   struct Tree* t;
+  time_t current_time;
+  time(&current_time);
 
-  t = tree_create("foo", DEAD, 1);
+  t = tree_create("foo", DEAD, current_time);
 
   ck_assert_str_eq(tree_get_species(t), "foo");
   ck_assert(tree_get_status(t) == DEAD);
-  ck_assert(tree_get_days_alived(t) == (unsigned long) 0);
+  ck_assert(t->day_planted == NULL);
 
   tree_free(t);
 }
@@ -23,12 +26,14 @@ END_TEST
 START_TEST(test_tree_create_normal)
 {
   struct Tree* t;
+  time_t current_time;
+  time(&current_time);
 
-  t = tree_create("foo", PLANTED, 10);
+  t = tree_create("foo", PLANTED, current_time);
 
   ck_assert_str_eq(tree_get_species(t), "foo");
   ck_assert(tree_get_status(t) == PLANTED);
-  ck_assert(tree_get_days_alived(t) == (unsigned long) 10);
+  ck_assert(mktime(t->day_planted) == current_time);
 
   tree_free(t);
 }

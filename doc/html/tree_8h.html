@@ -82,6 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="tree__state_8h_source.html">tree_state.h</a>&quot;</code><br />
 </div>
 <p><a href="tree_8h_source.html">Go to the source code of this file.</a></p>
@@ -98,22 +99,22 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c93fc37ff11fde84dabff8147e3e23e"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structTree.html">Tree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#a3c93fc37ff11fde84dabff8147e3e23e">tree_create</a> (const char *sp, <a class="el" href="tree__state_8h.html#a000b9251040da7bc6d3ae447d420bb48">tree_state</a> st, unsigned long d)</td></tr>
-<tr class="separator:a3c93fc37ff11fde84dabff8147e3e23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbbea7f877fe7f21f6e165ba641ad690"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structTree.html">Tree</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#acbbea7f877fe7f21f6e165ba641ad690">tree_create</a> (const char *sp, <a class="el" href="tree__state_8h.html#a000b9251040da7bc6d3ae447d420bb48">tree_state</a> st, time_t d)</td></tr>
+<tr class="separator:acbbea7f877fe7f21f6e165ba641ad690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c64008e7d343b168c2fb089f264bbab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#a3c64008e7d343b168c2fb089f264bbab">tree_free</a> (<a class="el" href="structTree.html">Tree</a> *t)</td></tr>
 <tr class="separator:a3c64008e7d343b168c2fb089f264bbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63aff437343e78346f3640d20bf004aa"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#a63aff437343e78346f3640d20bf004aa">tree_get_species</a> (const <a class="el" href="structTree.html">Tree</a> *t)</td></tr>
 <tr class="separator:a63aff437343e78346f3640d20bf004aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c30a83e5d894023a12e9ebd5cae32bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="tree__state_8h.html#a000b9251040da7bc6d3ae447d420bb48">tree_state</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#a9c30a83e5d894023a12e9ebd5cae32bd">tree_get_status</a> (const <a class="el" href="structTree.html">Tree</a> *t)</td></tr>
 <tr class="separator:a9c30a83e5d894023a12e9ebd5cae32bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab709e490b100cbe356aaf39493f6f25b"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#ab709e490b100cbe356aaf39493f6f25b">tree_get_days_alived</a> (const <a class="el" href="structTree.html">Tree</a> *t)</td></tr>
-<tr class="separator:ab709e490b100cbe356aaf39493f6f25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa16b78d732d809de58a425d6fa97e03e"><td class="memItemLeft" align="right" valign="top">struct tm *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#aa16b78d732d809de58a425d6fa97e03e">tree_get_day_planted</a> (const <a class="el" href="structTree.html">Tree</a> *t)</td></tr>
+<tr class="separator:aa16b78d732d809de58a425d6fa97e03e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46afbb95e6e7f38fc337c0c93618f94a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#a46afbb95e6e7f38fc337c0c93618f94a">tree_set_species</a> (<a class="el" href="structTree.html">Tree</a> *t, const char *sp)</td></tr>
 <tr class="separator:a46afbb95e6e7f38fc337c0c93618f94a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad91543206f23107edc165120ed5b548"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#aad91543206f23107edc165120ed5b548">tree_set_status</a> (<a class="el" href="structTree.html">Tree</a> *t, <a class="el" href="tree__state_8h.html#a000b9251040da7bc6d3ae447d420bb48">tree_state</a> st)</td></tr>
 <tr class="separator:aad91543206f23107edc165120ed5b548"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a314e44e5f0cf79c5f7c40d6bfa4b66b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#a314e44e5f0cf79c5f7c40d6bfa4b66b0">tree_set_days_alived</a> (<a class="el" href="structTree.html">Tree</a> *t, unsigned long d)</td></tr>
-<tr class="separator:a314e44e5f0cf79c5f7c40d6bfa4b66b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7648fd2cc235e46a74b02205956cc33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tree_8h.html#ad7648fd2cc235e46a74b02205956cc33">tree_set_day_planted</a> (<a class="el" href="structTree.html">Tree</a> *t, time_t d)</td></tr>
+<tr class="separator:ad7648fd2cc235e46a74b02205956cc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section date"><dt>Date</dt><dd>2022-11-11 23:27:54 PM +0800 </dd></dl>
@@ -136,8 +137,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3c93fc37ff11fde84dabff8147e3e23e" name="a3c93fc37ff11fde84dabff8147e3e23e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c93fc37ff11fde84dabff8147e3e23e">&#9670;&#160;</a></span>tree_create()</h2>
+<a id="acbbea7f877fe7f21f6e165ba641ad690" name="acbbea7f877fe7f21f6e165ba641ad690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbbea7f877fe7f21f6e165ba641ad690">&#9670;&#160;</a></span>tree_create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -157,7 +158,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramtype">time_t&#160;</td>
           <td class="paramname"><em>d</em>&#160;</td>
         </tr>
         <tr>
@@ -172,28 +173,28 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">sp</td><td>A string specifies the species name for the <a class="el" href="structTree.html">Tree</a> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">st</td><td>A <a class="el" href="structTree.html">Tree</a> State enum specifies the current status for the <a class="el" href="structTree.html">Tree</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">d</td><td>A non-negative integer specifies the days alived of the <a class="el" href="structTree.html">Tree</a></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">d</td><td>A time_t in seconds specifies the days alived of the <a class="el" href="structTree.html">Tree</a></td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structTree.html">Tree</a> data class that contains the information about its species name, current status and the amount of days alived.</dd></dl>
 <dl class="section attention"><dt>Attention</dt><dd>st must be valid </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00007">7</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    8</span>{</div>
-<div class="line"><span class="lineno">    9</span>  <a class="code hl_struct" href="structTree.html">Tree</a>* new_tree = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTree.html">Tree</a>));</div>
-<div class="line"><span class="lineno">   10</span>  assert(trstat_is_valid(st));</div>
-<div class="line"><span class="lineno">   11</span>  new_tree-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a> = NULL;</div>
-<div class="line"><span class="lineno">   12</span>  tree_set_species(new_tree, sp);</div>
-<div class="line"><span class="lineno">   13</span>  tree_set_status(new_tree, st);</div>
-<div class="line"><span class="lineno">   14</span>  tree_set_days_alived(new_tree, d);</div>
-<div class="line"><span class="lineno">   15</span> </div>
-<div class="line"><span class="lineno">   16</span>  <span class="keywordflow">return</span> new_tree;</div>
-<div class="line"><span class="lineno">   17</span>}</div>
-<div class="ttc" id="astructTree_html"><div class="ttname"><a href="structTree.html">Tree</a></div><div class="ttdef"><b>Definition:</b> <a href="tree_8h_source.html#l00015">tree.h:15</a></div></div>
-<div class="ttc" id="astructTree_html_aec2b035f6c14984af20fa5d87058e437"><div class="ttname"><a href="structTree.html#aec2b035f6c14984af20fa5d87058e437">Tree::species</a></div><div class="ttdeci">char * species</div><div class="ttdef"><b>Definition:</b> <a href="tree_8h_source.html#l00017">tree.h:17</a></div></div>
+<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00008">8</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    9</span>{</div>
+<div class="line"><span class="lineno">   10</span>  <a class="code hl_struct" href="structTree.html">Tree</a>* new_tree = malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTree.html">Tree</a>));</div>
+<div class="line"><span class="lineno">   11</span>  assert(trstat_is_valid(st));</div>
+<div class="line"><span class="lineno">   12</span>  new_tree-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a> = NULL;</div>
+<div class="line"><span class="lineno">   13</span>  tree_set_species(new_tree, sp);</div>
+<div class="line"><span class="lineno">   14</span>  tree_set_status(new_tree, st);</div>
+<div class="line"><span class="lineno">   15</span>  tree_set_day_planted(new_tree, d);</div>
+<div class="line"><span class="lineno">   16</span> </div>
+<div class="line"><span class="lineno">   17</span>  <span class="keywordflow">return</span> new_tree;</div>
+<div class="line"><span class="lineno">   18</span>}</div>
+<div class="ttc" id="astructTree_html"><div class="ttname"><a href="structTree.html">Tree</a></div><div class="ttdef"><b>Definition:</b> <a href="tree_8h_source.html#l00016">tree.h:16</a></div></div>
+<div class="ttc" id="astructTree_html_aec2b035f6c14984af20fa5d87058e437"><div class="ttname"><a href="structTree.html#aec2b035f6c14984af20fa5d87058e437">Tree::species</a></div><div class="ttdeci">char * species</div><div class="ttdef"><b>Definition:</b> <a href="tree_8h_source.html#l00018">tree.h:18</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00017">Tree::species</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00018">Tree::species</a>.</p>
 
 </div>
 </div>
@@ -220,24 +221,24 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00019">19</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   20</span>{</div>
-<div class="line"><span class="lineno">   21</span>  free(t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>);</div>
-<div class="line"><span class="lineno">   22</span>  free(t);</div>
-<div class="line"><span class="lineno">   23</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00020">20</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   21</span>{</div>
+<div class="line"><span class="lineno">   22</span>  free(t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>);</div>
+<div class="line"><span class="lineno">   23</span>  free(t);</div>
+<div class="line"><span class="lineno">   24</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00017">Tree::species</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00018">Tree::species</a>.</p>
 
 </div>
 </div>
-<a id="ab709e490b100cbe356aaf39493f6f25b" name="ab709e490b100cbe356aaf39493f6f25b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab709e490b100cbe356aaf39493f6f25b">&#9670;&#160;</a></span>tree_get_days_alived()</h2>
+<a id="aa16b78d732d809de58a425d6fa97e03e" name="aa16b78d732d809de58a425d6fa97e03e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa16b78d732d809de58a425d6fa97e03e">&#9670;&#160;</a></span>tree_get_day_planted()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long tree_get_days_alived </td>
+          <td class="memname">struct tm * tree_get_day_planted </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structTree.html">Tree</a> *&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
@@ -252,15 +253,15 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A non-negative integer of days the <a class="el" href="structTree.html">Tree</a> has lived </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to struct tm indicates the day when the <a class="el" href="structTree.html">Tree</a> was planted </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00035">35</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   36</span>{</div>
-<div class="line"><span class="lineno">   37</span>  <span class="keywordflow">return</span> t-&gt;<a class="code hl_variable" href="structTree.html#a508880eed4c5861ddfede1ca2d17df96">days_alived</a>;</div>
-<div class="line"><span class="lineno">   38</span>}</div>
-<div class="ttc" id="astructTree_html_a508880eed4c5861ddfede1ca2d17df96"><div class="ttname"><a href="structTree.html#a508880eed4c5861ddfede1ca2d17df96">Tree::days_alived</a></div><div class="ttdeci">unsigned long days_alived</div><div class="ttdef"><b>Definition:</b> <a href="tree_8h_source.html#l00021">tree.h:21</a></div></div>
+<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00036">36</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>{</div>
+<div class="line"><span class="lineno">   38</span>  <span class="keywordflow">return</span> t-&gt;<a class="code hl_variable" href="structTree.html#a4e216d45ddb33692b49dffd18c7c693b">day_planted</a>;</div>
+<div class="line"><span class="lineno">   39</span>}</div>
+<div class="ttc" id="astructTree_html_a4e216d45ddb33692b49dffd18c7c693b"><div class="ttname"><a href="structTree.html#a4e216d45ddb33692b49dffd18c7c693b">Tree::day_planted</a></div><div class="ttdeci">struct tm * day_planted</div><div class="ttdef"><b>Definition:</b> <a href="tree_8h_source.html#l00022">tree.h:22</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00021">Tree::days_alived</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00022">Tree::day_planted</a>.</p>
 
 </div>
 </div>
@@ -288,12 +289,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A string that describes the <a class="el" href="structTree.html">Tree</a>'s species name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00025">25</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   26</span>{</div>
-<div class="line"><span class="lineno">   27</span>  <span class="keywordflow">return</span> t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>;</div>
-<div class="line"><span class="lineno">   28</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00026">26</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   27</span>{</div>
+<div class="line"><span class="lineno">   28</span>  <span class="keywordflow">return</span> t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>;</div>
+<div class="line"><span class="lineno">   29</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00017">Tree::species</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00018">Tree::species</a>.</p>
 
 </div>
 </div>
@@ -321,24 +322,24 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A non-negative integer indicates the <a class="el" href="structTree.html">Tree</a>'s current status </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00030">30</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   31</span>{</div>
-<div class="line"><span class="lineno">   32</span>  <span class="keywordflow">return</span> t-&gt;<a class="code hl_variable" href="structTree.html#a79d3179f998392f5231d84717dad743c">status</a>;</div>
-<div class="line"><span class="lineno">   33</span>}</div>
-<div class="ttc" id="astructTree_html_a79d3179f998392f5231d84717dad743c"><div class="ttname"><a href="structTree.html#a79d3179f998392f5231d84717dad743c">Tree::status</a></div><div class="ttdeci">tree_state status</div><div class="ttdef"><b>Definition:</b> <a href="tree_8h_source.html#l00019">tree.h:19</a></div></div>
+<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00031">31</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>{</div>
+<div class="line"><span class="lineno">   33</span>  <span class="keywordflow">return</span> t-&gt;<a class="code hl_variable" href="structTree.html#a79d3179f998392f5231d84717dad743c">status</a>;</div>
+<div class="line"><span class="lineno">   34</span>}</div>
+<div class="ttc" id="astructTree_html_a79d3179f998392f5231d84717dad743c"><div class="ttname"><a href="structTree.html#a79d3179f998392f5231d84717dad743c">Tree::status</a></div><div class="ttdeci">tree_state status</div><div class="ttdef"><b>Definition:</b> <a href="tree_8h_source.html#l00020">tree.h:20</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00019">Tree::status</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00020">Tree::status</a>.</p>
 
 </div>
 </div>
-<a id="a314e44e5f0cf79c5f7c40d6bfa4b66b0" name="a314e44e5f0cf79c5f7c40d6bfa4b66b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a314e44e5f0cf79c5f7c40d6bfa4b66b0">&#9670;&#160;</a></span>tree_set_days_alived()</h2>
+<a id="ad7648fd2cc235e46a74b02205956cc33" name="ad7648fd2cc235e46a74b02205956cc33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7648fd2cc235e46a74b02205956cc33">&#9670;&#160;</a></span>tree_set_day_planted()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void tree_set_days_alived </td>
+          <td class="memname">void tree_set_day_planted </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structTree.html">Tree</a> *&#160;</td>
           <td class="paramname"><em>t</em>, </td>
@@ -346,7 +347,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned long&#160;</td>
+          <td class="paramtype">time_t&#160;</td>
           <td class="paramname"><em>d</em>&#160;</td>
         </tr>
         <tr>
@@ -360,21 +361,21 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">t</td><td>A modified <a class="el" href="structTree.html">Tree</a> with changed days of lived </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">d</td><td>A non-negative integer indicates day(s) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">d</td><td>A time_t in seconds </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00055">55</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   56</span>{</div>
-<div class="line"><span class="lineno">   57</span>  <span class="keywordflow">if</span> (tree_get_status(t) == DEAD) {</div>
-<div class="line"><span class="lineno">   58</span>    t-&gt;<a class="code hl_variable" href="structTree.html#a508880eed4c5861ddfede1ca2d17df96">days_alived</a> = 0;</div>
-<div class="line"><span class="lineno">   59</span>  } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   60</span>    t-&gt;<a class="code hl_variable" href="structTree.html#a508880eed4c5861ddfede1ca2d17df96">days_alived</a> = d;</div>
-<div class="line"><span class="lineno">   61</span>  }</div>
-<div class="line"><span class="lineno">   62</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00056">56</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   57</span>{</div>
+<div class="line"><span class="lineno">   58</span>  <span class="keywordflow">if</span> (tree_get_status(t) == DEAD) {</div>
+<div class="line"><span class="lineno">   59</span>    t-&gt;<a class="code hl_variable" href="structTree.html#a4e216d45ddb33692b49dffd18c7c693b">day_planted</a> = NULL;</div>
+<div class="line"><span class="lineno">   60</span>  } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   61</span>    t-&gt;<a class="code hl_variable" href="structTree.html#a4e216d45ddb33692b49dffd18c7c693b">day_planted</a> = localtime(&amp;d);</div>
+<div class="line"><span class="lineno">   62</span>  }</div>
+<div class="line"><span class="lineno">   63</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00021">Tree::days_alived</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00022">Tree::day_planted</a>.</p>
 
 </div>
 </div>
@@ -412,17 +413,17 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00040">40</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   41</span>{</div>
-<div class="line"><span class="lineno">   42</span>  <span class="keywordflow">if</span> (t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>) {</div>
-<div class="line"><span class="lineno">   43</span>    free(t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>);</div>
-<div class="line"><span class="lineno">   44</span>  }</div>
-<div class="line"><span class="lineno">   45</span> </div>
-<div class="line"><span class="lineno">   46</span>  t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a> = calloc(strlen(sp) + 1, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
-<div class="line"><span class="lineno">   47</span>  strncpy(t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>, sp, strlen(sp) + 1);</div>
-<div class="line"><span class="lineno">   48</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00041">41</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>{</div>
+<div class="line"><span class="lineno">   43</span>  <span class="keywordflow">if</span> (t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>) {</div>
+<div class="line"><span class="lineno">   44</span>    free(t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>);</div>
+<div class="line"><span class="lineno">   45</span>  }</div>
+<div class="line"><span class="lineno">   46</span> </div>
+<div class="line"><span class="lineno">   47</span>  t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a> = calloc(strlen(sp) + 1, <span class="keyword">sizeof</span>(<span class="keywordtype">char</span>));</div>
+<div class="line"><span class="lineno">   48</span>  strncpy(t-&gt;<a class="code hl_variable" href="structTree.html#aec2b035f6c14984af20fa5d87058e437">species</a>, sp, strlen(sp) + 1);</div>
+<div class="line"><span class="lineno">   49</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00017">Tree::species</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00018">Tree::species</a>.</p>
 
 </div>
 </div>
@@ -460,12 +461,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00050">50</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   51</span>{</div>
-<div class="line"><span class="lineno">   52</span>  t-&gt;<a class="code hl_variable" href="structTree.html#a79d3179f998392f5231d84717dad743c">status</a> = st;</div>
-<div class="line"><span class="lineno">   53</span>}</div>
+<p class="definition">Definition at line <a class="el" href="tree_8c_source.html#l00051">51</a> of file <a class="el" href="tree_8c_source.html">tree.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   52</span>{</div>
+<div class="line"><span class="lineno">   53</span>  t-&gt;<a class="code hl_variable" href="structTree.html#a79d3179f998392f5231d84717dad743c">status</a> = st;</div>
+<div class="line"><span class="lineno">   54</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="tree_8h_source.html#l00019">Tree::status</a>.</p>
+<p class="reference">References <a class="el" href="tree_8h_source.html#l00020">Tree::status</a>.</p>
 
 </div>
 </div>

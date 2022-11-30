@@ -3,15 +3,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <time.h>
 
-Tree* tree_create(const char* sp, tree_state st, unsigned long d)
+Tree* tree_create(const char* sp, tree_state st, time_t d)
 {
   Tree* new_tree = malloc(sizeof(Tree));
   assert(trstat_is_valid(st));
   new_tree->species = NULL;
   tree_set_species(new_tree, sp);
   tree_set_status(new_tree, st);
-  tree_set_days_alived(new_tree, d);
+  tree_set_day_planted(new_tree, d);
 
   return new_tree;
 }
@@ -32,9 +33,9 @@ tree_state tree_get_status(const Tree* t)
   return t->status;
 }
 
-unsigned long tree_get_days_alived(const Tree* t)
+struct tm* tree_get_day_planted(const Tree* t)
 {
-  return t->days_alived;
+  return t->day_planted;
 }
 
 void tree_set_species(Tree* t, const char* sp)
@@ -52,11 +53,11 @@ void tree_set_status(Tree* t, tree_state st)
   t->status = st;
 }
 
-void tree_set_days_alived(Tree* t, unsigned long d)
+void tree_set_day_planted(Tree* t, time_t d)
 {
   if (tree_get_status(t) == DEAD) {
-    t->days_alived = 0;
+    t->day_planted = NULL;
   } else {
-    t->days_alived = d;
+    t->day_planted = localtime(&d);
   }
 }
