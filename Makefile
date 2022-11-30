@@ -27,8 +27,8 @@ client: tree.o menuoption.o client.o
 client.o: $(SRCDIR)/client.c
 	$(CC) $(CFLAGS) -c $(SRCDIR)/client.c
 
-server: tree.o server.o
-	$(CC) $(CFLAGS) server.o tree.o tree_state.o -o greenland_server
+server: tree.o menuoption.o server.o
+	$(CC) $(CFLAGS) server.o tree.o tree_state.o menuoption.o -o greenland_server
 
 server.o: $(SRCDIR)/server.c
 	$(CC) $(CFLAGS) -c $(SRCDIR)/server.c
