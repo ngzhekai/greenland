@@ -1,5 +1,6 @@
 #include "../lib/tree.h"
 #include "../lib/menuoption.h"
+#include "../lib/species.h"
 #include <check.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -56,6 +57,20 @@ START_TEST(test_trstate_is_valid)
 }
 END_TEST
 
+START_TEST(test_species_is_valid)
+{
+  char* list_of_species[] = {
+    "Durio zibethinus",
+    "Musa acuminata",
+    "Acacia mangium",
+    "Tectona grandis",
+  };
+
+  ck_assert(species_is_valid("Acacia mangium", list_of_species) == true);
+  ck_assert(species_is_valid("Ingram ham", list_of_species) == false);
+}
+END_TEST
+
 START_TEST(test_menuoption_handle)
 {
   ck_assert_int_eq(moption_handle(PLANT_TREE), 0);
@@ -95,6 +110,7 @@ Suite* tree_suit(void)
   tcase_add_test(tc_core, test_tree_create_normal);
   tcase_add_test(tc_core, test_trstate_to_string);
   tcase_add_test(tc_core, test_trstate_is_valid);
+  tcase_add_test(tc_core, test_species_is_valid);
   suite_add_tcase(s, tc_core);
 
   return s;
