@@ -1,0 +1,67 @@
+.TH "lib/species.h" 3 "Wed Nov 30 2022" "greenland" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/species.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBspecies_is_valid\fP (const char *sp, char **sp_arr)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBDate\fP
+.RS 4
+2022-11-30 21:27:33 PM +0800 
+.RE
+.PP
+
+.PP
+Definition in file \fBspecies\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "bool species_is_valid (const char * sp, char ** sp_arr)"
+Check if the specified species is listed in an array stored the valied species
+.PP
+\fBParameters\fP
+.RS 4
+\fIsp\fP A species name to be checked 
+.br
+\fIsp_arr\fP A species array used to check
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if sp is in sp_arr, false otherwise 
+.RE
+.PP
+
+.PP
+Definition at line \fB4\fP of file \fBspecies\&.c\fP\&.
+.PP
+.nf
+5 {
+6   while (*sp_arr != NULL) {
+7     if (strcmp(sp, *sp_arr) == 0) {
+8       return true;
+9     }
+10 
+11     sp_arr++;
+12   }
+13 
+14   return false;
+15 }
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for greenland from the source code\&.

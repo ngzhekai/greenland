@@ -2,8 +2,8 @@ var indexSectionsWithContent =
 {
   0: "dmst",
   1: "t",
-  2: "mt",
-  3: "mt",
+  2: "mst",
+  3: "mst",
   4: "ds",
   5: "mt",
   6: "mt"

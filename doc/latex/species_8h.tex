@@ -1,0 +1,58 @@
+\hypertarget{species_8h}{}\doxysection{lib/species.h File Reference}
+\label{species_8h}\index{lib/species.h@{lib/species.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{species_8h_ad221963e3cf337abb641d19fba896f0c}{species\+\_\+is\+\_\+valid}} (const char $\ast$sp, char $\ast$$\ast$sp\+\_\+arr)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyDate}{Date}
+2022-\/11-\/30 21\+:27\+:33 PM +0800 
+\end{DoxyDate}
+
+
+Definition in file \mbox{\hyperlink{species_8h_source}{species.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{species_8h_ad221963e3cf337abb641d19fba896f0c}\label{species_8h_ad221963e3cf337abb641d19fba896f0c}} 
+\index{species.h@{species.h}!species\_is\_valid@{species\_is\_valid}}
+\index{species\_is\_valid@{species\_is\_valid}!species.h@{species.h}}
+\doxysubsubsection{\texorpdfstring{species\_is\_valid()}{species\_is\_valid()}}
+{\footnotesize\ttfamily bool species\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}\item[{const char $\ast$}]{sp,  }\item[{char $\ast$$\ast$}]{sp\+\_\+arr }\end{DoxyParamCaption})}
+
+Check if the specified species is listed in an array stored the valied species
+
+
+\begin{DoxyParams}{Parameters}
+{\em sp} & A species name to be checked \\
+\hline
+{\em sp\+\_\+arr} & A species array used to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if sp is in sp\+\_\+arr, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{species_8c_source_l00004}{4}} of file \mbox{\hyperlink{species_8c_source}{species.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005 \{}
+\DoxyCodeLine{00006   \textcolor{keywordflow}{while} (*sp\_arr != NULL) \{}
+\DoxyCodeLine{00007     \textcolor{keywordflow}{if} (strcmp(sp, *sp\_arr) == 0) \{}
+\DoxyCodeLine{00008       \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{00009     \}}
+\DoxyCodeLine{00010 }
+\DoxyCodeLine{00011     sp\_arr++;}
+\DoxyCodeLine{00012   \}}
+\DoxyCodeLine{00013 }
+\DoxyCodeLine{00014   \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{00015 \}}
+
+\end{DoxyCode}
