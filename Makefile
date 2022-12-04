@@ -2,7 +2,8 @@ CC=gcc
 CFLAGS=-Wall -Wextra -Wformat-nonliteral -Wcast-align -Wpointer-arith \
 -Wbad-function-cast -Wmissing-prototypes -Wstrict-prototypes \
 -Wmissing-declarations -Winline -Wundef -Wnested-externs -Wcast-qual -Wshadow \
--Wwrite-strings -Wno-unused-parameter -Wfloat-equal -pedantic -ansi -Werror
+-Wwrite-strings -Wno-unused-parameter -Wfloat-equal -pedantic -ansi -Werror \
+-std=c17
 SRCDIR=src
 LIBDIR=lib
 TESTDIR=test
