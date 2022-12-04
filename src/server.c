@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <unistd.h>
+#include <sys/socket.h>
 #include <arpa/inet.h>
 #include "../lib/menuoption.h"
 
-int main()
+int main(void)
 {
   // user-defined server's ip and port
   /* Make sure both the client and server are having the same ip and port */
-  char* ip = "127.0.0.1";
+  char ip[] = "127.0.0.1";
   int port = 3939;
 
   int server_socket, client_socket;
@@ -40,18 +42,17 @@ int main()
 
   if (bind_status < 0) {
     perror("[-] Bind error!");
-    exit(1);
+    exit(2);
   }
 
   printf("[+] Bind to the port number: %d\n", port);
 
-  if (bind_status < 0) {
-    perror("[-] Bind error!");
-    exit(2);
-  }
+  // 5 connection request that can be queue by the system in server_socket
+  listen(server_socket, 5);
+  printf("Listening...\n");
 
-  // infinite loop inside the while(), which will not end the server
   while (1) {
+    // infinite loop inside the while(), which will not end the server
     addr_size = sizeof(client_addr);
     client_socket = accept(server_socket, (struct sockaddr*)&client_addr,
                            &addr_size);
