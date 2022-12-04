@@ -1,38 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <strings.h>
 #include <unistd.h>
-#include <fcntl.h>
-#include <sys/wait.h>
 #include <arpa/inet.h>
-#include <stdbool.h>
-#include "../lib/menuoption.h"
 
-/**
- * The client's flow of operations are done as depicted in following diagram:
- *  ┌──────────────┐       ┌────────────────┐
- *  │              │       │                │
- *  │ Display Menu │       │ Create Socket  │
- *  │              │       │                │
- *  └──────┬───────┘       └────────┬───────┘
- *         │                        │
- *         │                        │
- *  ┌──────▼───────┐       ┌────────▼───────┐
- *  │              │       │                │
- *  │ Select Menu  │       │Establish Socket│
- *  │              │       │                │
- *  └──────┬───────┘       └────────┬───────┘
- *         │                        │
- *         │                        │
- *         │               ┌────────▼───────┐
- *         │               │                │
- *         │               │   Send Menu    │
- *         └───────────────►    Option      │
- *                         │                │
- *                         └────────────────┘
- */
-int main(void)
+int main()
 {
   pid_t child_pid;
   int pipe1[2];
@@ -115,5 +87,5 @@ int main(void)
     close(pipe1[0]); // close pipe
   }
 
-  return 0;
+    return 0;
 }
