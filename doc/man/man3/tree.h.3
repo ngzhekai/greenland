@@ -1,4 +1,4 @@
-.TH "lib/tree.h" 3 "Wed Nov 30 2022" "greenland" \" -*- nroff -*-
+.TH "lib/tree.h" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -11,8 +11,6 @@ lib/tree.h
 \fC#include <time\&.h>\fP
 .br
 \fC#include 'tree_state\&.h'\fP
-.br
-\fC#include 'species\&.h'\fP
 .br
 
 .SS "Data Structures"
@@ -99,19 +97,19 @@ st must be valid
 .PP
 
 .PP
-Definition at line \fB9\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB8\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-10 {
-11   Tree* new_tree = malloc(sizeof(Tree));
-12   assert(trstat_is_valid(st));
-13   new_tree->species = NULL;
-14   tree_set_species(new_tree, sp);
-15   tree_set_status(new_tree, st);
-16   tree_set_day_planted(new_tree, d);
-17 
-18   return new_tree;
-19 }
+9 {
+10   Tree* new_tree = malloc(sizeof(Tree));
+11   assert(trstat_is_valid(st));
+12   new_tree->species = NULL;
+13   tree_set_species(new_tree, sp);
+14   tree_set_status(new_tree, st);
+15   tree_set_day_planted(new_tree, d);
+16 
+17   return new_tree;
+18 }
 .fi
 .PP
 References \fBTree::species\fP\&.
@@ -125,13 +123,13 @@ Destroy a \fBTree\fP data class
 .PP
 
 .PP
-Definition at line \fB21\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB20\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-22 {
-23   free(t->species);
-24   free(t);
-25 }
+21 {
+22   free(t->species);
+23   free(t);
+24 }
 .fi
 .PP
 References \fBTree::species\fP\&.
@@ -150,12 +148,12 @@ A pointer to struct tm indicates the day when the \fBTree\fP was planted
 .PP
 
 .PP
-Definition at line \fB37\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB36\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-38 {
-39   return t->day_planted;
-40 }
+37 {
+38   return t->day_planted;
+39 }
 .fi
 .PP
 References \fBTree::day_planted\fP\&.
@@ -174,12 +172,12 @@ A string that describes the \fBTree\fP's species name
 .PP
 
 .PP
-Definition at line \fB27\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB26\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-28 {
-29   return t->species;
-30 }
+27 {
+28   return t->species;
+29 }
 .fi
 .PP
 References \fBTree::species\fP\&.
@@ -198,12 +196,12 @@ A non-negative integer indicates the \fBTree\fP's current status
 .PP
 
 .PP
-Definition at line \fB32\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB31\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-33 {
-34   return t->status;
-35 }
+32 {
+33   return t->status;
+34 }
 .fi
 .PP
 References \fBTree::status\fP\&.
@@ -219,16 +217,16 @@ Set \fBTree\fP's the amount of days it has lived
 .PP
 
 .PP
-Definition at line \fB57\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB56\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-58 {
-59   if (tree_get_status(t) == DEAD) {
-60     t->day_planted = NULL;
-61   } else {
-62     t->day_planted = localtime(&d);
-63   }
-64 }
+57 {
+58   if (tree_get_status(t) == DEAD) {
+59     t->day_planted = NULL;
+60   } else {
+61     t->day_planted = localtime(&d);
+62   }
+63 }
 .fi
 .PP
 References \fBTree::day_planted\fP\&.
@@ -244,17 +242,17 @@ Set \fBTree\fP's species name
 .PP
 
 .PP
-Definition at line \fB42\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB41\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-43 {
-44   if (t->species) {
-45     free(t->species);
-46   }
-47 
-48   t->species = calloc(strlen(sp) + 1, sizeof(char));
-49   strncpy(t->species, sp, strlen(sp) + 1);
-50 }
+42 {
+43   if (t->species) {
+44     free(t->species);
+45   }
+46 
+47   t->species = calloc(strlen(sp) + 1, sizeof(char));
+48   strncpy(t->species, sp, strlen(sp) + 1);
+49 }
 .fi
 .PP
 References \fBTree::species\fP\&.
@@ -270,12 +268,12 @@ Set \fBTree\fP's current status
 .PP
 
 .PP
-Definition at line \fB52\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB51\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-53 {
-54   t->status = st;
-55 }
+52 {
+53   t->status = st;
+54 }
 .fi
 .PP
 References \fBTree::status\fP\&.

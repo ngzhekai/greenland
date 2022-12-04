@@ -99,8 +99,10 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6f7571f6077ddc1c6fe33f14de4bbf22"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menuoption_8h.html#a6f7571f6077ddc1c6fe33f14de4bbf22">moption_handle</a> (<a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> mo)</td></tr>
-<tr class="separator:a6f7571f6077ddc1c6fe33f14de4bbf22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e5efd912ef72baae88513b54fddade1"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menuoption_8h.html#a6e5efd912ef72baae88513b54fddade1">moption_handle</a> (<a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> mo)</td></tr>
+<tr class="separator:a6e5efd912ef72baae88513b54fddade1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a215b9f209465187d24b52152f8b781d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menuoption_8h.html#a215b9f209465187d24b52152f8b781d0">moption_display</a> (<a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> *opt)</td></tr>
+<tr class="separator:a215b9f209465187d24b52152f8b781d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section date"><dt>Date</dt><dd>2022-11-16 23:05:32 PM +0800 </dd></dl>
@@ -143,14 +145,66 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a6f7571f6077ddc1c6fe33f14de4bbf22" name="a6f7571f6077ddc1c6fe33f14de4bbf22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f7571f6077ddc1c6fe33f14de4bbf22">&#9670;&#160;</a></span>moption_handle()</h2>
+<a id="a215b9f209465187d24b52152f8b781d0" name="a215b9f209465187d24b52152f8b781d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a215b9f209465187d24b52152f8b781d0">&#9670;&#160;</a></span>moption_display()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int moption_handle </td>
+          <td class="memname">void moption_display </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> *&#160;</td>
+          <td class="paramname"><em>opt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Display menu options</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">opt</td><td>A MenuOption got from user's input </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="menuoption_8c_source.html#l00022">22</a> of file <a class="el" href="menuoption_8c_source.html">menuoption.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>{</div>
+<div class="line"><span class="lineno">   24</span>  printf(<span class="stringliteral">&quot;  ________                               .__                       .___ \n&quot;</span>);</div>
+<div class="line"><span class="lineno">   25</span>  printf(<span class="stringliteral">&quot; /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n&quot;</span>);</div>
+<div class="line"><span class="lineno">   26</span>  printf(<span class="stringliteral">&quot;/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n&quot;</span>);</div>
+<div class="line"><span class="lineno">   27</span>  printf(<span class="stringliteral">&quot;\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n&quot;</span>);</div>
+<div class="line"><span class="lineno">   28</span>  printf(<span class="stringliteral">&quot; \\______  /|__|    \\___  &gt;\\___  &gt;|___|  /|____/(____  /|___|  /\\____ |  \n&quot;</span>);</div>
+<div class="line"><span class="lineno">   29</span>  printf(<span class="stringliteral">&quot;        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   30</span> </div>
+<div class="line"><span class="lineno">   31</span>  printf(<span class="stringliteral">&quot;Welcome to greenland, a place to plant tree!\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   32</span>  printf(<span class="stringliteral">&quot;We don&#39;t have any affiliation to the Greenland government, but if \n&quot;</span></div>
+<div class="line"><span class="lineno">   33</span>         <span class="stringliteral">&quot;you can plant a tree there, we are more than welcome! :)\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   34</span> </div>
+<div class="line"><span class="lineno">   35</span>  printf(<span class="stringliteral">&quot;################################\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   36</span>  printf(<span class="stringliteral">&quot;#                              #\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   37</span>  printf(<span class="stringliteral">&quot;#            MENU              #\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   38</span>  printf(<span class="stringliteral">&quot;#                              #\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   39</span>  printf(<span class="stringliteral">&quot;################################\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   40</span>  printf(<span class="stringliteral">&quot;\t1. To plant a tree\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   41</span>  printf(<span class="stringliteral">&quot;\t2. To query a tree\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   42</span>  printf(<span class="stringliteral">&quot;\t3. To update a tree&#39;s status\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   43</span>  printf(<span class="stringliteral">&quot;(Choose a service needed according to the number)\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   44</span>  printf(<span class="stringliteral">&quot;Option: &quot;</span>);</div>
+<div class="line"><span class="lineno">   45</span>  scanf(<span class="stringliteral">&quot;%d&quot;</span>, (<span class="keywordtype">int</span>*) opt);</div>
+<div class="line"><span class="lineno">   46</span>  system(<span class="stringliteral">&quot;clear&quot;</span>);</div>
+<div class="line"><span class="lineno">   47</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6e5efd912ef72baae88513b54fddade1" name="a6e5efd912ef72baae88513b54fddade1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e5efd912ef72baae88513b54fddade1">&#9670;&#160;</a></span>moption_handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * moption_handle </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a>&#160;</td>
           <td class="paramname"><em>mo</em></td><td>)</td>
@@ -167,19 +221,22 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 if the handling succeeded, -1 if failed </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="menuoption_8c_source.html#l00004">4</a> of file <a class="el" href="menuoption_8c_source.html">menuoption.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    5</span>{</div>
-<div class="line"><span class="lineno">    6</span>  <span class="keywordflow">switch</span> (mo) {</div>
-<div class="line"><span class="lineno">    7</span>    <span class="keywordflow">case</span> PLANT_TREE:</div>
-<div class="line"><span class="lineno">    8</span>    <span class="keywordflow">case</span> QUERY_TREE:</div>
-<div class="line"><span class="lineno">    9</span>    <span class="keywordflow">case</span> UPDATE_TREE:</div>
-<div class="line"><span class="lineno">   10</span>      printf(<span class="stringliteral">&quot;Option %d soon to be supported\n&quot;</span>, mo);</div>
-<div class="line"><span class="lineno">   11</span>      <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">   12</span> </div>
-<div class="line"><span class="lineno">   13</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">   14</span>      <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">   15</span>  }</div>
-<div class="line"><span class="lineno">   16</span>}</div>
+<p class="definition">Definition at line <a class="el" href="menuoption_8c_source.html#l00005">5</a> of file <a class="el" href="menuoption_8c_source.html">menuoption.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    6</span>{</div>
+<div class="line"><span class="lineno">    7</span>  <span class="keywordtype">char</span>* msg = malloc(1024);</div>
+<div class="line"><span class="lineno">    8</span> </div>
+<div class="line"><span class="lineno">    9</span>  <span class="keywordflow">switch</span> (mo) {</div>
+<div class="line"><span class="lineno">   10</span>    <span class="keywordflow">case</span> PLANT_TREE:</div>
+<div class="line"><span class="lineno">   11</span>    <span class="keywordflow">case</span> QUERY_TREE:</div>
+<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">case</span> UPDATE_TREE:</div>
+<div class="line"><span class="lineno">   13</span>      sprintf(msg, <span class="stringliteral">&quot;Option %d soon to be supported\n&quot;</span>, mo);</div>
+<div class="line"><span class="lineno">   14</span>      <span class="keywordflow">return</span> msg;</div>
+<div class="line"><span class="lineno">   15</span> </div>
+<div class="line"><span class="lineno">   16</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">   17</span>      sprintf(msg, <span class="stringliteral">&quot;Option %d not supported\n&quot;</span>, mo);</div>
+<div class="line"><span class="lineno">   18</span>      <span class="keywordflow">return</span> msg;</div>
+<div class="line"><span class="lineno">   19</span>  }</div>
+<div class="line"><span class="lineno">   20</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

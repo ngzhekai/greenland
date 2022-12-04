@@ -3,68 +3,67 @@
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{tree_8c_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tree_8h}{tree.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00002}00002 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{species_8h}{species.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00003}00003 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tree__state_8h}{tree\_state.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <stdlib.h>}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <string.h>}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <assert.h>}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00007}00007 \textcolor{preprocessor}{\#include <time.h>}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00008}00008 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00009}\mbox{\hyperlink{tree_8h_acbbea7f877fe7f21f6e165ba641ad690}{00009}} \mbox{\hyperlink{structTree}{Tree}}* tree\_create(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* sp, \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\_state}} st, time\_t d)}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00010}00010 \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00011}00011   \mbox{\hyperlink{structTree}{Tree}}* new\_tree = malloc(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structTree}{Tree}}));}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00012}00012   assert(trstat\_is\_valid(st));}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00013}00013   new\_tree-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}} = NULL;}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00014}00014   tree\_set\_species(new\_tree, sp);}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00015}00015   tree\_set\_status(new\_tree, st);}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00016}00016   tree\_set\_day\_planted(new\_tree, d);}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00017}00017 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00018}00018   \textcolor{keywordflow}{return} new\_tree;}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00019}00019 \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00020}00020 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00021}\mbox{\hyperlink{tree_8h_a3c64008e7d343b168c2fb089f264bbab}{00021}} \textcolor{keywordtype}{void} tree\_free(\mbox{\hyperlink{structTree}{Tree}}* t)}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00022}00022 \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00023}00023   free(t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}});}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00024}00024   free(t);}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00025}00025 \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00026}00026 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00027}\mbox{\hyperlink{tree_8h_a63aff437343e78346f3640d20bf004aa}{00027}} \textcolor{keywordtype}{char}* tree\_get\_species(\textcolor{keyword}{const} \mbox{\hyperlink{structTree}{Tree}}* t)}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00028}00028 \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00029}00029   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}};}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00030}00030 \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00031}00031 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00032}\mbox{\hyperlink{tree_8h_a9c30a83e5d894023a12e9ebd5cae32bd}{00032}} \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\_state}} tree\_get\_status(\textcolor{keyword}{const} \mbox{\hyperlink{structTree}{Tree}}* t)}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00033}00033 \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00034}00034   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}};}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00035}00035 \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00036}00036 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00037}\mbox{\hyperlink{tree_8h_aa16b78d732d809de58a425d6fa97e03e}{00037}} \textcolor{keyword}{struct }tm* tree\_get\_day\_planted(\textcolor{keyword}{const} \mbox{\hyperlink{structTree}{Tree}}* t)}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00038}00038 \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00039}00039   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_a4e216d45ddb33692b49dffd18c7c693b}{day\_planted}};}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00040}00040 \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00041}00041 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00042}\mbox{\hyperlink{tree_8h_a46afbb95e6e7f38fc337c0c93618f94a}{00042}} \textcolor{keywordtype}{void} tree\_set\_species(\mbox{\hyperlink{structTree}{Tree}}* t, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* sp)}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00043}00043 \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00044}00044   \textcolor{keywordflow}{if} (t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}}) \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00045}00045     free(t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}});}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00046}00046   \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00047}00047 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00048}00048   t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}} = calloc(strlen(sp) + 1, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00049}00049   strncpy(t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}}, sp, strlen(sp) + 1);}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00050}00050 \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00051}00051 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00052}\mbox{\hyperlink{tree_8h_aad91543206f23107edc165120ed5b548}{00052}} \textcolor{keywordtype}{void} tree\_set\_status(\mbox{\hyperlink{structTree}{Tree}}* t, \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\_state}} st)}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00053}00053 \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00054}00054   t-\/>\mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}} = st;}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00055}00055 \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00056}00056 }
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00057}\mbox{\hyperlink{tree_8h_ad7648fd2cc235e46a74b02205956cc33}{00057}} \textcolor{keywordtype}{void} tree\_set\_day\_planted(\mbox{\hyperlink{structTree}{Tree}}* t, time\_t d)}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00058}00058 \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00059}00059   \textcolor{keywordflow}{if} (tree\_get\_status(t) == DEAD) \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00060}00060     t-\/>\mbox{\hyperlink{structTree_a4e216d45ddb33692b49dffd18c7c693b}{day\_planted}} = NULL;}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00061}00061   \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00062}00062     t-\/>\mbox{\hyperlink{structTree_a4e216d45ddb33692b49dffd18c7c693b}{day\_planted}} = localtime(\&d);}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00063}00063   \}}
-\DoxyCodeLine{\Hypertarget{tree_8c_source_l00064}00064 \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00002}00002 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tree__state_8h}{tree\_state.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00008}\mbox{\hyperlink{tree_8h_acbbea7f877fe7f21f6e165ba641ad690}{00008}} \mbox{\hyperlink{structTree}{Tree}}* tree\_create(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* sp, \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\_state}} st, time\_t d)}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00009}00009 \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00010}00010   \mbox{\hyperlink{structTree}{Tree}}* new\_tree = malloc(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structTree}{Tree}}));}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00011}00011   assert(trstat\_is\_valid(st));}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00012}00012   new\_tree-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}} = NULL;}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00013}00013   tree\_set\_species(new\_tree, sp);}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00014}00014   tree\_set\_status(new\_tree, st);}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00015}00015   tree\_set\_day\_planted(new\_tree, d);}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00017}00017   \textcolor{keywordflow}{return} new\_tree;}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00018}00018 \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00020}\mbox{\hyperlink{tree_8h_a3c64008e7d343b168c2fb089f264bbab}{00020}} \textcolor{keywordtype}{void} tree\_free(\mbox{\hyperlink{structTree}{Tree}}* t)}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00021}00021 \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00022}00022   free(t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}});}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00023}00023   free(t);}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00024}00024 \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00026}\mbox{\hyperlink{tree_8h_a63aff437343e78346f3640d20bf004aa}{00026}} \textcolor{keywordtype}{char}* tree\_get\_species(\textcolor{keyword}{const} \mbox{\hyperlink{structTree}{Tree}}* t)}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00027}00027 \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00028}00028   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}};}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00029}00029 \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00031}\mbox{\hyperlink{tree_8h_a9c30a83e5d894023a12e9ebd5cae32bd}{00031}} \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\_state}} tree\_get\_status(\textcolor{keyword}{const} \mbox{\hyperlink{structTree}{Tree}}* t)}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00032}00032 \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00033}00033   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}};}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00034}00034 \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00036}\mbox{\hyperlink{tree_8h_aa16b78d732d809de58a425d6fa97e03e}{00036}} \textcolor{keyword}{struct }tm* tree\_get\_day\_planted(\textcolor{keyword}{const} \mbox{\hyperlink{structTree}{Tree}}* t)}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00037}00037 \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00038}00038   \textcolor{keywordflow}{return} t-\/>\mbox{\hyperlink{structTree_a4e216d45ddb33692b49dffd18c7c693b}{day\_planted}};}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00039}00039 \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00041}\mbox{\hyperlink{tree_8h_a46afbb95e6e7f38fc337c0c93618f94a}{00041}} \textcolor{keywordtype}{void} tree\_set\_species(\mbox{\hyperlink{structTree}{Tree}}* t, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* sp)}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00042}00042 \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00043}00043   \textcolor{keywordflow}{if} (t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}}) \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00044}00044     free(t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}});}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00045}00045   \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00047}00047   t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}} = calloc(strlen(sp) + 1, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00048}00048   strncpy(t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}}, sp, strlen(sp) + 1);}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00049}00049 \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00051}\mbox{\hyperlink{tree_8h_aad91543206f23107edc165120ed5b548}{00051}} \textcolor{keywordtype}{void} tree\_set\_status(\mbox{\hyperlink{structTree}{Tree}}* t, \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\_state}} st)}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00052}00052 \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00053}00053   t-\/>\mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}} = st;}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00054}00054 \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00056}\mbox{\hyperlink{tree_8h_ad7648fd2cc235e46a74b02205956cc33}{00056}} \textcolor{keywordtype}{void} tree\_set\_day\_planted(\mbox{\hyperlink{structTree}{Tree}}* t, time\_t d)}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00057}00057 \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00058}00058   \textcolor{keywordflow}{if} (tree\_get\_status(t) == DEAD) \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00059}00059     t-\/>\mbox{\hyperlink{structTree_a4e216d45ddb33692b49dffd18c7c693b}{day\_planted}} = NULL;}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00060}00060   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00061}00061     t-\/>\mbox{\hyperlink{structTree_a4e216d45ddb33692b49dffd18c7c693b}{day\_planted}} = localtime(\&d);}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00062}00062   \}}
+\DoxyCodeLine{\Hypertarget{tree_8c_source_l00063}00063 \}}
 
 \end{DoxyCode}
