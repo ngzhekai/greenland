@@ -87,5 +87,5 @@ int main()
     close(pipe1[0]); // close pipe
   }
 
-    return 0;
+  return 0;
 }
