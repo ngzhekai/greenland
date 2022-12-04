@@ -57,6 +57,8 @@ START_TEST(test_trstate_is_valid)
 }
 END_TEST
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdiscarded-qualifiers"
 START_TEST(test_species_is_valid)
 {
   char* list_of_species[] = {
@@ -70,6 +72,7 @@ START_TEST(test_species_is_valid)
   ck_assert(species_is_valid("Ingram ham", list_of_species) == false);
 }
 END_TEST
+#pragma GCC diagnostic pop
 
 START_TEST(test_menuoption_handle)
 {
