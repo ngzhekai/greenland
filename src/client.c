@@ -1,10 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/wait.h>
 #include <arpa/inet.h>
+#include <stdbool.h>
+#include "../lib/menuoption.h"
 
-int main()
+/**
+ * The client's flow of operations are done as depicted in following diagram:
+ *  ┌──────────────┐       ┌────────────────┐
+ *  │              │       │                │
+ *  │ Display Menu │       │ Create Socket  │
+ *  │              │       │                │
+ *  └──────┬───────┘       └────────┬───────┘
+ *         │                        │
+ *         │                        │
+ *  ┌──────▼───────┐       ┌────────▼───────┐
+ *  │              │       │                │
+ *  │ Select Menu  │       │Establish Socket│
+ *  │              │       │                │
+ *  └──────┬───────┘       └────────┬───────┘
+ *         │                        │
+ *         │                        │
+ *         │               ┌────────▼───────┐
+ *         │               │                │
+ *         │               │   Send Menu    │
+ *         └───────────────►    Option      │
+ *                         │                │
+ *                         └────────────────┘
+ */
+int main(void)
 {
   pid_t child_pid;
   int pipe1[2];
