@@ -1,17 +1,20 @@
+#define _XOPEN_SOURCE // include support for strptime(3)
 #include "tree.h"
 #include "tree_state.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <time.h>
 
-Tree* tree_create(const char* sp, tree_state st, time_t d)
+Tree* tree_create(const char* sp, tree_state st, const char* d)
 {
   Tree* new_tree = malloc(sizeof(Tree));
   assert(trstat_is_valid(st));
   new_tree->species = NULL;
   tree_set_species(new_tree, sp);
   tree_set_status(new_tree, st);
+  new_tree->day_planted = malloc(sizeof(struct tm));
   tree_set_day_planted(new_tree, d);
 
   return new_tree;
@@ -19,6 +22,7 @@ Tree* tree_create(const char* sp, tree_state st, time_t d)
 
 void tree_free(Tree* t)
 {
+  free(t->day_planted);
   free(t->species);
   free(t);
 }
@@ -53,11 +57,11 @@ void tree_set_status(Tree* t, tree_state st)
   t->status = st;
 }
 
-void tree_set_day_planted(Tree* t, time_t d)
+void tree_set_day_planted(Tree* t, const char* d)
 {
   if (tree_get_status(t) == DEAD) {
     t->day_planted = NULL;
   } else {
-    t->day_planted = localtime(&d);
+    strptime(d, "%Y-%m-%d", t->day_planted);
   }
 }

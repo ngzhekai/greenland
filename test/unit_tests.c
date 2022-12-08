@@ -1,3 +1,4 @@
+#define _XOPEN_SOURCE // include support for strptime(3)
 #include "../lib/tree.h"
 #include "../lib/menuoption.h"
 #include "../lib/species.h"
@@ -6,15 +7,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <time.h>
 
 START_TEST(test_tree_create_dead)
 {
   struct Tree* t;
-  time_t current_time;
-  time(&current_time);
 
-  t = tree_create("foo", DEAD, current_time);
+  t = tree_create("foo", DEAD, "2022-12-05");
 
   ck_assert_str_eq(tree_get_species(t), "foo");
   ck_assert(tree_get_status(t) == DEAD);
@@ -27,14 +27,15 @@ END_TEST
 START_TEST(test_tree_create_normal)
 {
   struct Tree* t;
-  time_t current_time;
-  time(&current_time);
 
-  t = tree_create("foo", PLANTED, current_time);
+  t = tree_create("foo", PLANTED, "2022-12-05");
+
+  char* d = malloc(sizeof(char) * 11);
+  strftime(d, sizeof(char) * 11, "%F", tree_get_day_planted(t));
 
   ck_assert_str_eq(tree_get_species(t), "foo");
   ck_assert(tree_get_status(t) == PLANTED);
-  ck_assert(mktime(t->day_planted) == current_time);
+  ck_assert_str_eq(d, "2022-12-05");
 
   tree_free(t);
 }

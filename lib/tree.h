@@ -28,14 +28,15 @@ typedef struct Tree {
  * @param[in] sp A string specifies the species name for the Tree
  * @param[in] st A Tree State enum specifies the current status for the
  *               Tree
- * @param[in] d A time_t in seconds specifies the days alived of the Tree
+ * @param[in] d A string specifies the days alived of the Tree in format
+ *              %Y-%m-%d, e.g. 2022-12-05
  *
  * @return A Tree data class that contains the information about its species
  * name, current status and the amount of days alived.
  *
  * @attention st must be valid
  */
-struct Tree* tree_create(const char* sp, tree_state st, time_t d);
+struct Tree* tree_create(const char* sp, tree_state st, const char* d);
 
 /**
  * Destroy a Tree data class
@@ -88,11 +89,11 @@ void tree_set_species(Tree* t, const char* sp);
 void tree_set_status(Tree* t, tree_state st);
 
 /**
- * Set Tree's the amount of days it has lived
+ * Set Tree's when it was planted
  *
- * @param[out] t A modified Tree with changed days of lived
- * @param[in] d A time_t in seconds
+ * @param[out] t A modified Tree with changed planted day
+ * @param[in] d A string specifies the planted day
  */
-void tree_set_day_planted(Tree* t, time_t d);
+void tree_set_day_planted(Tree* t, const char* d);
 
 #endif
