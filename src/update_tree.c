@@ -49,9 +49,9 @@ int main(int argc, char const *argv[])
 
 struct details get_coordinates(struct details tree)
 {
-    printf("Enter the X Coordinates of the tree: \n");
+    printf("Enter the X Coordinates of the tree: ");
     scanf("%d", &tree.vertical);
-    printf("Enter the Y Coordinates of the tree: \n");
+    printf("Enter the Y Coordinates of the tree: ");
     scanf("%d", &tree.horizontal);
     return tree;
 }
@@ -74,7 +74,7 @@ int check_tree_exist(char *filename, struct details tree, struct details trees[]
     // Read tree data from the file and store in the trees array
     while (fgets(temp, 512, fp) != NULL)
     {
-        sscanf(temp, "%d,%d\t\t%s\t\t%s\t\t%s\n", &trees[numTrees].vertical, &trees[numTrees].horizontal, &trees[numTrees].species, &trees[numTrees].date, &trees[numTrees].status);
+        sscanf(temp, "%d,%d\t\t%s\t\t%s\t\t%s\n", &trees[numTrees].vertical, &trees[numTrees].horizontal, trees[numTrees].species, trees[numTrees].date, trees[numTrees].status);
         if (trees[numTrees].vertical == tree.vertical && trees[numTrees].horizontal == tree.horizontal)
         {
             *treeIndex = numTrees;
@@ -116,7 +116,7 @@ void copy_tree(char *filename, struct details *trees, struct details tree, int *
     // Read tree data from the file and store in the trees array
     while (fgets(temp, 512, fp) != NULL)
     {
-        sscanf(temp, "%d,%d\t\t%s\t\t%s\t\t%s\n", &trees[numTrees].vertical, &trees[numTrees].horizontal, &trees[numTrees].species, &trees[numTrees].date, &trees[numTrees].status);
+        sscanf(temp, "%d,%d\t\t%s\t\t%s\t\t%s\n", &trees[numTrees].vertical, &trees[numTrees].horizontal, trees[numTrees].species, trees[numTrees].date, trees[numTrees].status);
         if (!(trees[numTrees].vertical == tree.vertical && trees[numTrees].horizontal == tree.horizontal))
         {
             fprintf(tmp, "%d,%d\t\t%s\t\t%s\t\t%s\n", trees[numTrees].vertical, trees[numTrees].horizontal, trees[numTrees].species, trees[numTrees].date, trees[numTrees].status);
