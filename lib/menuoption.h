@@ -19,7 +19,7 @@ typedef enum MenuOption { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
  *
  * @return 0 if the handling succeeded, -1 if failed
  */
-char* moption_handle(int client_socket, MenuOption mo);
+char* moption_handle(int* client_socket, MenuOption mo);
 
 /**
  * Display menu options

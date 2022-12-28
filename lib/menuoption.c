@@ -2,7 +2,7 @@
 #include "menuoption.h"
 #include "plant_tree.h"
 
-char *moption_handle(int client_socket, MenuOption mo) // called by server
+char *moption_handle(int* client_socket, MenuOption mo) // called by server
 {
   char *msg = malloc(1024);
   char buffer[1024];
@@ -16,14 +16,18 @@ char *moption_handle(int client_socket, MenuOption mo) // called by server
     char *d = malloc(1024);
     tree_coordinate c;
 
-    recv(client_socket, buffer, sizeof(buffer), 0);
+    recv(*client_socket, buffer, sizeof(buffer), 0);
     strcpy(sp, buffer);
-    recv(client_socket, buffer, sizeof(buffer), 0);    
+
+    recv(*client_socket, buffer, sizeof(buffer), 0);    
     strcpy(d, buffer);
-    recv(client_socket, buffer, sizeof(buffer), 0);
+
+    recv(*client_socket, buffer, sizeof(buffer), 0);
     c.x = atoi(buffer);
-    recv(client_socket, buffer, sizeof(buffer), 0);
+
+    recv(*client_socket, buffer, sizeof(buffer), 0);
     c.y = atoi(buffer);
+
     tree_create(sp, st, d, c);
     sprintf(msg, "\nTree successfully planted.");
     return msg;

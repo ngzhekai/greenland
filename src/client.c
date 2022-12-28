@@ -59,7 +59,7 @@ int main(void)
       write(pipe1[1], buffer, 1024);
 
       if (option == PLANT_TREE)
-        init_plant_tree(pipe1[1]);
+        init_plant_tree(&pipe1[1]);
     }
 
     close(pipe1[1]); // close pipe

@@ -66,7 +66,7 @@ int main(void)
 
     // handling menu option
     bzero(buffer, 1024);
-    snprintf(buffer, 1024, "%s", moption_handle(client_socket, client_menuoption));
+    snprintf(buffer, 1024, "%s", moption_handle(&client_socket, client_menuoption));
 
     // send the message to the client socket
     printf("Server: %s\n", buffer);
