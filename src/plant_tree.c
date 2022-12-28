@@ -25,14 +25,8 @@ void write_tree(char *filename, struct details trees[], int treeIndex);
 int main(int argc, char const *argv[])
 {
 
+    // variable INIT
     char *filename = "test.txt";
-    // int fd;
-    // int speciesChosen, state;
-
-    // For SEARCH Coordinates
-    // FILE *fp;
-    // int line_num,
-
     int find_result = 1; // initialize to true
     int treeIndex = -1;
 
@@ -138,6 +132,7 @@ void write_tree(char *filename, struct details trees[], int treeIndex)
     /* open file for writing */
     FILE *of;
     of = fopen(filename, "a");
+
     if (of == NULL)
     {
         printf("Error opening the file %s", filename);
