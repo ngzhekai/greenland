@@ -1,3 +1,4 @@
+/* plant_tree.c (code refactored) */
 #include <stdio.h>
 #include <search.h>
 #include <fcntl.h>
@@ -6,8 +7,8 @@
 #include <string.h>
 #include <sys/types.h>
 
+#define MAX_TREES 100
 #define BUFFER_SIZE 512
-// #define PERMISSION 0755 /* OWNER: WRX | GROUP: RX  | Other: RX */
 
 struct details
 {
@@ -16,62 +17,96 @@ struct details
     char species[BUFFER_SIZE];
     char date[BUFFER_SIZE];
     char status[BUFFER_SIZE];
-} tree;
+} tree, trees[MAX_TREES];
+
+/* function declaration */
+struct details get_coordinates(struct details tree);
+int check_tree_exist(char *filename, struct details tree, struct details trees[], int *treeIndex);
+void update_tree(char *filename, struct details trees[], int *treeIndex);
+void write_tree(char *filename, struct details trees[], int treeIndex);
 
 int main(int argc, char const *argv[])
 {
 
-    char *filename = "database.txt";
-    int fd;
-    int speciesChosen, state;
+    char *filename = "test.txt";
+    // int fd;
+    // int speciesChosen, state;
 
     // For SEARCH Coordinates
-    FILE *fp;
-    int line_num, find_result;
-    char temp[BUFFER_SIZE];
-    char search[BUFFER_SIZE];
+    // FILE *fp;
+    // int line_num,
+
+    int find_result = 1; // initialize to true
+    int treeIndex = -1;
 
     do
     {
-        printf("Enter the X Coordinates of the tree: \n");
-        scanf("%d", &tree.vertical);
-        printf("Enter the Y Coordinates of the tree: \n");
-        scanf("%d", &tree.horizontal);
-
-        // Concatenate into string format x,y used for search
-        sprintf(search, "%d,%d", tree.vertical, tree.horizontal);
-
-        // INIT
-        line_num = 1;
-        find_result = 0;
-
-        // Open file for reading
-        if ((fp = fopen(filename, "r")) == NULL)
-        {
-            printf("Error opening the file %s for reading", filename);
-            exit(0);
-        }
-
-        // read characters from the fp until the first new-line character (/n) and stores in string temp
-        while (fgets(temp, 512, fp) != NULL)
-        {
-            if ((strstr(temp, search)) != NULL) // check if string search is in string temp
-            {
-                printf("A match found on line: %d\n\n", line_num);
-                printf("\n%s\n", temp);
-                find_result = 1;
-                break;
-            }
-            line_num++;
-        }
-
+        tree = get_coordinates(tree);
+        find_result = check_tree_exist(filename, tree, trees, &treeIndex);
         if (find_result)
-        {
-            printf("\nThe following location already exists!\nTry Again!\n\n\n");
-        }
-        fclose(fp);
-    } while (find_result != 0);
+            printf("\nA tree was found in the database at the given location.\nTry a new coordinate!\n\n\n");
 
+        // ideas: maybe can create something like if a user entered a coordinates where tree already exist, can give them the option to update it.
+    } while (find_result);
+
+    update_tree(filename, trees, &treeIndex);
+
+    return 0;
+}
+
+struct details get_coordinates(struct details tree)
+{
+    printf("Enter the X Coordinates of the tree: \n");
+    scanf("%d", &tree.vertical);
+    printf("Enter the Y Coordinates of the tree: \n");
+    scanf("%d", &tree.horizontal);
+    return tree;
+}
+
+int check_tree_exist(char *filename, struct details tree, struct details trees[], int *treeIndex)
+{
+    FILE *fp;
+
+    // variable INIT
+    int numTrees = 0;
+    char temp[BUFFER_SIZE];
+
+    // Open file for reading
+    if ((fp = fopen(filename, "r")) == NULL)
+    {
+        printf("Error opening the file %s for reading", filename);
+        exit(0);
+    }
+
+    // Read tree data from the file and store in the trees array
+    while (fgets(temp, 512, fp) != NULL)
+    {
+        sscanf(temp, "%d,%d\t\t%s\t\t%s\t\t%s\n", &trees[numTrees].vertical, &trees[numTrees].horizontal, &trees[numTrees].species, &trees[numTrees].date, &trees[numTrees].status);
+        if (trees[numTrees].vertical == tree.vertical && trees[numTrees].horizontal == tree.horizontal)
+        {
+            *treeIndex = numTrees;
+            // treeIndex can be used to show which line is the search tree located in the textfile;
+            // printf("The coordinates found was located on line %d\n", *treeIndex + 1); // for debug
+            return 1;
+        }
+        numTrees++;
+    }
+
+    // initialize trees[*treeIndex].xxxxx  to be used when writing
+    trees[*treeIndex].vertical = tree.vertical;
+    trees[*treeIndex].horizontal = tree.horizontal;
+    fclose(fp);
+
+    return 0;
+}
+
+void update_tree(char *filename, struct details trees[], int *treeIndex)
+{
+    // variable INIT
+    int speciesChosen = 0;
+    int state = 0;
+
+    // check user input
     do
     {
         printf("Enter the species of the tree (1) Deciduous (2) Coniferous: \n");
@@ -79,13 +114,14 @@ int main(int argc, char const *argv[])
     } while (speciesChosen > 2 || speciesChosen < 1);
 
     if (speciesChosen == 1)
-        strncpy(tree.species, "Deciduous", 10);
+        strncpy(trees[*treeIndex].species, "Deciduous", 10);
     else
-        strncpy(tree.species, "Coniferous", 11);
+        strncpy(trees[*treeIndex].species, "Coniferous", 11);
 
     printf("Enter the date planted: \n");
-    scanf("%s", &tree.date);
+    scanf("%s", trees[*treeIndex].date);
 
+    // check user input
     do
     {
         printf("Enter the status of the tree (1) Alive (2) Dead: \n");
@@ -93,10 +129,15 @@ int main(int argc, char const *argv[])
     } while (state > 2 || state < 1);
 
     if (state == 1)
-        strncpy(tree.status, "Alive", 6);
+        strncpy(trees[*treeIndex].status, "Alive", 6);
     else
-        strncpy(tree.status, "Dead", 5);
+        strncpy(trees[*treeIndex].status, "Dead", 5);
 
+    write_tree(filename, trees, *treeIndex);
+}
+
+void write_tree(char *filename, struct details trees[], int treeIndex)
+{
     /* open file for writing */
     FILE *of;
     of = fopen(filename, "a");
@@ -106,10 +147,8 @@ int main(int argc, char const *argv[])
         exit(0);
     }
 
-    fprintf(of, "%d,%d\t\t\t%s\t\t%s\t%s\n", tree.vertical, tree.horizontal, tree.species, tree.date, tree.status);
-
-    // fprintf generally use for the text file and fwrite generally use for a binary file.
+    // append the array data for trees[treeIndex] into the text file
+    fprintf(of, "%d,%d\t\t%s\t\t%s\t\t%s\n", trees[treeIndex].vertical, trees[treeIndex].horizontal, trees[treeIndex].species, trees[treeIndex].date, trees[treeIndex].status);
 
     fclose(of);
-    return 0;
 }
