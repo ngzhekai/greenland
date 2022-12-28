@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <time.h>
 #include "tree_state.h"
+#include "tree_coordinate.h"
 
 /**
  * Tree data class that stores information about a tree including its species,
@@ -20,6 +21,8 @@ typedef struct Tree {
   tree_state status;
   /** The day when the tree was planted */
   struct tm* day_planted;
+  /** The coordinate where the tree was planted */
+  tree_coordinate coordinate;
 } Tree;
 
 /**
@@ -30,13 +33,16 @@ typedef struct Tree {
  *               Tree
  * @param[in] d A string specifies the days alived of the Tree in format
  *              %Y-%m-%d, e.g. 2022-12-05
+ * 
+ * @param[in] c A Tree coordinate struct that specify the longitude and latitude
+ *              coordinate of the planted tree
  *
  * @return A Tree data class that contains the information about its species
  * name, current status and the amount of days alived.
  *
  * @attention st must be valid
  */
-struct Tree* tree_create(const char* sp, tree_state st, const char* d);
+struct Tree* tree_create(const char* sp, tree_state st, const char* d, tree_coordinate c);
 
 /**
  * Destroy a Tree data class

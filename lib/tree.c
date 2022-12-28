@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <time.h>
 
-Tree* tree_create(const char* sp, tree_state st, const char* d)
+Tree* tree_create(const char* sp, tree_state st, const char* d, tree_coordinate c)
 {
   Tree* new_tree = malloc(sizeof(Tree));
   assert(trstat_is_valid(st));
@@ -16,7 +16,8 @@ Tree* tree_create(const char* sp, tree_state st, const char* d)
   tree_set_status(new_tree, st);
   new_tree->day_planted = malloc(sizeof(struct tm));
   tree_set_day_planted(new_tree, d);
-
+  assert(trloc_is_valid(c));
+  tree_set_coordinate(new_tree, c);
   return new_tree;
 }
 
@@ -42,6 +43,11 @@ struct tm* tree_get_day_planted(const Tree* t)
   return t->day_planted;
 }
 
+tree_coordinate tree_get_coordinate(const Tree* t)
+{
+  return t->coordinate;
+}
+
 void tree_set_species(Tree* t, const char* sp)
 {
   if (t->species) {
@@ -64,4 +70,9 @@ void tree_set_day_planted(Tree* t, const char* d)
   } else {
     strptime(d, "%Y-%m-%d", t->day_planted);
   }
+}
+
+void tree_set_coordinate(Tree* t, tree_coordinate c)
+{
+  t->coordinate = c;
 }
