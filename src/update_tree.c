@@ -1,6 +1,5 @@
 /* update_tree.c (refactored) into several sub functions */
 #include <stdio.h>
-#include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
@@ -20,9 +19,9 @@ struct details
 /* function declaration */
 struct details get_coordinates(struct details tree);
 int check_tree_exist(char *filename, struct details tree, struct details trees[], int *treeIndex);
-void copy_tree(char *filename, struct details *trees, struct details tree, int *find_result, int *treeIndex);
+void copy_tree(char *filename, struct details *trees, struct details tree, int *treeIndex);
+void update_tree(char *filename, struct details trees[], int *treeIndex);
 void write_tree(char *filename, struct details trees[], int treeIndex);
-void update_tree(char *filename, struct details trees[], int treeIndex);
 
 int main(int argc, char const *argv[])
 {
@@ -42,8 +41,8 @@ int main(int argc, char const *argv[])
 
     } while (!find_result);
 
-    copy_tree(filename, trees, tree, &find_result, &treeIndex);
-    update_tree(filename, trees, treeIndex);
+    copy_tree(filename, trees, tree, &treeIndex);
+    update_tree(filename, trees, &treeIndex);
 
     return 0;
 }
@@ -90,7 +89,7 @@ int check_tree_exist(char *filename, struct details tree, struct details trees[]
     return 0;
 }
 
-void copy_tree(char *filename, struct details *trees, struct details tree, int *find_result, int *treeIndex)
+void copy_tree(char *filename, struct details *trees, struct details tree, int *treeIndex)
 {
     FILE *fp;
 
@@ -127,13 +126,9 @@ void copy_tree(char *filename, struct details *trees, struct details tree, int *
 
     fclose(tmp);
     fclose(fp);
-
-    // Prompt the user (no tree located in the specified location)
-    if (!*find_result)
-        printf("\nNo tree with the given coordinates was found in the database.\nTry Again!\n\n\n");
 }
 
-void update_tree(char *filename, struct details trees[], int treeIndex)
+void update_tree(char *filename, struct details trees[], int *treeIndex)
 {
     // variable INIT
     int speciesChosen = 0;
@@ -147,12 +142,12 @@ void update_tree(char *filename, struct details trees[], int treeIndex)
     } while (speciesChosen > 2 || speciesChosen < 1);
 
     if (speciesChosen == 1)
-        strncpy(trees[treeIndex].species, "Deciduous", 10);
+        strncpy(trees[*treeIndex].species, "Deciduous", 10);
     else
-        strncpy(trees[treeIndex].species, "Coniferous", 11);
+        strncpy(trees[*treeIndex].species, "Coniferous", 11);
 
     printf("Enter the date planted: \n");
-    scanf("%s", trees[treeIndex].date);
+    scanf("%s", trees[*treeIndex].date);
 
     // check user input
     do
@@ -162,11 +157,11 @@ void update_tree(char *filename, struct details trees[], int treeIndex)
     } while (state > 2 || state < 1);
 
     if (state == 1)
-        strncpy(trees[treeIndex].status, "Alive", 6);
+        strncpy(trees[*treeIndex].status, "Alive", 6);
     else
-        strncpy(trees[treeIndex].status, "Dead", 5);
+        strncpy(trees[*treeIndex].status, "Dead", 5);
 
-    write_tree(filename, trees, treeIndex);
+    write_tree(filename, trees, *treeIndex);
 }
 
 void write_tree(char *filename, struct details trees[], int treeIndex)
