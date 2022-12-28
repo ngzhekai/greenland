@@ -1,21 +1,45 @@
+#include "inet.h"
 #include "menuoption.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "plant_tree.h"
 
-char* moption_handle(MenuOption mo)
+char *moption_handle(int* client_socket, MenuOption mo) // called by server
 {
-  char* msg = malloc(1024);
+  char *msg = malloc(1024);
+  char buffer[1024];
 
-  switch (mo) {
-    case PLANT_TREE:
-    case QUERY_TREE:
-    case UPDATE_TREE:
-      sprintf(msg, "Option %d soon to be supported\n", mo);
-      return msg;
+  switch (mo)
+  {
+  case PLANT_TREE:
+    bzero(buffer, 1024);
+    char *sp = malloc(1024);
+    tree_state st = PLANTED;
+    char *d = malloc(1024);
+    tree_coordinate c;
 
-    default:
-      sprintf(msg, "Option %d not supported\n", mo);
-      return msg;
+    recv(*client_socket, buffer, sizeof(buffer), 0);
+    strcpy(sp, buffer);
+
+    recv(*client_socket, buffer, sizeof(buffer), 0);    
+    strcpy(d, buffer);
+
+    recv(*client_socket, buffer, sizeof(buffer), 0);
+    c.x = atoi(buffer);
+
+    recv(*client_socket, buffer, sizeof(buffer), 0);
+    c.y = atoi(buffer);
+
+    tree_create(sp, st, d, c);
+    sprintf(msg, "\nTree successfully planted.");
+    return msg;
+
+  case QUERY_TREE:
+  case UPDATE_TREE:
+    sprintf(msg, "Option %d soon to be supported\n", mo);
+    return msg;
+
+  default:
+    sprintf(msg, "Option %d not supported\n", mo);
+    return msg;
   }
 }
 

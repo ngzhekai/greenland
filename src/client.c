@@ -8,6 +8,7 @@
 #include <arpa/inet.h>
 #include <stdbool.h>
 #include "../lib/menuoption.h"
+#include "../lib/plant_tree.h"
 
 /**
  * The client's flow of operations are done as depicted in following diagram:
@@ -56,6 +57,9 @@ int main(void)
       bzero(buffer, 1024);
       sprintf(buffer, "%d", (int) option);
       write(pipe1[1], buffer, 1024);
+
+      if (option == PLANT_TREE)
+        init_plant_tree(&pipe1[1]);
     }
 
     close(pipe1[1]); // close pipe
