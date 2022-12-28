@@ -79,6 +79,15 @@ tree_state tree_get_status(const Tree* t);
 struct tm* tree_get_day_planted(const Tree* t);
 
 /**
+ * Get Tree's the current coordinate
+ *
+ * @param[in] t A pointer to a Tree
+ *
+ * @return A pointer to struct tree_coordinate indicates the coordinate where the Tree was planted
+ */
+tree_coordinate tree_get_coordinate(const Tree *t);
+
+/**
  * Set Tree's species name
  *
  * @param[out] t A modified Tree with changed species name
@@ -101,5 +110,14 @@ void tree_set_status(Tree* t, tree_state st);
  * @param[in] d A string specifies the planted day
  */
 void tree_set_day_planted(Tree* t, const char* d);
+
+
+/**
+ * Set Tree's coordinate where it was planted
+ *
+ * @param[out] t A modified Tree with changed planted coordinate
+ * @param[in] d A struct specifies the coordinate
+ */
+void tree_set_coordinate(Tree *t, tree_coordinate c);
 
 #endif

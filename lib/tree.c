@@ -1,6 +1,5 @@
 #define _XOPEN_SOURCE // include support for strptime(3)
 #include "tree.h"
-#include "tree_state.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,7 +15,7 @@ Tree* tree_create(const char* sp, tree_state st, const char* d, tree_coordinate 
   tree_set_status(new_tree, st);
   new_tree->day_planted = malloc(sizeof(struct tm));
   tree_set_day_planted(new_tree, d);
-  assert(trloc_is_valid(c));
+  //assert(trcdn_is_valid(c));
   tree_set_coordinate(new_tree, c);
   return new_tree;
 }

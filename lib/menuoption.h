@@ -13,11 +13,13 @@ typedef enum MenuOption { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
 /**
  * Handles menu option
  *
+ * @param[in] client_socket Descriptor of client's socket
+ * 
  * @param[in] mo A MenuOption enum to be handle
  *
  * @return 0 if the handling succeeded, -1 if failed
  */
-char* moption_handle(MenuOption mo);
+char* moption_handle(int client_socket, MenuOption mo);
 
 /**
  * Display menu options
