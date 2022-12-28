@@ -1,11 +1,8 @@
 /* plant_tree.c (code refactored) */
 #include <stdio.h>
-#include <search.h>
-#include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/types.h>
 
 #define MAX_TREES 100
 #define BUFFER_SIZE 512

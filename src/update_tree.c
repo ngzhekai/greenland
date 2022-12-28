@@ -17,16 +17,8 @@ struct details
     char status[BUFFER_SIZE];
 } tree, trees[MAX_TREES];
 
-struct details get_coordinates(struct details tree)
-{
-    printf("Enter the X Coordinates of the tree: \n");
-    scanf("%d", &tree.vertical);
-    printf("Enter the Y Coordinates of the tree: \n");
-    scanf("%d", &tree.horizontal);
-    return tree;
-}
-
 /* function declaration */
+struct details get_coordinates(struct details tree);
 int check_tree_exist(char *filename, struct details tree, struct details trees[], int *treeIndex);
 void copy_tree(char *filename, struct details *trees, struct details tree, int *find_result, int *treeIndex);
 void write_tree(char *filename, struct details trees[], int treeIndex);
@@ -54,6 +46,15 @@ int main(int argc, char const *argv[])
     update_tree(filename, trees, treeIndex);
 
     return 0;
+}
+
+struct details get_coordinates(struct details tree)
+{
+    printf("Enter the X Coordinates of the tree: \n");
+    scanf("%d", &tree.vertical);
+    printf("Enter the Y Coordinates of the tree: \n");
+    scanf("%d", &tree.horizontal);
+    return tree;
 }
 
 int check_tree_exist(char *filename, struct details tree, struct details trees[], int *treeIndex)
