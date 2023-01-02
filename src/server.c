@@ -5,6 +5,7 @@
 #include <strings.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include "../lib/menuoption.h"
 
 #define MYPORT 3939
 #define BACKLOG 5

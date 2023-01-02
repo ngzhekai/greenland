@@ -6,6 +6,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <netdb.h> /* gethostbyname() */
+#include "../lib/menuoption.h"
 #define PORT 3939
 #define BUFSIZE 1024 //
 
@@ -16,6 +17,30 @@ int menu_display();
 void plant_tree(int sockfd, char *buffer);
 void update_tree(int sockfd, char *buffer);
 void query_tree(int sockfd, char *buffer);
+
+/**
+ * The client's flow of operations are done as depicted in following diagram:
+ *  ┌──────────────┐       ┌────────────────┐
+ *  │              │       │                │
+ *  │ Display Menu │       │ Create Socket  │
+ *  │              │       │                │
+ *  └──────┬───────┘       └────────┬───────┘
+ *         │                        │
+ *         │                        │
+ *  ┌──────▼───────┐       ┌────────▼───────┐
+ *  │              │       │                │
+ *  │ Select Menu  │       │Establish Socket│
+ *  │              │       │                │
+ *  └──────┬───────┘       └────────┬───────┘
+ *         │                        │
+ *         │                        │
+ *         │               ┌────────▼───────┐
+ *         │               │                │
+ *         │               │   Send Menu    │
+ *         └───────────────►    Option      │
+ *                         │                │
+ *                         └────────────────┘
+ */
 
 int main(int argc, char const *argv[])
 {
@@ -303,3 +328,4 @@ int menu_display()
     system("clear");
     return option;
 } /* end of menu_display() function */
+
