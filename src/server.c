@@ -1,5 +1,6 @@
 /* server.c */
 #include "inet.h"
+#include "sem.h"
 #include <errno.h>
 #include <string.h>
 #include <strings.h>
@@ -23,6 +24,11 @@ struct details
     char status[BUFFER_SIZE];
 } tree, trees[MAX_TREES];
 
+/* semaphore function declaration */
+int initsem(key_t semkey);
+int p(int semid);
+int v(int semid);
+
 /* function declaration */
 struct details get_coordinates(struct details tree, int sockfd, char *buffer);
 int check_tree_exist(char *filename, struct details tree, struct details trees[], int *treeIndex);
@@ -37,6 +43,8 @@ void sigchld_handler(int sig);
 
 int main(int argc, char const *argv[])
 {
+    key_t semkey = 0x200; /* set value of IPC key in hexadecimal (0x200) */
+
     char *filename = "test.txt";
 
     int sockfd, new_sockfd, len_size;
@@ -78,14 +86,15 @@ int main(int argc, char const *argv[])
 
     printf("\nWaiting for connection!!!\n");
 
-    // sa.sa_handler = sigchld_handler; /* reap all dead processes */
-    // sigemptyset(&sa.sa_mask);
-    // sa.sa_flags = SA_RESTART; /* restart system call when there is interrupt */
-    // if (sigaction(SIGCHLD, &sa, (int *)0) == -1)
-    // {
-    //     printf("\nsigaction() error!!!\n");
-    //     exit(1);
-    // }
+    // from lab 9 helloserver.c - SIGCHLD signal used to clean up child processes that have terminated.
+    sa.sa_handler = sigchld_handler; /* reap all dead processes */
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_RESTART; /* restart system call when there is interrupt, This can be useful for a server program that needs to maintain a connection with a client and does not want the system call to be interrupted by the SIGCHLD signal */
+    if (sigaction(SIGCHLD, &sa, (struct sigaction *)0) == -1)
+    {
+        printf("\nsigaction() error!!!\n");
+        exit(1);
+    }
 
     for (;;) /* main accept() loop */
     {
@@ -103,9 +112,15 @@ int main(int argc, char const *argv[])
         getpeername(sockfd, (struct sockaddr *)&their_addr, &len_size);
         printf("Client address: %s\n", inet_ntoa(their_addr.sin_addr));
 
-        if (!fork()) /* !1 means 0, child process */
+        if (!fork()) /* !1 means 0, child process  (if it is confusing 0 is equivalent to false) */
         {
             close(sockfd);
+
+            int semid;
+            pid_t pid = getpid();
+
+            if ((semid = initsem(semkey)) < 0) /* call the initsem() function and if return value is less than 0 shows semget fails. */
+                exit(1);
 
             // receive option from client
             recv(new_sockfd, buffer, BUFFER_SIZE, 0);
@@ -115,8 +130,17 @@ int main(int argc, char const *argv[])
             switch (option)
             {
             case 1:
+                // printf("\n Process %d before entering critical section\n", pid); // debug
+                p(semid); // lock the semaphore for writing
+
+                /* critical section */
+
+                // printf("\nProcess %d in critical section now\n", pid); // debug
                 /* invoke plant_tree function */
                 plant_tree(filename, tree, trees, new_sockfd, buffer);
+                // printf("\nProcess %d leaving critical section\n", pid); // debug
+                v(semid); // unlock the semaphore after writing
+                // printf("\nProcess %d end \n", pid);                     // debug
                 break;
 
             case 2:
@@ -125,8 +149,11 @@ int main(int argc, char const *argv[])
                 break;
 
             case 3:
+                p(semid); // lock the semaphore for writing
+                /* critical section */
                 /* invoke update_tree function */
                 update_tree(filename, tree, trees, new_sockfd, buffer);
+                v(semid); // unlock the semaphore after writing
                 break;
 
             default:
@@ -142,10 +169,10 @@ int main(int argc, char const *argv[])
     return 0;
 }
 
-// void sigchld_handler(int sig)
-// {
-//     wait((int *)0);
-// }
+void sigchld_handler(int sig)
+{
+    wait((int *)0);
+}
 
 struct details get_coordinates(struct details tree, int sockfd, char *buffer)
 {
@@ -317,7 +344,9 @@ void plant_tree(char *filename, struct details tree, struct details trees[], int
 
     // printf("\nTree coordinates: %d, %d", tree.vertical, tree.horizontal); // for debug
 
+    /* critical section */
     update_detail(filename, trees, &treeIndex, new_sockfd, buffer);
+    /* end of critical section */
 
     // printf("This is the newly created tree details:\n\n");
     // printf("Coordinates\tSpecies\t\tDate\t\tStatus\n"); // for debug
@@ -330,6 +359,7 @@ void plant_tree(char *filename, struct details tree, struct details trees[], int
 
 void update_tree(char *filename, struct details tree, struct details trees[], int new_sockfd, char *buffer)
 {
+
     int find_result = 0;
     int treeIndex = -1;
     do
@@ -352,8 +382,10 @@ void update_tree(char *filename, struct details tree, struct details trees[], in
     // printf("%s\n", buffer); // for debug
     send(new_sockfd, buffer, BUFFER_SIZE, 0);
 
+    /* critical section */
     copy_tree(filename, trees, tree, &treeIndex);
     update_detail(filename, trees, &treeIndex, new_sockfd, buffer);
+    /* end of critical section */
 
     // printf("This is the updated tree details:\n\n");
     // printf("Coordinates\tSpecies\t\tDate\t\tStatus\n");  // for debug
@@ -389,3 +421,79 @@ void query_tree(char *filename, struct details tree, struct details trees[], int
     // printf("%s", buffer); // for debug
     send(new_sockfd, buffer, BUFFER_SIZE, 0);
 } /* end of query_tree() function */
+
+int initsem(key_t semkey)
+{
+    int status = 0, semid;
+    semun arg;
+
+    if ((semid = semget(semkey, 1, SEMPERM | IPC_CREAT | IPC_EXCL)) == -1)
+    {                                     /* create semaphore using semget() function with the key (semkey) and set 1 semaphore in the set.
+                                            Flags:
+                                            - SEMPERM -> file Permission of 0660
+                                            - IPC_CREAT -> create semaphore if not yet exist
+                                            - IPC_EXCL ->  return -1 with errno EEXIST if semaphore already exist (basically it causes the semget() function to fail if semaphore already exist)
+                                            */
+        if (errno == EEXIST)              /* check if error/failure of semget() fuction is because of semaphore already exists. */
+            semid = semget(semkey, 1, 0); /* access to semaphore with key (semkey) and with 1 semaphore in teh set
+                                            and the last argument '0' which is the semflg that apply the following:
+                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() has read and/or write permissions to it, then semget() returns the associated semaphore identifier.
+                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() does not have read and/or write permissions to it, then semget() returns-1 and sets errno to EACCES.
+                                                + If a semaphore identifier has not been created with key earlier, then semget() returns -1 and sets errno to ENOENT.
+                                            [Refer here for more info](https://www.ibm.com/docs/en/zos/2.2.0?topic=functions-semget-get-set-semaphores)
+                                            */
+    }
+    else
+    {
+        arg.val = 1;                            /* initialize arg.val to 1 */
+        status = semctl(semid, 0, SETVAL, arg); /* set the semaphore value (semval) of semaphore number '0' with id equals semid to 1 (arg) using SETVAL */
+    }
+
+    if (semid == -1 || status == -1)
+    {
+        perror("Initsem() fails");
+        return (-1);
+    }
+    return (semid);
+} /* end of initsem() function */
+
+int p(int semid)
+{
+    struct sembuf p_buf;
+    p_buf.sem_num = 0; /* semaphore number of the sepamore set,
+                         value '0' shows the first semaphore in the set is chosen */
+
+    p_buf.sem_op = -1; /* the semaphore value is decremented by the absolute value of sem_op (-1)
+                         showing the locking operation of semaphore is done */
+
+    p_buf.sem_flg = SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
+                                This allows processes to avoid deadlock problems. */
+
+    if (semop(semid, &p_buf, 1) == -1)
+    { /* add explanation here */
+        perror("P () fails");
+        exit(1);
+    }
+    return (0);
+} /* end of sem p() */
+
+int v(int semid)
+{
+    struct sembuf v_buf;
+    v_buf.sem_num = 0; /* semaphore number of the sepamore set,
+                         value '0' shows the first semaphore in the set is chosen */
+
+    v_buf.sem_op = 1; /* the semaphore value is incremented by the absolute value of sem_op (1),
+                        showing the unlocking operation of semaphore is done. */
+
+    v_buf.sem_flg = SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
+                                This allows processes to avoid deadlock problems. */
+
+    if (semop(semid, &v_buf, 1) == -1)
+    { /* perform the semaphore operation as specified in v_buf struct on semaphore with the id (semid)
+        the last argument '1' shows the number of sembuf structure in the array. */
+        perror("V (semid) fails");
+        exit(1);
+    }
+    return (0);
+}

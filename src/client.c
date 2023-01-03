@@ -49,6 +49,12 @@ int main(int argc, char const *argv[])
     struct hostent *he;
     struct sockaddr_in their_addr;
 
+    sigset_t set1;
+    sigemptyset(&set1);        // initialize the signal set with an empty set of signals
+    sigaddset(&set1, SIGTSTP); // add ctrl+z to the signal set
+    sigaddset(&set1, SIGINT);  // add ctrl+c to the signal set
+    // sigfillset(&set1); // debug
+
     if (argc != 2)
     {
         fprintf(stderr, "\nHow to use: ./client RemoteIPaddress!!!\n");
@@ -57,7 +63,6 @@ int main(int argc, char const *argv[])
 
     if ((he = gethostbyname(argv[1])) == (void *)0) /*
                                                     check if the gethostbyname() function returns null
-
                                                     What will gethostbyname() function returns:
                                                     Return entry from host data base for host using the supplied argument [NAME]
                                                     */
@@ -85,6 +90,7 @@ int main(int argc, char const *argv[])
         exit(1);
     }
 
+    sigprocmask(SIG_SETMASK, &set1, NULL); // activates the signal block
     int option = menu_display();
 
     switch (option)
@@ -120,6 +126,7 @@ int main(int argc, char const *argv[])
         printf("You entered %d! Please enter 1, 2, or 3 Only!\n", option);
         break;
     }
+    sigprocmask(SIG_UNBLOCK, &set1, NULL); // activates the signal block
 
     // if ((numbytes = recv(sockfd, buffer, MAXDATASIZE, 0)) == -1)
     // {
