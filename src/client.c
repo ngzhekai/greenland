@@ -13,7 +13,7 @@
 #define BUFFER_SIZE 512 // for send and recv (must be same)
 
 /* function declaration */
-int menu_display();
+int menu_display(void);
 void plant_tree(int sockfd, char *buffer);
 void update_tree(int sockfd, char *buffer);
 void query_tree(int sockfd, char *buffer);
@@ -44,15 +44,17 @@ void query_tree(int sockfd, char *buffer);
 
 int main(int argc, char const *argv[])
 {
-    int sockfd, numbytes;
+    int sockfd;
+    // int numbytes;
+
     char buffer[BUFFER_SIZE];
     struct hostent *he;
     struct sockaddr_in their_addr;
 
-    sigset_t set1;
-    sigemptyset(&set1);        // initialize the signal set with an empty set of signals
-    sigaddset(&set1, SIGTSTP); // add ctrl+z to the signal set
-    sigaddset(&set1, SIGINT);  // add ctrl+c to the signal set
+    // sigset_t set1;
+    // sigemptyset(&set1);        // initialize the signal set with an empty set of signals
+    // sigaddset(&set1, SIGTSTP); // add ctrl+z to the signal set
+    // sigaddset(&set1, SIGINT);  // add ctrl+c to the signal set
     // sigfillset(&set1); // debug
 
     if (argc != 2)
@@ -81,7 +83,7 @@ int main(int argc, char const *argv[])
     their_addr.sin_family = AF_INET;   /* host byte order */
     their_addr.sin_port = htons(PORT); /* short, network byte order */
 
-    their_addr.sin_addr = *((struct in_addr *)he->h_addr);
+    their_addr.sin_addr = *((struct in_addr *)he->h_addr_list[0]);
     bzero(&(their_addr.sin_zero), 8); /* zero the rest of the struct */
 
     if (connect(sockfd, (struct sockaddr *)&their_addr, sizeof(struct sockaddr)) == -1)
@@ -90,7 +92,7 @@ int main(int argc, char const *argv[])
         exit(1);
     }
 
-    sigprocmask(SIG_SETMASK, &set1, NULL); // activates the signal block
+    // sigprocmask(SIG_SETMASK, &set1, NULL); // activates the signal block
     int option = menu_display();
 
     switch (option)
@@ -126,7 +128,7 @@ int main(int argc, char const *argv[])
         printf("You entered %d! Please enter 1, 2, or 3 Only!\n", option);
         break;
     }
-    sigprocmask(SIG_UNBLOCK, &set1, NULL); // activates the signal block
+    // sigprocmask(SIG_UNBLOCK, &set1, NULL); // activates the signal block
 
     // if ((numbytes = recv(sockfd, buffer, MAXDATASIZE, 0)) == -1)
     // {
@@ -155,8 +157,10 @@ void plant_tree(int sockfd, char *buffer)
         scanf("%s", buffer);
         send(sockfd, buffer, BUFFER_SIZE, 0);
 
+        // bzero(buffer, BUFFER_SIZE);
         recv(sockfd, buffer, BUFFER_SIZE, 0);
         result = atoi(buffer);
+        printf("result: %d\n", result);
         if (result)
             printf("\nA tree was found in the database at the given location.\nTry a new coordinate!\n\n\n");
 
@@ -169,29 +173,30 @@ void plant_tree(int sockfd, char *buffer)
     // check user input is valid before sending to the server
     do
     {
-        printf("Enter the species of the tree (1) Deciduous (2) Coniferous: \n");
+        printf("Enter the species of the tree (0) Deciduous (1) Coniferous: \n");
         scanf("%d", &speciesChosen);
-    } while (speciesChosen > 2 || speciesChosen < 1);
+    } while (speciesChosen > 1 || speciesChosen < 0);
     // convert int to string and store in buffer
     sprintf(buffer, "%d", speciesChosen);
     // send the string to the server
     send(sockfd, buffer, BUFFER_SIZE, 0);
 
-    // send the date to the server
-    printf("Enter the date planted in this format dd/mm/yyyy: \n");
-    scanf("%s", buffer);
-    send(sockfd, buffer, BUFFER_SIZE, 0);
-
     // check user input
     do
     {
-        printf("Enter the status of the tree (1) Alive (2) Dead: \n");
+        printf("Enter the status of the tree (0) Dead (1) Alive (2) Sick (3) Treatment: \n");
         scanf("%d", &state);
-    } while (state > 2 || state < 1);
+    } while (state > 3 || state < 0);
 
     // convert int to string
     sprintf(buffer, "%d", state);
+
     // send the string to the server
+    send(sockfd, buffer, BUFFER_SIZE, 0);
+
+    // send the date to the server
+    printf("Enter the date planted in this format yyyy-mm-dd: \n");
+    scanf("%s", buffer);
     send(sockfd, buffer, BUFFER_SIZE, 0);
 
     // print the updated tree details to the user.
@@ -228,7 +233,7 @@ void update_tree(int sockfd, char *buffer)
 
     // print the current tree details to the user.
     printf("\n\nThis is the current tree details:\n\n");
-    printf("Coordinates\tSpecies\t\tDate\t\tStatus\n");
+    printf("Coordinates\tSpecies\t\tDate\t\tStatus\n"); // this features is discarded because having trouble to convert struct tm to strings
     printf("-----------\t-------\t\t----\t\t------\n");
     recv(sockfd, buffer, BUFFER_SIZE, 0);
     printf("%s\n", buffer);
@@ -241,30 +246,30 @@ void update_tree(int sockfd, char *buffer)
     // check user input is valid before sending to the server
     do
     {
-        printf("Enter the species of the tree (1) Deciduous (2) Coniferous: \n");
+        printf("Enter the species of the tree (0) Deciduous (1) Coniferous: \n");
         scanf("%d", &speciesChosen);
-    } while (speciesChosen > 2 || speciesChosen < 1);
+    } while (speciesChosen > 1 || speciesChosen < 0);
 
     // convert int to string
     sprintf(buffer, "%d", speciesChosen);
     // send the string to the server
     send(sockfd, buffer, BUFFER_SIZE, 0);
 
-    // send the date to the server
-    printf("Enter the date planted in this format dd/mm/yyyy: \n");
-    scanf("%s", buffer);
-    send(sockfd, buffer, BUFFER_SIZE, 0);
-
     // check user input
     do
     {
-        printf("Enter the status of the tree (1) Alive (2) Dead: \n");
+        printf("Enter the status of the tree (0) Dead (1) Alive (2) Sick (3) Treatment: \n");
         scanf("%d", &state);
-    } while (state > 2 || state < 1);
+    } while (state > 3 || state < 0);
 
     // convert int to string
     sprintf(buffer, "%d", state);
     // send the string to the server
+    send(sockfd, buffer, BUFFER_SIZE, 0);
+
+    // send the date to the server
+    printf("Enter the date planted in this format yyyy-mm-dd: \n");
+    scanf("%s", buffer);
     send(sockfd, buffer, BUFFER_SIZE, 0);
 
     // print the updated tree details to the user.
@@ -335,4 +340,3 @@ int menu_display()
     system("clear");
     return option;
 } /* end of menu_display() function */
-

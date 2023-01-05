@@ -13,8 +13,11 @@
 START_TEST(test_tree_create_dead)
 {
   struct Tree* t;
+  tree_coordinate c;
 
-  t = tree_create("foo", DEAD, "2022-12-05");
+  tree_set_x(&c, 20);
+  tree_set_y(&c, 30);
+  t = tree_create("foo", DEAD, "2022-12-05", c);
 
   ck_assert_str_eq(tree_get_species(t), "foo");
   ck_assert(tree_get_status(t) == DEAD);
@@ -27,8 +30,11 @@ END_TEST
 START_TEST(test_tree_create_normal)
 {
   struct Tree* t;
+  tree_coordinate c;
 
-  t = tree_create("foo", PLANTED, "2022-12-05");
+  tree_set_x(&c, 20);
+  tree_set_y(&c, 30);
+  t = tree_create("foo", PLANTED, "2022-12-05", c);
 
   char* d = malloc(sizeof(char) * 11);
   strftime(d, sizeof(char) * 11, "%F", tree_get_day_planted(t));
