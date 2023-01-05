@@ -12,7 +12,7 @@ Tree* tree_create(const char* sp, tree_state st, const char* d)
   Tree* new_tree = malloc(sizeof(Tree));
   tree_set_species(new_tree, sp);
   tree_set_status(new_tree, st);
-  new_tree->day_planted = malloc(sizeof(struct tm));
+  new_tree->day_planted = NULL;
   tree_set_day_planted(new_tree, d);
 
   return new_tree;
@@ -61,6 +61,10 @@ void tree_set_day_planted(Tree* t, const char* d)
   if (tree_get_status(t) == DEAD) {
     t->day_planted = NULL;
   } else {
+    if (!t->day_planted) {  // handle the case when day_planted haven't allocated with memory
+      t->day_planted = malloc(sizeof(struct tm));
+    }
+
     strptime(d, "%Y-%m-%d", t->day_planted);
   }
 }
