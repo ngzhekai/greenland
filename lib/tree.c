@@ -10,8 +10,6 @@
 Tree* tree_create(const char* sp, tree_state st, const char* d)
 {
   Tree* new_tree = malloc(sizeof(Tree));
-  assert(trstat_is_valid(st));
-  new_tree->species = NULL;
   tree_set_species(new_tree, sp);
   tree_set_status(new_tree, st);
   new_tree->day_planted = malloc(sizeof(struct tm));
@@ -27,7 +25,7 @@ void tree_free(Tree* t)
   free(t);
 }
 
-char* tree_get_species(const Tree* t)
+const char* tree_get_species(const Tree* t)
 {
   return t->species;
 }
@@ -44,12 +42,13 @@ struct tm* tree_get_day_planted(const Tree* t)
 
 void tree_set_species(Tree* t, const char* sp)
 {
-  if (t->species) {
-    free(t->species);
+  if ((t->str_size = strlen(sp) + 1) > 0) {
+    t->species = calloc(t->str_size, sizeof(char));
+    strncpy(t->species, sp, t->str_size);
+  } else {
+    t->str_size = 0;
+    t->species = NULL;
   }
-
-  t->species = calloc(strlen(sp) + 1, sizeof(char));
-  strncpy(t->species, sp, strlen(sp) + 1);
 }
 
 void tree_set_status(Tree* t, tree_state st)

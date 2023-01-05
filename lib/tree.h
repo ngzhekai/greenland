@@ -5,6 +5,7 @@
 #ifndef TREE_H
 #define TREE_H
 
+#include <stddef.h>
 #include <stdint.h>
 #include <time.h>
 #include "tree_state.h"
@@ -14,7 +15,9 @@
  * its status, and the amount of days it has lived.
  */
 typedef struct Tree {
-  /** Species name of the tree */
+  /** String size of species string **/
+  unsigned long str_size;
+  /** Species name of the tree*/
   char* species;
   /** Status of the tree */
   tree_state status;
@@ -52,7 +55,7 @@ void tree_free(Tree* t);
  *
  * @return A string that describes the Tree's species name
  */
-char* tree_get_species(const Tree* t);
+const char* tree_get_species(const Tree* t);
 
 /**
  * Get Tree's current status
