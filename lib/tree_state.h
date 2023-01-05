@@ -18,8 +18,7 @@ typedef enum tree_state { DEAD, PLANTED, SICK, TREAMENT } tree_state;
  *
  * @param[in] st A tree state
  *
- * @return A string that specifies the state of the Tree, NULL if the state is
- *         unknown
+ * @return A string that specifies the state of the Tree
  */
 const char* trstat_to_string(tree_state st);
 

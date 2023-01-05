@@ -16,15 +16,15 @@ const char* trstat_to_string(tree_state st)
       return "TREAMENT";
 
     default:
-      return (char*) 0;
+      return "UNKNOWN STATE";
   }
 }
 
 bool trstat_is_valid(tree_state st)
 {
-  if (!(trstat_to_string(st))) {
-    return false;
+  if (st >= 0 && st < 4) {
+    return true;
   }
 
-  return true;
+  return false;
 }
