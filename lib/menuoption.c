@@ -39,14 +39,10 @@ char* moption_handle(int new_sockfd, int semid, char* cli_addr, MenuOption mo)
       p(semid); // lock the semaphore for writing
       sprintf(msg, "Client [%s]: Plant tree process done.", cli_addr);
       return msg;
-      break;
-
     case QUERY_TREE:
       query_tree_server(FILENAME, tree, new_sockfd, buffer);
       sprintf(msg, "Client [%s]: Query tree process done.", cli_addr);
       return msg;
-      break;
-
     case UPDATE_TREE:
       p(semid); // lock the semaphore for writing
       /* critical section */
@@ -55,13 +51,9 @@ char* moption_handle(int new_sockfd, int semid, char* cli_addr, MenuOption mo)
       v(semid); // unlock the semaphore after writing
       sprintf(msg, "Client [%s]: Update tree process done.", cli_addr);
       return msg;
-      break;
-
     case EXIT_PROGRAM:
       sprintf(msg, "Client [%s]: Exited program.", cli_addr);
       return msg;
-      break;
-
     default:
       sprintf(msg, "Option %d not supported\n", mo);
       return msg;
@@ -182,13 +174,14 @@ int check_tree_exist(const char* filename, Tree* tree, int* treeIndex,
 } /* end of check_tree_exist() function */
 
 void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
-                   tree_coordinate store)
+                   tree_coordinate c)
 {
   // variable INIT
   int state = 0;
   int speciesChosen = 0;
   char sp[BUFFER_SIZE];
   tree_state st;
+  printf("Coordinate set [X = %d, Y = %d]\n", c.x, c.y);
 
   // get species from client
   recv(sockfd, buffer, BUFFER_SIZE, 0);
@@ -219,19 +212,17 @@ void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
   }
 
   tree.status = st;
-  printf("State selected: [%s]\n", trstat_to_string(st));
+  printf("State selected [%s]\n", trstat_to_string(st));
 
   // get date from client
   recv(sockfd, buffer, BUFFER_SIZE, 0);
-  printf("date received: %s\n", buffer);
   char time[] = "2020-11-11";
 
   tree.day_planted = NULL;
 
   strncpy(time, buffer, BUFFER_SIZE);
   tree_set_day_planted(&tree, time);
-  printf("date selected\n");
-  printf("\n before writing \n");
+  printf("Date set [%s]\n", time);
 
   FILE* of;
   of = fopen(filename, "a");
@@ -241,27 +232,22 @@ void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
     exit(0);
   }
 
-  printf("%d\n", store.x);
-  printf("%d\n", store.y);
-  printf("%s\n", tree.species);
-  printf("%s\n", time);
-  printf("%d\n", tree.status);
-  fprintf(of, "%d,%d\t\t%s\t\t%s\t\t%d\n", store.x, store.y, tree.species, time,
+  fprintf(of, "%d,%d\t\t%s\t\t%s\t\t%d\n", c.x, c.y, tree.species, time,
           tree.status);
 
   fclose(of);
 
   if (tree.status == 0) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t0 (DEAD)\n", store.x, store.y, tree.species,
+    sprintf(buffer, "%d,%d\t\t%s\t%s\t0 (DEAD)\n", c.x, c.y, tree.species,
             time);
   } else if (tree.status == 1) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t1 (ALIVE)\n", store.x, store.y, tree.species,
+    sprintf(buffer, "%d,%d\t\t%s\t%s\t1 (ALIVE)\n", c.x, c.y, tree.species,
             time);
   } else if (tree.status == 2) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t2 (Sick)\n", store.x, store.y, tree.species,
+    sprintf(buffer, "%d,%d\t\t%s\t%s\t2 (Sick)\n", c.x, c.y, tree.species,
             time);
   } else {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t3 (Treatment)\n", store.x, store.y,
+    sprintf(buffer, "%d,%d\t\t%s\t%s\t3 (Treatment)\n", c.x, c.y,
             tree.species, time);
   }
 
