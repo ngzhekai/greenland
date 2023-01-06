@@ -1,3 +1,5 @@
+#include <asm-generic/socket.h>
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,6 +8,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include "../lib/menuoption.h"
+
+#define BUFSIZE 1024
 
 int main(void)
 {
@@ -17,13 +21,21 @@ int main(void)
   int server_socket, client_socket;
   struct sockaddr_in server_addr, client_addr;
   socklen_t addr_size;
-  char buffer[1024];
+  char buffer[BUFSIZE];
+  int yes = 1;
 
   // create the server side socket
   server_socket = socket(AF_INET, SOCK_STREAM, 0);
 
   if (server_socket < 0) {
     perror("[-] Socket error!");
+    exit(1);
+  }
+
+  // reuse the socket
+  if (setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &yes,
+                 sizeof(yes)) < 0) {
+    perror("[-] Socket option error!");
     exit(1);
   }
 
@@ -59,14 +71,17 @@ int main(void)
     printf("[+] Client connected.\n");
 
     // receive the message from the client socket
-    bzero(buffer, 1024);
-    recv(client_socket, buffer, sizeof(buffer), 0);
-    MenuOption client_menuoption = strtol(buffer, NULL, 10);
-    printf("Client: Request Option %d\n", client_menuoption);
+    bzero(buffer, BUFSIZE);
+    recv(client_socket, buffer, BUFSIZE, 0);
+    Tree* t = tree_deserialise(buffer);
+    char* date = malloc(11);
+    strftime(date, 11, "%F", t->day_planted);
+    printf("Tree received:\n\tspecies: %s\n\tstatus: %s\n\tday planted: %s\n",
+           t->species, trstat_to_string(t->status), date);
 
     // handling menu option
-    bzero(buffer, 1024);
-    snprintf(buffer, 1024, "%s", moption_handle(client_menuoption));
+    bzero(buffer, BUFSIZE);
+    snprintf(buffer, BUFSIZE, "Planting Tree");
 
     // send the message to the client socket
     printf("Server: %s\n", buffer);
@@ -75,6 +90,8 @@ int main(void)
     // close the connection with the client (socket)
     close(client_socket);
     printf("[+] Client disconnected. \n\n");
+    free(date);
+    free(t);
   }
 
   return 0;

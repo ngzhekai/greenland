@@ -9,6 +9,8 @@
 #include <stdbool.h>
 #include "../lib/menuoption.h"
 
+#define BUFSIZE 1024
+
 /**
  * The client's flow of operations are done as depicted in following diagram:
  *  ┌──────────────┐       ┌────────────────┐
@@ -49,18 +51,24 @@ int main(void)
     close(pipe1[0]);  // close read end of the pipe
 
     while (true) {
-      char buffer[1024];
+      char buffer[BUFSIZE];
+      Tree* t = malloc(sizeof(Tree));
       MenuOption option;
       moption_display(&option);
 
-      bzero(buffer, 1024);
-      sprintf(buffer, "%d", (int) option);
-      write(pipe1[1], buffer, 1024);
+      if (moption_handle(option, t) == -1) {
+        perror("[-] Menu Option error!");
+        continue;
+      }
+
+      bzero(buffer, BUFSIZE);
+      tree_serialise(t, buffer);
+      write(pipe1[1], buffer, BUFSIZE);
     }
 
-    close(pipe1[1]); // close pipe
+    close(pipe1[1]);  // clean up
   } else {
-    close(pipe1[1]);  // close write end of the pipe
+    close(pipe1[1]);  // close the write end of the pipe
 
     while (true) {
       // user-defined server's ip and port
@@ -71,7 +79,6 @@ int main(void)
       int sock;
       struct sockaddr_in addr;
       // socklen_t addr_size;
-      char buffer[1024];
 
       // create the client side socket
       sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -97,22 +104,23 @@ int main(void)
       printf("Connected to the server. \n");
 
       // send the message to the server socket
-      bzero(buffer, 1024);
-      read(pipe1[0], buffer, 1024);
-      printf("Client: %s\n", buffer);
-      send(sock, buffer, strlen(buffer), 0);
+      char* buf = malloc(BUFSIZE);
+      bzero(buf, BUFSIZE);
+      read(pipe1[0], buf, BUFSIZE);
+      send(sock, buf, BUFSIZE, 0);
 
       // receive the message from the server socket
-      bzero(buffer, 1024);
-      recv(sock, buffer, sizeof(buffer), 0);
-      printf("Server: %s\n", buffer);
+      bzero(buf, BUFSIZE);
+      recv(sock, buf, BUFSIZE, 0);
+      printf("Server: %s\n", buf);
 
+      free(buf);
       // close the connection (socket)
       close(sock);
       printf("Disconnected from the server.\n");
     }
 
-    close(pipe1[0]); // close pipe
+    close(pipe1[0]);  // clean up
   }
 
   return 0;
