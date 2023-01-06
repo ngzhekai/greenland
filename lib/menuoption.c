@@ -57,13 +57,13 @@ char *moption_handle(int new_sockfd, int semid, char *cli_addr, MenuOption mo)
     sprintf(msg, "Client [%s]: Update tree process done.", cli_addr);
     return msg;
 
-  case EXIT_PROGRAM:
-    sprintf(msg, "Client [%s]: Exited program.", cli_addr);
-    return msg;
-
   case DISPLAY_ALL_TREES:
     display_all_tree(FILENAME, new_sockfd, buffer);
     sprintf(msg, "Client [%s]: Display tree process done.", cli_addr);
+    return msg;
+
+  case EXIT_PROGRAM:
+    sprintf(msg, "Client [%s]: Exited program.", cli_addr);
     return msg;
 
   default:
@@ -114,11 +114,11 @@ const char *getMenuOptionName(enum MenuOption op)
   case UPDATE_TREE:
     return "Update Tree";
 
-  case EXIT_PROGRAM:
-    return "Exit Program";
-
   case DISPLAY_ALL_TREES:
     return "Display All Trees";
+
+  case EXIT_PROGRAM:
+    return "Exit Program";
 
   default:
     return (char *)0;
@@ -435,16 +435,19 @@ void query_tree_server(const char *filename, Tree tree, int new_sockfd,
   // send to client
   char date[BUFFER_SIZE];
 
-  if (tree.status != DEAD) {
+  if (tree.status != DEAD)
+  {
     strftime(date, BUFFER_SIZE, "%Y-%m-%d",
              tree.day_planted); // refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti
-  } else {
+  }
+  else
+  {
     sprintf(date, "NO DATE\t");
   }
 
   sprintf(buffer, "%d,%d\t\t%s\t%s\t%d (%s)\n", coordinates.x, coordinates.y,
           tree.species, date, tree.status, trstat_to_string(tree.status));
-          
+
   send(new_sockfd, buffer, BUFFER_SIZE, 0);
 } /* end of query_tree_server() function */
 
@@ -454,8 +457,6 @@ void display_all_tree(const char *filename, int new_sockfd,
   printf("\n\nFunction invoked.\n\n");
   dup2(new_sockfd, 1);
   execl("/bin/cat", "cat", filename, (char *)0);
-  
-  // execl("/bin/wc", "wc", "-l", filename, (char *)0);
 }
 
 int p(int semid)
@@ -465,12 +466,12 @@ int p(int semid)
                          value '0' shows the first semaphore in the set is chosen */
 
   p_buf.sem_op =
-    -1; /* the semaphore value is decremented by the absolute value of sem_op (-1)
-                                 showing the locking operation of semaphore is done */
+      -1; /* the semaphore value is decremented by the absolute value of sem_op (-1)
+                                   showing the locking operation of semaphore is done */
 
   p_buf.sem_flg =
-    SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
-                                        This allows processes to avoid deadlock problems. */
+      SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
+                                          This allows processes to avoid deadlock problems. */
 
   if (semop(semid, &p_buf, 1) == -1)
   {
@@ -489,12 +490,12 @@ int v(int semid)
                          value '0' shows the first semaphore in the set is chosen */
 
   v_buf.sem_op =
-    1; /* the semaphore value is incremented by the absolute value of sem_op (1),
-                                showing the unlocking operation of semaphore is done. */
+      1; /* the semaphore value is incremented by the absolute value of sem_op (1),
+                                  showing the unlocking operation of semaphore is done. */
 
   v_buf.sem_flg =
-    SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
-                                        This allows processes to avoid deadlock problems. */
+      SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
+                                          This allows processes to avoid deadlock problems. */
 
   if (semop(semid, &v_buf, 1) == -1)
   {

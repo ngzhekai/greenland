@@ -141,17 +141,27 @@ int main(int argc, char const *argv[])
       break;
 
     case 4:
-      // invoke update_tree() method
-      sprintf(buffer, "%d", option); // convert int (option) to string
-      // send the string to the server
-      send(sockfd, buffer, BUFFER_SIZE, 0);
-      exit(0);
-    case 5:
       // invoke display_all_tree() method
       sprintf(buffer, "%d", option); // convert int (option) to string
       // send the string to the server
       send(sockfd, buffer, BUFFER_SIZE, 0);
+
+      // read from server
+
+      printf("\n%s Operation Success!\n", getMenuOptionName(option));
+      while ('\n' != getchar())
+        ;
+
+      printf("Press [ENTER] to return to menu...\n");
+      getchar();
+      system("clear");
       break;
+
+    case 5:
+      sprintf(buffer, "%d", option); // convert int (option) to string
+      send(sockfd, buffer, BUFFER_SIZE, 0);
+      exit(0);
+
     default:
       printf("You entered %d! Please enter 1, 2, or 3 Only!\n", option);
       break;
