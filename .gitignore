@@ -55,4 +55,7 @@ dkms.conf
 
 # Formatting result
 *.orig
+
+# (Note) Desmond: Temporarily ignore documentation changes
+doc/
 .vscode/settings.json

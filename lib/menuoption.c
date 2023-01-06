@@ -62,13 +62,13 @@ char* moption_handle(int new_sockfd, int semid, char* cli_addr, MenuOption mo)
       return msg;
       break;
 
-    default:
-      sprintf(msg, "Option %d not supported\n", mo);
-      return msg;
+  default:
+    sprintf(msg, "Option %d not supported\n", mo);
+    return msg;
   }
 }
 
-void moption_display(MenuOption* opt)
+void moption_display(MenuOption *opt)
 {
   printf("  ________                               .__                       .___ \n");
   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
