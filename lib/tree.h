@@ -99,4 +99,21 @@ void tree_set_status(Tree* t, tree_state st);
  */
 void tree_set_day_planted(Tree* t, const char* d);
 
+/**
+ * Serialise struct Tree into string
+ *
+ * @param[in] t A Tree to be serialised
+ * @param[out] s A serialised string represents the tree
+ */
+void tree_serialise(Tree* t, char* s);
+
+/**
+ * Deserialise a string into struct Tree
+ *
+ * @param[in] s A serialised string represents a tree
+ *
+ * @return A deserialised Tree
+ */
+Tree* tree_deserialise(char* s);
+
 #endif

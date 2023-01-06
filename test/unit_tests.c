@@ -43,6 +43,34 @@ START_TEST(test_tree_create_normal)
 }
 END_TEST
 
+START_TEST(test_tree_serialisation)
+{
+  struct Tree* t;
+  t = tree_create("foo and boo", PLANTED, "2022-12-05");
+
+  char* buf = malloc(1024);
+  tree_serialise(t, buf);
+
+  struct Tree* nt = tree_deserialise(buf);
+
+  char* d1 = malloc(sizeof(char) * 11);
+  strftime(d1, sizeof(char) * 11, "%F", tree_get_day_planted(t));
+  char* d2 = malloc(sizeof(char) * 11);
+  strftime(d2, sizeof(char) * 11, "%F", tree_get_day_planted(nt));
+
+  ck_assert_uint_eq(t->str_size, nt->str_size);
+  ck_assert_str_eq(tree_get_species(t), tree_get_species(nt));
+  ck_assert_int_eq(tree_get_status(t), tree_get_status(nt));
+  ck_assert_str_eq(d1, d2);
+
+  free(d2);
+  free(d1);
+  tree_free(nt);
+  free(buf);
+  tree_free(t);
+}
+END_TEST
+
 START_TEST(test_trstate_to_string)
 {
   ck_assert_str_eq(trstat_to_string(DEAD), "DEAD");
@@ -114,6 +142,7 @@ Suite* tree_suit(void)
 
   tcase_add_test(tc_core, test_tree_create_dead);
   tcase_add_test(tc_core, test_tree_create_normal);
+  tcase_add_test(tc_core, test_tree_serialisation);
   tcase_add_test(tc_core, test_trstate_to_string);
   tcase_add_test(tc_core, test_trstate_is_valid);
   tcase_add_test(tc_core, test_species_is_valid);

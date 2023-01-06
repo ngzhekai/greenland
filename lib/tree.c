@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 #include <time.h>
 
 Tree* tree_create(const char* sp, tree_state st, const char* d)
@@ -67,4 +66,25 @@ void tree_set_day_planted(Tree* t, const char* d)
 
     strptime(d, "%Y-%m-%d", t->day_planted);
   }
+}
+
+void tree_serialise(Tree* t, char* buf)
+{
+  char* date = malloc(11);
+  strftime(date, 11, "%F", t->day_planted);
+  sprintf(buf, "%s,%u,%s", t->species, t->status, date);
+}
+
+Tree* tree_deserialise(char* s)
+{
+  char* species = malloc(1024);
+  tree_state status;
+  char* date = malloc(11);
+  sscanf(s, "%[^,],%u,%[^,]", species, &status, date);
+
+  Tree* t = tree_create(species, status, date);
+
+  free(species);
+  free(date);
+  return t;
 }
