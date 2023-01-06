@@ -2,10 +2,8 @@
 #include "inet.h"
 #include "../lib/menuoption.h"
 #define PORT 3939
-#define BUFFER_SIZE 1024 // for send and recv (must be same)
 
 /* function declaration */
-// int menu_display(void);
 void plant_tree(int sockfd, char* buffer);
 void update_tree(int sockfd, char* buffer);
 void query_tree(int sockfd, char* buffer);
@@ -124,15 +122,6 @@ int main(int argc, char const* argv[])
   }
 
   // sigprocmask(SIG_UNBLOCK, &set1, NULL); // activates the signal block
-
-  // if ((numbytes = recv(sockfd, buffer, MAXDATASIZE, 0)) == -1)
-  // {
-  //     printf("\nrecv() error!!!\n");
-  //     exit(1);
-  // }
-
-  // buffer[numbytes] = '\0';
-  // printf("\nReceived : %s", buffer);
   close(sockfd);
   return 0;
 }
@@ -152,10 +141,8 @@ void plant_tree(int sockfd, char* buffer)
     scanf("%s", buffer);
     send(sockfd, buffer, BUFFER_SIZE, 0);
 
-    // bzero(buffer, BUFFER_SIZE);
     recv(sockfd, buffer, BUFFER_SIZE, 0);
     result = atoi(buffer);
-    printf("result: %d\n", result);
 
     if (result) {
       printf("\nA tree was found in the database at the given location.\nTry a new coordinate!\n\n\n");
@@ -306,34 +293,3 @@ void query_tree(int sockfd, char* buffer)
   recv(sockfd, buffer, BUFFER_SIZE, 0);
   printf("%s", buffer);
 }
-
-/* int menu_display()
-{
-    printf("  ________                               .__                       .___ \n");
-    printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
-    printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
-    printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
-    printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
-    printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
-
-    printf("Welcome to greenland, a place to plant tree!\n\n");
-    printf("We don't have any affiliation to the Greenland government, but if \n"
-           "you can plant a tree there, we are more than welcome! :)\n");
-
-    printf("################################\n");
-    printf("#                              #\n");
-    printf("#            MENU              #\n");
-    printf("#                              #\n");
-    printf("################################\n\n");
-    printf("\t1. To plant a tree\n");
-    printf("\t2. To query a tree\n");
-    printf("\t3. To update a tree's status\n");
-    printf("\t4. Exit\n");
-    printf("(Choose a service needed according to the number)\n\n");
-    printf("Option: ");
-    int option;
-    scanf("%d", &option);
-    system("clear");
-    return option;
-} // end of menu_display() function
-*/

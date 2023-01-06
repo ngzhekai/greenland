@@ -12,22 +12,6 @@
 
 /* semaphore function declaration */
 int initsem(key_t semkey);
-int p(int semid);
-int v(int semid);
-
-/* function declaration */
-// tree_coordinate get_coordinates(int sockfd, char* buffer);
-// int check_tree_exist(const char* filename, Tree* tree, int* treeIndex,
-//                      tree_coordinate* c, tree_coordinate* store);
-// void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
-//                    tree_coordinate store);
-// void copy_tree(const char* filename, tree_coordinate store);
-// void plant_tree(const char* filename, Tree tree, int new_sockfd, char* buffer);
-// void update_tree(const char* filename, Tree tree, int new_sockfd,
-//                  char* buffer);
-// void query_tree(const char* filename, Tree tree, int new_sockfd, char* buffer);
-
-// void sigchld_handler(int sig);
 
 int main(int argc, char const* argv[])
 {
@@ -90,7 +74,8 @@ int main(int argc, char const* argv[])
       exit(1);
     }
 
-    printf("Connection from %s in socket %d accepted\n", inet_ntoa(their_addr.sin_addr),
+    printf("Connection from %s in socket %d accepted\n",
+           inet_ntoa(their_addr.sin_addr),
            new_sockfd);
     socklen_t len_size = sizeof(struct sockaddr_in);
     getsockname(sockfd, (struct sockaddr*)&my_addr, &len_size);
@@ -134,3 +119,41 @@ int main(int argc, char const* argv[])
 
   return 0;
 }
+
+int initsem(key_t semkey)
+{
+  int status = 0, semid;
+  semun arg;
+
+  if ((semid = semget(semkey, 1, SEMPERM | IPC_CREAT | IPC_EXCL)) == -1) {
+    /* create semaphore using semget() function with the key (semkey) and set 1 semaphore in the set.
+      Flags:
+      - SEMPERM -> file Permission of 0660
+      - IPC_CREAT -> create semaphore if not yet exist
+      - IPC_EXCL ->  return -1 with errno EEXIST if semaphore already exist (basically it causes the semget() function to fail if semaphore already exist)
+      */
+    if (errno ==
+        EEXIST) {
+      /* check if error/failure of semget() fuction is because of semaphore already exists. */
+      semid = semget(semkey, 1, 0);
+    } /* access to semaphore with key (semkey) and with 1 semaphore in teh set
+
+                                            and the last argument '0' which is the semflg that apply the following:
+                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() has read and/or write permissions to it, then semget() returns the associated semaphore identifier.
+                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() does not have read and/or write permissions to it, then semget() returns-1 and sets errno to EACCES.
+                                                + If a semaphore identifier has not been created with key earlier, then semget() returns -1 and sets errno to ENOENT.
+                                            [Refer here for more info](https://www.ibm.com/docs/en/zos/2.2.0?topic=functions-semget-get-set-semaphores)
+                                            */
+  } else {
+    arg.val = 1; /* initialize arg.val to 1 */
+    status = semctl(semid, 0, SETVAL,
+                    arg); /* set the semaphore value (semval) of semaphore number '0' with id equals semid to 1 (arg) using SETVAL */
+  }
+
+  if (semid == -1 || status == -1) {
+    perror("Initsem() fails");
+    return (-1);
+  }
+
+  return (semid);
+} /* end of initsem() function */

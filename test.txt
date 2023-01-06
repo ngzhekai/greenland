@@ -1,5 +1,0 @@
-12,12		Deciduous		2012-12-10		2
-12,23		Deciduous		2001-12-08		2
-128,890		Deciduous		2001-12-30		1
-12,3		Coniferous		1999-12-05		1
-12,21		Deciduous		2001-12-09		2

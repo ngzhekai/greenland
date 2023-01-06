@@ -62,13 +62,13 @@ char* moption_handle(int new_sockfd, int semid, char* cli_addr, MenuOption mo)
       return msg;
       break;
 
-  default:
-    sprintf(msg, "Option %d not supported\n", mo);
-    return msg;
+    default:
+      sprintf(msg, "Option %d not supported\n", mo);
+      return msg;
   }
 }
 
-void moption_display(MenuOption *opt)
+void moption_display(MenuOption* opt)
 {
   printf("  ________                               .__                       .___ \n");
   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
@@ -126,14 +126,11 @@ tree_coordinate get_coordinates(int sockfd, char* buffer)
 {
   tree_coordinate c;
   int num;
-  // recv // tree.vertical
   recv(sockfd, buffer, BUFFER_SIZE, 0);
   num = atoi(buffer);
   tree_set_x(&c, num);
-  // recv // tree.horizontal
   recv(sockfd, buffer, BUFFER_SIZE, 0);
   num = atoi(buffer);
-  // tree.horizontal = num;
   tree_set_y(&c, num);
   return c;
 } /* end of get_coordinates() function */
@@ -159,10 +156,6 @@ int check_tree_exist(const char* filename, Tree* tree, int* treeIndex,
     char species[BUFFER_SIZE], status[BUFFER_SIZE], date[BUFFER_SIZE];
     sscanf(temp, "%d,%d\t\t%s\t\t%s\t\t%s\n", &vertical, &horizontal, species,
            date, status);
-    printf("x: %d, y: %d\n", vertical,
-           horizontal); // debug
-    printf("compare x: %d, compare y: %d\n", tree_get_x(c),
-           tree_get_y(c)); // debug
 
     store->x = vertical;
     store->y = horizontal;
@@ -174,32 +167,17 @@ int check_tree_exist(const char* filename, Tree* tree, int* treeIndex,
     tree_set_day_planted(tree,
                          date); //<---code got stuck here (fixed with initalization)
 
-    printf("Debug: X coordinates print from Tree (store): %d\n",
-           store->x); // debug
-    printf("Debug: Y coordinates print from Tree (store): %d\n",
-           store->y); // deubg
-
     if (vertical == tree_get_x(c) && horizontal == tree_get_y(c)) {
       *treeIndex = numTrees;
-      // treeIndex can be used to show which line is the search tree located in the textfile;
-      printf("Debug: The coordinates found was located on line %d\n",
-             *treeIndex + 1);
       return 1;
     }
 
     numTrees++;
   }
 
-  // initialize trees[*treeIndex].xxxxx  to be used when writing (which is mainly for creating a new tree)
-  // trees[*treeIndex].vertical = tree.vertical;
-  // trees[*treeIndex].horizontal = tree.horizontal;
-  printf("\nDebug Checkpoint: after searching\n");
   tree_set_x(store, tree_get_x(c));
   tree_set_y(store, tree_get_y(c));
-  printf("\nDebug Checkpoint: end of check_tree_exist()\n");
-
   fclose(fp);
-
   return 0;
 } /* end of check_tree_exist() function */
 
@@ -212,23 +190,19 @@ void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
   char sp[BUFFER_SIZE];
   tree_state st;
 
-  printf("\nDebug Checkpoint: beginning of update_detail function (recv from client)\n");
-
   // get species from client
   recv(sockfd, buffer, BUFFER_SIZE, 0);
   speciesChosen = atoi(buffer);
 
   if (speciesChosen == 1) {
-    // strncpy(trees[*treeIndex].species, "Deciduous", 10);
     tree_set_species(&tree, "Deciduous");
     strcpy(sp, "Deciduous");
   } else {
-    // strncpy(trees[*treeIndex].species, "Coniferous", 11);
     tree_set_species(&tree, "Coniferous");
     strcpy(sp, "Coniferous");
   }
 
-  printf("Species selected\n"); // debug
+  printf("Species selected [%s]\n", sp);
 
   // get status from client
   recv(sockfd, buffer, BUFFER_SIZE, 0);
@@ -245,27 +219,19 @@ void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
   }
 
   tree.status = st;
-  printf("state selected: %s\n", trstat_to_string(st)); // debug
+  printf("State selected: [%s]\n", trstat_to_string(st));
 
   // get date from client
   recv(sockfd, buffer, BUFFER_SIZE, 0);
   printf("date received: %s\n", buffer);
-  // strncpy(trees[*treeIndex].date, buffer, BUFFER_SIZE);
-  char time[] = "2020-11-11"; // debug
-
-  // char time[BUFFER_SIZE];
-  // strncpy(time, buffer, BUFFER_SIZE);
+  char time[] = "2020-11-11";
 
   tree.day_planted = NULL;
 
   strncpy(time, buffer, BUFFER_SIZE);
   tree_set_day_planted(&tree, time);
-  // tree.day_planted = time;
   printf("date selected\n");
-
-  // Tree tree = *tree_create(sp, st, time, store);
   printf("\n before writing \n");
-  // write_tree(filename, trees, *treeIndex, tree);
 
   FILE* of;
   of = fopen(filename, "a");
@@ -285,8 +251,6 @@ void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
 
   fclose(of);
 
-  // sprintf(buffer, "%d,%d\t\t%s\t%s\t%d\n", store.x, store.y, tree.species, time, tree.status); //discarded to hardcode the status text
-  // send back to the client
   if (tree.status == 0) {
     sprintf(buffer, "%d,%d\t\t%s\t%s\t0 (DEAD)\n", store.x, store.y, tree.species,
             time);
@@ -302,8 +266,6 @@ void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
   }
 
   send(sockfd, buffer, BUFFER_SIZE, 0);
-
-  printf("\n<-- debug Checkpoint! (writing completed from update_details() func) -->\n");
 } /* end of update_detail() function */
 
 void copy_tree(const char* filename, tree_coordinate store)
@@ -349,7 +311,6 @@ void copy_tree(const char* filename, tree_coordinate store)
 
   // rename temp.txt to test.txt
   if (rename("temp.txt", filename) == 0) {
-    // printf("Copied successfully\n"); // debug purpose only
     unlink("temp.txt");
   } else {
     perror("Error: has occurred\n");
@@ -385,9 +346,6 @@ void plant_tree_server(const char* filename, Tree tree, int new_sockfd,
   update_detail(filename, tree, new_sockfd, buffer, store);
   /* end of critical section */
 
-  // printf("This is the newly created tree details:\n\n");
-  // printf("Coordinates\tSpecies\t\tDate\t\tStatus\n"); // for debug (this is what it is going to show on the client end)
-  // printf("-----------\t-------\t\t----\t\t------\n");
 
 } /* end of plant_tree_server() function */
 
@@ -415,14 +373,10 @@ void update_tree_server(const char* filename, Tree tree, int new_sockfd,
 
   } while (!find_result);
 
-  // printf("This is the current tree details:\n\n");
-  // printf("Coordinates\tSpecies\t\tDate\t\tStatus\n"); // for debug (this is what it is going to show on the client ends)
-  // printf("-----------\t-------\t\t----\t\t------\n");
   char date[BUFFER_SIZE];
   strftime(date, BUFFER_SIZE, "%Y-%m-%d",
            tree.day_planted); // refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti
 
-  // sprintf(buffer, "%d,%d\t\t%s\t%s\t%d\n", coordinates.x, coordinates.y, tree.species, date, tree.status);
   if (tree.status == 0) {
     sprintf(buffer, "%d,%d\t\t%s\t%s\t0 (DEAD)\n", coordinates.x, coordinates.y,
             tree.species, date);
@@ -443,10 +397,6 @@ void update_tree_server(const char* filename, Tree tree, int new_sockfd,
   copy_tree(filename, store);
   update_detail(filename, tree, new_sockfd, buffer, store);
   /* end of critical section */
-
-  // printf("This is the updated tree details:\n\n");
-  // printf("Coordinates\tSpecies\t\tDate\t\tStatus\n");  // for debug (this is what it is going to show on the client end)
-  // printf("-----------\t-------\t\t----\t\t------\n");
 
 } /* end of update_tree_server() function */
 
@@ -474,15 +424,11 @@ void query_tree_server(const char* filename, Tree tree, int new_sockfd,
 
   } while (!find_result);
 
-  // printf("This is the query result:\n\n");
-  // printf("Coordinates\tSpecies\t\tDate\t\tStatus\n"); // for debug (this is what it is going to show on the client end)
-  // printf("-----------\t-------\t\t----\t\t------\n");
   // send to client
   char date[BUFFER_SIZE];
   strftime(date, BUFFER_SIZE, "%Y-%m-%d",
            tree.day_planted); // refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti
 
-  // sprintf(buffer, "%d,%d\t\t%s\t%s\t%d\n", coordinates.x, coordinates.y, tree.species, date, tree.status);
   if (tree.status == 0) {
     sprintf(buffer, "%d,%d\t\t%s\t%s\t0 (DEAD)\n", coordinates.x, coordinates.y,
             tree.species, date);
@@ -499,44 +445,6 @@ void query_tree_server(const char* filename, Tree tree, int new_sockfd,
 
   send(new_sockfd, buffer, BUFFER_SIZE, 0);
 } /* end of query_tree_server() function */
-
-int initsem(key_t semkey)
-{
-  int status = 0, semid;
-  semun arg;
-
-  if ((semid = semget(semkey, 1, SEMPERM | IPC_CREAT | IPC_EXCL)) == -1) {
-    /* create semaphore using semget() function with the key (semkey) and set 1 semaphore in the set.
-      Flags:
-      - SEMPERM -> file Permission of 0660
-      - IPC_CREAT -> create semaphore if not yet exist
-      - IPC_EXCL ->  return -1 with errno EEXIST if semaphore already exist (basically it causes the semget() function to fail if semaphore already exist)
-      */
-    if (errno ==
-        EEXIST) {
-      /* check if error/failure of semget() fuction is because of semaphore already exists. */
-      semid = semget(semkey, 1, 0);
-    } /* access to semaphore with key (semkey) and with 1 semaphore in teh set
-
-                                            and the last argument '0' which is the semflg that apply the following:
-                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() has read and/or write permissions to it, then semget() returns the associated semaphore identifier.
-                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() does not have read and/or write permissions to it, then semget() returns-1 and sets errno to EACCES.
-                                                + If a semaphore identifier has not been created with key earlier, then semget() returns -1 and sets errno to ENOENT.
-                                            [Refer here for more info](https://www.ibm.com/docs/en/zos/2.2.0?topic=functions-semget-get-set-semaphores)
-                                            */
-  } else {
-    arg.val = 1; /* initialize arg.val to 1 */
-    status = semctl(semid, 0, SETVAL,
-                    arg); /* set the semaphore value (semval) of semaphore number '0' with id equals semid to 1 (arg) using SETVAL */
-  }
-
-  if (semid == -1 || status == -1) {
-    perror("Initsem() fails");
-    return (-1);
-  }
-
-  return (semid);
-} /* end of initsem() function */
 
 int p(int semid)
 {

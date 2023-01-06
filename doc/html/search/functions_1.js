@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['species_5fis_5fvalid_40',['species_is_valid',['../species_8h.html#ad221963e3cf337abb641d19fba896f0c',1,'species.c']]]
+  ['moption_5fdisplay_40',['moption_display',['../menuoption_8h.html#a215b9f209465187d24b52152f8b781d0',1,'menuoption.c']]],
+  ['moption_5fhandle_41',['moption_handle',['../menuoption_8h.html#a496d61fead00c3a207d72fbd780a561b',1,'menuoption.c']]]
 ];

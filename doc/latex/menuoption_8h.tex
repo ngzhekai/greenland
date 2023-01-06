@@ -21,8 +21,7 @@ char $\ast$ \mbox{\hyperlink{menuoption_8h_a496d61fead00c3a207d72fbd780a561b}{mo
 \item 
 void \mbox{\hyperlink{menuoption_8h_a215b9f209465187d24b52152f8b781d0}{moption\+\_\+display}} (\mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{Menu\+Option}} $\ast$opt)
 \item 
-\mbox{\Hypertarget{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}\label{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}} 
-const char $\ast$ {\bfseries get\+Menu\+Option\+Name} (enum \mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{Menu\+Option}} op)
+const char $\ast$ \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{get\+Menu\+Option\+Name}} (enum \mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{Menu\+Option}} op)
 \end{DoxyCompactItemize}
 
 
@@ -60,6 +59,49 @@ Definition at line 11 of file menuoption.\+h.
 
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}\label{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}} 
+\index{menuoption.h@{menuoption.h}!getMenuOptionName@{getMenuOptionName}}
+\index{getMenuOptionName@{getMenuOptionName}!menuoption.h@{menuoption.h}}
+\doxysubsubsection{\texorpdfstring{getMenuOptionName()}{getMenuOptionName()}}
+{\footnotesize\ttfamily const char$\ast$ get\+Menu\+Option\+Name (\begin{DoxyParamCaption}\item[{enum \mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{Menu\+Option}}}]{op }\end{DoxyParamCaption})}
+
+Get menu option into readable string
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em op} & A menu option\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A string that specifies the name of menu option, N\+U\+LL if the state is unknown 
+\end{DoxyReturn}
+
+
+Definition at line 99 of file menuoption.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{100 \{}
+\DoxyCodeLine{101   \textcolor{keywordflow}{switch} (op) \{}
+\DoxyCodeLine{102     \textcolor{keywordflow}{case} PLANT\_TREE:}
+\DoxyCodeLine{103       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Plant Tree"};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keywordflow}{case} QUERY\_TREE:}
+\DoxyCodeLine{106       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Query Tree"};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     \textcolor{keywordflow}{case} UPDATE\_TREE:}
+\DoxyCodeLine{109       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Update Tree"};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keywordflow}{case} EXIT\_PROGRAM:}
+\DoxyCodeLine{112       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Exit Program"};}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{115       \textcolor{keywordflow}{return} (\textcolor{keywordtype}{char}*) 0;}
+\DoxyCodeLine{116   \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \}}
+
+\end{DoxyCode}
 \mbox{\Hypertarget{menuoption_8h_a215b9f209465187d24b52152f8b781d0}\label{menuoption_8h_a215b9f209465187d24b52152f8b781d0}} 
 \index{menuoption.h@{menuoption.h}!moption\_display@{moption\_display}}
 \index{moption\_display@{moption\_display}!menuoption.h@{menuoption.h}}

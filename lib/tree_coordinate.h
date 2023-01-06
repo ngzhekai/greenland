@@ -8,19 +8,18 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-typedef struct tree_coordinate
-{
-    int x;
-    int y;
+typedef struct tree_coordinate {
+  int x;
+  int y;
 } tree_coordinate;
 
-void tree_set_x(tree_coordinate *c, int x);
+void tree_set_x(tree_coordinate* c, int x);
 
-void tree_set_y(tree_coordinate *c, int y);
+void tree_set_y(tree_coordinate* c, int y);
 
-int tree_get_x(const tree_coordinate *c);
+int tree_get_x(const tree_coordinate* c);
 
-int tree_get_y(const tree_coordinate *c);
+int tree_get_y(const tree_coordinate* c);
 
 // bool trcdn_is_valid(tree_coordinate c);
 

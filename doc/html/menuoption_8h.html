@@ -97,8 +97,7 @@ Functions</h2></td></tr>
 <tr class="separator:a496d61fead00c3a207d72fbd780a561b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a215b9f209465187d24b52152f8b781d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menuoption_8h.html#a215b9f209465187d24b52152f8b781d0">moption_display</a> (<a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> *opt)</td></tr>
 <tr class="separator:a215b9f209465187d24b52152f8b781d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43ea43aa23e5cf4da54a2be35f7f0fce"><td class="memItemLeft" align="right" valign="top"><a id="a43ea43aa23e5cf4da54a2be35f7f0fce"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getMenuOptionName</b> (enum <a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> op)</td></tr>
+<tr class="memitem:a43ea43aa23e5cf4da54a2be35f7f0fce"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="menuoption_8h.html#a43ea43aa23e5cf4da54a2be35f7f0fce">getMenuOptionName</a> (enum <a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> op)</td></tr>
 <tr class="separator:a43ea43aa23e5cf4da54a2be35f7f0fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -141,6 +140,53 @@ const char *&#160;</td><td class="memItemRight" valign="bottom"><b>getMenuOption
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a43ea43aa23e5cf4da54a2be35f7f0fce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43ea43aa23e5cf4da54a2be35f7f0fce">&#9670;&nbsp;</a></span>getMenuOptionName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* getMenuOptionName </td>
+          <td>(</td>
+          <td class="paramtype">enum <a class="el" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a>&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get menu option into readable string</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">op</td><td>A menu option</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string that specifies the name of menu option, NULL if the state is unknown </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="menuoption_8c_source.html#l00099">99</a> of file <a class="el" href="menuoption_8c_source.html">menuoption.c</a>.</p>
+<div class="fragment"><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;{</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">switch</span> (op) {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">case</span> PLANT_TREE:</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Plant Tree&quot;</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">case</span> QUERY_TREE:</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Query Tree&quot;</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">case</span> UPDATE_TREE:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Update Tree&quot;</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">case</span> EXIT_PROGRAM:</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;Exit Program&quot;</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      <span class="keywordflow">return</span> (<span class="keywordtype">char</span>*) 0;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a215b9f209465187d24b52152f8b781d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a215b9f209465187d24b52152f8b781d0">&#9670;&nbsp;</a></span>moption_display()</h2>
 

@@ -61,6 +61,44 @@ Definition at line 11 of file menuoption\&.h\&.
 .fi
 .SH "Function Documentation"
 .PP 
+.SS "const char* getMenuOptionName (enum \fBMenuOption\fP op)"
+Get menu option into readable string
+.PP
+\fBParameters\fP
+.RS 4
+\fIop\fP A menu option
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A string that specifies the name of menu option, NULL if the state is unknown 
+.RE
+.PP
+
+.PP
+Definition at line 99 of file menuoption\&.c\&.
+.PP
+.nf
+100 {
+101   switch (op) {
+102     case PLANT_TREE:
+103       return "Plant Tree";
+104 
+105     case QUERY_TREE:
+106       return "Query Tree";
+107 
+108     case UPDATE_TREE:
+109       return "Update Tree";
+110 
+111     case EXIT_PROGRAM:
+112       return "Exit Program";
+113 
+114     default:
+115       return (char*) 0;
+116   }
+117 
+118 }
+.fi
 .SS "void moption_display (\fBMenuOption\fP * opt)"
 Display menu options
 .PP

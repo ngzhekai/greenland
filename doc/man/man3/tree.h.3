@@ -255,12 +255,12 @@ Set \fBTree\fP's coordinate where it was planted
 .PP
 
 .PP
-Definition at line 122 of file tree\&.c\&.
+Definition at line 116 of file tree\&.c\&.
 .PP
 .nf
-123 {
-124   t->coordinate = c;
-125 }
+117 {
+118   t->coordinate = c;
+119 }
 .fi
 .PP
 References Tree::coordinate\&.
@@ -283,21 +283,15 @@ Definition at line 103 of file tree\&.c\&.
 .nf
 104 {
 105   if (tree_get_status(t) == DEAD) {
-106     printf("debug: it is dead\n");
-107     t->day_planted = NULL;
-108   } else {
-109     printf("debug: it is alive\n");
-110 
-111     if (!t->day_planted) {
-112       // handle the case when day_planted haven't allocated with memory
-113       printf("debug: day_planted is null\n");
-114       t->day_planted = malloc(sizeof(struct tm));
-115     }
-116 
-117     printf("debug: date: %s\n", d);
-118     strptime(d, "%F", t->day_planted);
-119   }
-120 }
+106     t->day_planted = NULL;
+107   } else {
+108     if (!t->day_planted) {
+109       // handle the case when day_planted haven't allocated with memory
+110       t->day_planted = malloc(sizeof(struct tm));
+111     }
+112     strptime(d, "%F", t->day_planted);
+113   }
+114 }
 .fi
 .PP
 References tree_get_status()\&.
