@@ -1,0 +1,56 @@
+\hypertarget{date_8h}{}\doxysection{lib/date.h File Reference}
+\label{date_8h}\index{lib/date.h@{lib/date.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{date_8h_af4b274b03ff682a133b613a8be92b280}{date\+\_\+is\+\_\+valid}} (const char $\ast$date)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{date_8h_af4b274b03ff682a133b613a8be92b280}\label{date_8h_af4b274b03ff682a133b613a8be92b280}} 
+\index{date.h@{date.h}!date\_is\_valid@{date\_is\_valid}}
+\index{date\_is\_valid@{date\_is\_valid}!date.h@{date.h}}
+\doxysubsubsection{\texorpdfstring{date\_is\_valid()}{date\_is\_valid()}}
+{\footnotesize\ttfamily bool date\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}\item[{const char $\ast$}]{date }\end{DoxyParamCaption})}
+
+Check whether the date is valid
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em date} & A string represents data in the format of YYYY-\/\+MM-\/\+DD\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the date is valid, otherwise false 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{date_8c_source_l00049}{49}} of file \mbox{\hyperlink{date_8c_source}{date.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050 \{}
+\DoxyCodeLine{00051   \textcolor{keywordtype}{char}* year\_s = calloc(5, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00052   \textcolor{keywordtype}{char}* month\_s = calloc(3, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00053   \textcolor{keywordtype}{char}* day\_s = calloc(3, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00054   sscanf(date, \textcolor{stringliteral}{"{}\%[\string^-\/]-\/\%[\string^-\/]-\/\%[\string^-\/]"{}}, year\_s, month\_s, day\_s);}
+\DoxyCodeLine{00055 }
+\DoxyCodeLine{00056   printf(\textcolor{stringliteral}{"{}debug: year len: \%lu, month len: \%lu, day len: \%lu\(\backslash\)n"{}}, strlen(year\_s),}
+\DoxyCodeLine{00057          strlen(month\_s), strlen(day\_s));}
+\DoxyCodeLine{00058 }
+\DoxyCodeLine{00059   \textcolor{keywordflow}{if} (strlen(year\_s) != 4 || strlen(month\_s) != 2 || strlen(day\_s) != 2) \{}
+\DoxyCodeLine{00060     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{00061   \}}
+\DoxyCodeLine{00062 }
+\DoxyCodeLine{00063   \textcolor{keywordtype}{unsigned} year = atoi(year\_s);}
+\DoxyCodeLine{00064   \textcolor{keywordtype}{unsigned} month = atoi(month\_s);}
+\DoxyCodeLine{00065   \textcolor{keywordtype}{unsigned} day = atoi(day\_s);}
+\DoxyCodeLine{00066 }
+\DoxyCodeLine{00067   printf(\textcolor{stringliteral}{"{}debug: year: \%u, month: \%u, day: \%u\(\backslash\)n"{}}, year, month, day);}
+\DoxyCodeLine{00068 }
+\DoxyCodeLine{00069   \textcolor{keywordflow}{return} date\_is\_valid\_f(year, month, day);}
+\DoxyCodeLine{00070 \}}
+
+\end{DoxyCode}

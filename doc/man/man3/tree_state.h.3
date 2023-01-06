@@ -1,4 +1,4 @@
-.TH "lib/tree_state.h" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
+.TH "lib/tree_state.h" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -82,11 +82,11 @@ Definition at line \fB23\fP of file \fBtree_state\&.c\fP\&.
 .PP
 .nf
 24 {
-25   if (!(trstat_to_string(st))) {
-26     return false;
+25   if (st >= 0 && st < 4) {
+26     return true;
 27   }
 28 
-29   return true;
+29   return false;
 30 }
 .fi
 .SS "const char * trstat_to_string (\fBtree_state\fP st)"
@@ -99,7 +99,7 @@ Convert tree state into readable string
 .PP
 \fBReturns\fP
 .RS 4
-A string that specifies the state of the \fBTree\fP, NULL if the state is unknown 
+A string that specifies the state of the \fBTree\fP 
 .RE
 .PP
 
@@ -122,7 +122,7 @@ Definition at line \fB3\fP of file \fBtree_state\&.c\fP\&.
 16       return "TREAMENT";
 17 
 18     default:
-19       return (char*) 0;
+19       return "UNKNOWN STATE";
 20   }
 21 }
 .fi

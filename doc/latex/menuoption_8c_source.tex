@@ -3,51 +3,132 @@
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{menuoption_8h}{menuoption.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00002}00002 \textcolor{preprocessor}{\#include <stdio.h>}}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <stdlib.h>}}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00004}00004 }
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00005}\mbox{\hyperlink{menuoption_8h_a6e5efd912ef72baae88513b54fddade1}{00005}} \textcolor{keywordtype}{char}* moption\_handle(\mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{MenuOption}} mo)}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00006}00006 \{}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00007}00007   \textcolor{keywordtype}{char}* msg = malloc(1024);}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00008}00008 }
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00009}00009   \textcolor{keywordflow}{switch} (mo) \{}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00010}00010     \textcolor{keywordflow}{case} PLANT\_TREE:}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00011}00011     \textcolor{keywordflow}{case} QUERY\_TREE:}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00012}00012     \textcolor{keywordflow}{case} UPDATE\_TREE:}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00013}00013       sprintf(msg, \textcolor{stringliteral}{"{}Option \%d soon to be supported\(\backslash\)n"{}}, mo);}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00014}00014       \textcolor{keywordflow}{return} msg;}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00015}00015 }
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00016}00016     \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00017}00017       sprintf(msg, \textcolor{stringliteral}{"{}Option \%d not supported\(\backslash\)n"{}}, mo);}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00018}00018       \textcolor{keywordflow}{return} msg;}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00019}00019   \}}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00020}00020 \}}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00021}00021 }
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00022}\mbox{\hyperlink{menuoption_8h_a215b9f209465187d24b52152f8b781d0}{00022}} \textcolor{keywordtype}{void} moption\_display(\mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{MenuOption}}* opt)}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00023}00023 \{}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00024}00024   printf(\textcolor{stringliteral}{"{}  \_\_\_\_\_\_\_\_                               .\_\_                       .\_\_\_ \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00025}00025   printf(\textcolor{stringliteral}{"{} /  \_\_\_\_\_/\_\_\_\_\_\_\_   \_\_\_\_   \_\_\_\_    \_\_\_\_  |  |  \_\_\_\_\_     \_\_\_\_    \_\_| \_/ \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00026}00026   printf(\textcolor{stringliteral}{"{}/   \(\backslash\)\(\backslash\)  \_\_\_\(\backslash\)\(\backslash\)\_  \_\_ \(\backslash\)\(\backslash\)\_/ \_\_ \(\backslash\)\(\backslash\)\_/ \_\_ \(\backslash\)\(\backslash\)  /    \(\backslash\)\(\backslash\) |  |  \(\backslash\)\(\backslash\)\_\_  \(\backslash\)\(\backslash\)   /    \(\backslash\)\(\backslash\)  / \_\_ |  \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00027}00027   printf(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)    \(\backslash\)\(\backslash\)\_\(\backslash\)\(\backslash\)  \(\backslash\)\(\backslash\)|  | \(\backslash\)\(\backslash\)/\(\backslash\)\(\backslash\)  \_\_\_/\(\backslash\)\(\backslash\)  \_\_\_/ |   |  \(\backslash\)\(\backslash\)|  |\_\_ / \_\_ \(\backslash\)\(\backslash\)\_|   |  \(\backslash\)\(\backslash\)/ /\_/ |  \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00028}00028   printf(\textcolor{stringliteral}{"{} \(\backslash\)\(\backslash\)\_\_\_\_\_\_  /|\_\_|    \(\backslash\)\(\backslash\)\_\_\_  >\(\backslash\)\(\backslash\)\_\_\_  >|\_\_\_|  /|\_\_\_\_/(\_\_\_\_  /|\_\_\_|  /\(\backslash\)\(\backslash\)\_\_\_\_ |  \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00029}00029   printf(\textcolor{stringliteral}{"{}        \(\backslash\)\(\backslash\)/             \(\backslash\)\(\backslash\)/     \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/            \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/  \(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00002}00002 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{date_8h}{date.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00003}00003 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tree_8h}{tree.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00004}00004 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tree__state_8h}{tree\_state.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00007}00007 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00008}00008 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00009}00009 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00010}00010 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00011}00011 \textcolor{preprocessor}{\#include <strings.h>}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00013}00013 \textcolor{preprocessor}{\#define BUFSIZE 512}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00015}\mbox{\hyperlink{menuoption_8h_a0e7faa3061f742b4fbb9d865d7926103}{00015}} \textcolor{keywordtype}{int} moption\_handle(\mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{MenuOption}} mo, \mbox{\hyperlink{structTree}{Tree}}* t)}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00016}00016 \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00017}00017   \mbox{\hyperlink{structTree}{Tree}}* nt = (\mbox{\hyperlink{structTree}{Tree}}*) 0;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00019}00019   \textcolor{keywordflow}{switch} (mo) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00020}00020     \textcolor{keywordflow}{case} PLANT\_TREE:}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00021}00021       nt = moption\_plant\_tree();}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00022}00022       t = realloc(t, \textcolor{keyword}{sizeof}(*nt));}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00023}00023       bcopy(nt, t, \textcolor{keyword}{sizeof}(*nt));}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00024}00024       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00026}00026     \textcolor{keywordflow}{case} QUERY\_TREE:}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00027}00027     \textcolor{keywordflow}{case} UPDATE\_TREE:}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00028}00028       printf(\textcolor{stringliteral}{"{}Option \%d soon to be supported\(\backslash\)n"{}}, mo);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00029}00029       \textcolor{keywordflow}{break};}
 \DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00030}00030 }
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00031}00031   printf(\textcolor{stringliteral}{"{}Welcome to greenland, a place to plant tree!\(\backslash\)n\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00032}00032   printf(\textcolor{stringliteral}{"{}We don't have any affiliation to the Greenland government, but if \(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00033}00033          \textcolor{stringliteral}{"{}you can plant a tree there, we are more than welcome! :)\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00034}00034 }
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00035}00035   printf(\textcolor{stringliteral}{"{}\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00036}00036   printf(\textcolor{stringliteral}{"{}\#                              \#\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00037}00037   printf(\textcolor{stringliteral}{"{}\#            MENU              \#\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00038}00038   printf(\textcolor{stringliteral}{"{}\#                              \#\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00039}00039   printf(\textcolor{stringliteral}{"{}\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00040}00040   printf(\textcolor{stringliteral}{"{}\(\backslash\)t1. To plant a tree\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00041}00041   printf(\textcolor{stringliteral}{"{}\(\backslash\)t2. To query a tree\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00042}00042   printf(\textcolor{stringliteral}{"{}\(\backslash\)t3. To update a tree's status\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00043}00043   printf(\textcolor{stringliteral}{"{}(Choose a service needed according to the number)\(\backslash\)n\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00044}00044   printf(\textcolor{stringliteral}{"{}Option: "{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00045}00045   scanf(\textcolor{stringliteral}{"{}\%d"{}}, (\textcolor{keywordtype}{int}*) opt);}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00046}00046   system(\textcolor{stringliteral}{"{}clear"{}});}
-\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00047}00047 \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00031}00031     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00032}00032       errno = ENOTSUP;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00033}00033       printf(\textcolor{stringliteral}{"{}Option \%d not supported\(\backslash\)n"{}}, mo);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00034}00034       \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00035}00035   \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00037}00037   free(nt);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00038}00038   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00039}00039 \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00041}\mbox{\hyperlink{menuoption_8h_a215b9f209465187d24b52152f8b781d0}{00041}} \textcolor{keywordtype}{void} moption\_display(\mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{MenuOption}}* opt)}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00042}00042 \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00043}00043   printf(\textcolor{stringliteral}{"{}  \_\_\_\_\_\_\_\_                               .\_\_                       .\_\_\_ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00044}00044   printf(\textcolor{stringliteral}{"{} /  \_\_\_\_\_/\_\_\_\_\_\_\_   \_\_\_\_   \_\_\_\_    \_\_\_\_  |  |  \_\_\_\_\_     \_\_\_\_    \_\_| \_/ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00045}00045   printf(\textcolor{stringliteral}{"{}/   \(\backslash\)\(\backslash\)  \_\_\_\(\backslash\)\(\backslash\)\_  \_\_ \(\backslash\)\(\backslash\)\_/ \_\_ \(\backslash\)\(\backslash\)\_/ \_\_ \(\backslash\)\(\backslash\)  /    \(\backslash\)\(\backslash\) |  |  \(\backslash\)\(\backslash\)\_\_  \(\backslash\)\(\backslash\)   /    \(\backslash\)\(\backslash\)  / \_\_ |  \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00046}00046   printf(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)    \(\backslash\)\(\backslash\)\_\(\backslash\)\(\backslash\)  \(\backslash\)\(\backslash\)|  | \(\backslash\)\(\backslash\)/\(\backslash\)\(\backslash\)  \_\_\_/\(\backslash\)\(\backslash\)  \_\_\_/ |   |  \(\backslash\)\(\backslash\)|  |\_\_ / \_\_ \(\backslash\)\(\backslash\)\_|   |  \(\backslash\)\(\backslash\)/ /\_/ |  \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00047}00047   printf(\textcolor{stringliteral}{"{} \(\backslash\)\(\backslash\)\_\_\_\_\_\_  /|\_\_|    \(\backslash\)\(\backslash\)\_\_\_  >\(\backslash\)\(\backslash\)\_\_\_  >|\_\_\_|  /|\_\_\_\_/(\_\_\_\_  /|\_\_\_|  /\(\backslash\)\(\backslash\)\_\_\_\_ |  \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00048}00048   printf(\textcolor{stringliteral}{"{}        \(\backslash\)\(\backslash\)/             \(\backslash\)\(\backslash\)/     \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/            \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/  \(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00050}00050   printf(\textcolor{stringliteral}{"{}Welcome to greenland, a place to plant tree!\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00051}00051   printf(\textcolor{stringliteral}{"{}We don't have any affiliation to the Greenland government, but if \(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00052}00052          \textcolor{stringliteral}{"{}you can plant a tree there, we are more than welcome! :)\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00054}00054   printf(\textcolor{stringliteral}{"{}\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00055}00055   printf(\textcolor{stringliteral}{"{}\#                              \#\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00056}00056   printf(\textcolor{stringliteral}{"{}\#            MENU              \#\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00057}00057   printf(\textcolor{stringliteral}{"{}\#                              \#\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00058}00058   printf(\textcolor{stringliteral}{"{}\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00059}00059   printf(\textcolor{stringliteral}{"{}\(\backslash\)t1. To plant a tree\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00060}00060   printf(\textcolor{stringliteral}{"{}\(\backslash\)t2. To query a tree\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00061}00061   printf(\textcolor{stringliteral}{"{}\(\backslash\)t3. To update a tree's status\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00062}00062   printf(\textcolor{stringliteral}{"{}(Choose a service needed according to the number)\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00063}00063   printf(\textcolor{stringliteral}{"{}Option: "{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00064}00064   scanf(\textcolor{stringliteral}{"{}\%d"{}}, (\textcolor{keywordtype}{int}*) opt);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00065}00065   system(\textcolor{stringliteral}{"{}clear"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00066}00066 \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00067}00067 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00068}\mbox{\hyperlink{menuoption_8h_a8c75042fb9e6cb53046eb4fcc1bede5f}{00068}} \mbox{\hyperlink{structTree}{Tree}}* moption\_plant\_tree(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00069}00069 \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00070}00070   printf(\textcolor{stringliteral}{"{}\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00071}00071   printf(\textcolor{stringliteral}{"{}\#                              \#\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00072}00072   printf(\textcolor{stringliteral}{"{}\#        PLANTING TREE         \#\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00073}00073   printf(\textcolor{stringliteral}{"{}\#                              \#\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00074}00074   printf(\textcolor{stringliteral}{"{}\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00075}00075   printf(\textcolor{stringliteral}{"{}Press <Enter> to agree to default value\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00076}00076 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00077}00077   \textcolor{keywordtype}{char} species[BUFSIZE], day\_planted[BUFSIZE];}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00078}00078   \textcolor{keywordtype}{char} status[BUFSIZE] = \textcolor{stringliteral}{"{}-\/1"{}};}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00079}00079   \textcolor{keywordtype}{int} nbytes;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00080}00080 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00081}00081   write(STDOUT\_FILENO, \textcolor{stringliteral}{"{}Tree's species: "{}}, 17);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00083}00083   \textcolor{keywordflow}{if} ((nbytes = read(STDIN\_FILENO, species, BUFSIZE)) < 0) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00084}00084     perror(\textcolor{stringliteral}{"{}[-\/] Input error!"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00085}00085     exit(1);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00086}00086   \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00088}00088   species[nbytes -\/ 1] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00089}00089 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00090}00090   getchar();  \textcolor{comment}{// ignore new line}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00091}00091 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00092}00092   \textcolor{keywordflow}{while} (!trstat\_is\_valid(atoi(status))) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00093}00093     printf(\textcolor{stringliteral}{"{}Tree's status: (default PLANTED) "{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00094}00094     fgets(status, BUFSIZE, stdin);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00095}00095 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00096}00096     \textcolor{keywordflow}{if} (status[0] == \textcolor{charliteral}{'\(\backslash\)n'}) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00097}00097       bzero(status, BUFSIZE);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00098}00098       strcpy(status, \textcolor{stringliteral}{"{}1"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00099}00099     \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00100}00100 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00101}00101     status[strcspn(status, \textcolor{stringliteral}{"{}\(\backslash\)n"{}})] = 0;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00103}00103     \textcolor{keywordflow}{if} (!trstat\_is\_valid(atoi(status))) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00104}00104       printf(\textcolor{stringliteral}{"{}[-\/] Input error!: Status must be within range of 0 and 3\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00105}00105     \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00106}00106   \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00107}00107 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00108}00108   \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00109}00109     printf(\textcolor{stringliteral}{"{}Day when the tree is planted: (default local time, in format YYYY-\/MM-\/DD) "{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00110}00110     fgets(day\_planted, BUFSIZE, stdin);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00112}00112     \textcolor{keywordflow}{if} (day\_planted[0] == \textcolor{charliteral}{'\(\backslash\)n'}) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00113}00113       time\_t current\_time = time(NULL);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00114}00114       strftime(day\_planted, BUFSIZE, \textcolor{stringliteral}{"{}\%F"{}}, localtime(\&current\_time));}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00115}00115     \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00116}00116 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00117}00117     printf(\textcolor{stringliteral}{"{}day\_planted: \%s\(\backslash\)n"{}}, day\_planted);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00118}00118     day\_planted[strcspn(day\_planted, \textcolor{stringliteral}{"{}\(\backslash\)n"{}})] = 0;}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00119}00119 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00120}00120     \textcolor{keywordflow}{if} (!date\_is\_valid(day\_planted)) \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00121}00121       printf(\textcolor{stringliteral}{"{}[-\/] Input error!: Date must be valid and in format of YYYY-\/MM-\/DD\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00122}00122     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00123}00123       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00124}00124     \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00125}00125   \}}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00127}00127   \textcolor{keywordflow}{return} tree\_create(species, atoi(status), day\_planted);}
+\DoxyCodeLine{\Hypertarget{menuoption_8c_source_l00128}00128 \}}
 
 \end{DoxyCode}

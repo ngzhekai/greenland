@@ -86,11 +86,11 @@ Definition at line \mbox{\hyperlink{tree__state_8c_source_l00023}{23}} of file \
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00024 \{}
-\DoxyCodeLine{00025   \textcolor{keywordflow}{if} (!(trstat\_to\_string(st))) \{}
-\DoxyCodeLine{00026     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{00025   \textcolor{keywordflow}{if} (st >= 0 \&\& st < 4) \{}
+\DoxyCodeLine{00026     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
 \DoxyCodeLine{00027   \}}
 \DoxyCodeLine{00028 }
-\DoxyCodeLine{00029   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{00029   \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
 \DoxyCodeLine{00030 \}}
 
 \end{DoxyCode}
@@ -108,7 +108,7 @@ Convert tree state into readable string
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A string that specifies the state of the \mbox{\hyperlink{structTree}{Tree}}, NULL if the state is unknown 
+A string that specifies the state of the \mbox{\hyperlink{structTree}{Tree}} 
 \end{DoxyReturn}
 
 
@@ -131,7 +131,7 @@ Definition at line \mbox{\hyperlink{tree__state_8c_source_l00003}{3}} of file \m
 \DoxyCodeLine{00016       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}TREAMENT"{}};}
 \DoxyCodeLine{00017 }
 \DoxyCodeLine{00018     \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{00019       \textcolor{keywordflow}{return} (\textcolor{keywordtype}{char}*) 0;}
+\DoxyCodeLine{00019       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}UNKNOWN STATE"{}};}
 \DoxyCodeLine{00020   \}}
 \DoxyCodeLine{00021 \}}
 

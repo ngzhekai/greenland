@@ -1,0 +1,63 @@
+.TH "lib/date.h" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/date.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBdate_is_valid\fP (const char *date)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "bool date_is_valid (const char * date)"
+Check whether the date is valid
+.PP
+\fBParameters\fP
+.RS 4
+\fIdate\fP A string represents data in the format of YYYY-MM-DD
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if the date is valid, otherwise false 
+.RE
+.PP
+
+.PP
+Definition at line \fB49\fP of file \fBdate\&.c\fP\&.
+.PP
+.nf
+50 {
+51   char* year_s = calloc(5, sizeof(char));
+52   char* month_s = calloc(3, sizeof(char));
+53   char* day_s = calloc(3, sizeof(char));
+54   sscanf(date, "%[^-]-%[^-]-%[^-]", year_s, month_s, day_s);
+55 
+56   printf("debug: year len: %lu, month len: %lu, day len: %lu\n", strlen(year_s),
+57          strlen(month_s), strlen(day_s));
+58 
+59   if (strlen(year_s) != 4 || strlen(month_s) != 2 || strlen(day_s) != 2) {
+60     return false;
+61   }
+62 
+63   unsigned year = atoi(year_s);
+64   unsigned month = atoi(month_s);
+65   unsigned day = atoi(day_s);
+66 
+67   printf("debug: year: %u, month: %u, day: %u\n", year, month, day);
+68 
+69   return date_is_valid_f(year, month, day);
+70 }
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for greenland from the source code\&.

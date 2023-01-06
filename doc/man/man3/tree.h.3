@@ -1,4 +1,4 @@
-.TH "lib/tree.h" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
+.TH "lib/tree.h" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,6 +6,8 @@ lib/tree.h
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <stddef\&.h>\fP
+.br
 \fC#include <stdint\&.h>\fP
 .br
 \fC#include <time\&.h>\fP
@@ -31,13 +33,13 @@ lib/tree.h
 
 .in +1c
 .ti -1c
-.RI "struct \fBTree\fP * \fBtree_create\fP (const char *sp, \fBtree_state\fP st, time_t d)"
+.RI "struct \fBTree\fP * \fBtree_create\fP (const char *sp, \fBtree_state\fP st, const char *d)"
 .br
 .ti -1c
 .RI "void \fBtree_free\fP (\fBTree\fP *t)"
 .br
 .ti -1c
-.RI "char * \fBtree_get_species\fP (const \fBTree\fP *t)"
+.RI "const char * \fBtree_get_species\fP (const \fBTree\fP *t)"
 .br
 .ti -1c
 .RI "\fBtree_state\fP \fBtree_get_status\fP (const \fBTree\fP *t)"
@@ -52,7 +54,13 @@ lib/tree.h
 .RI "void \fBtree_set_status\fP (\fBTree\fP *t, \fBtree_state\fP st)"
 .br
 .ti -1c
-.RI "void \fBtree_set_day_planted\fP (\fBTree\fP *t, time_t d)"
+.RI "void \fBtree_set_day_planted\fP (\fBTree\fP *t, const char *d)"
+.br
+.ti -1c
+.RI "void \fBtree_serialise\fP (\fBTree\fP *t, char *s)"
+.br
+.ti -1c
+.RI "\fBTree\fP * \fBtree_deserialise\fP (char *s)"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -73,7 +81,7 @@ Definition in file \fBtree\&.h\fP\&.
 \fBTree\fP data class that stores information about a tree including its species, its status, and the amount of days it has lived\&. 
 .SH "Function Documentation"
 .PP 
-.SS "struct \fBTree\fP * tree_create (const char * sp, \fBtree_state\fP st, time_t d)"
+.SS "struct \fBTree\fP * tree_create (const char * sp, \fBtree_state\fP st, const char * d)"
 Create a \fBTree\fP data class
 .PP
 \fBParameters\fP
@@ -82,7 +90,7 @@ Create a \fBTree\fP data class
 .br
 \fIst\fP A \fBTree\fP State enum specifies the current status for the \fBTree\fP 
 .br
-\fId\fP A time_t in seconds specifies the days alived of the \fBTree\fP
+\fId\fP A string specifies the days alived of the \fBTree\fP in format Y-m-d, e\&.g\&. 2022-12-05
 .RE
 .PP
 \fBReturns\fP
@@ -97,22 +105,52 @@ st must be valid
 .PP
 
 .PP
-Definition at line \fB8\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB9\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-9 {
-10   Tree* new_tree = malloc(sizeof(Tree));
-11   assert(trstat_is_valid(st));
-12   new_tree->species = NULL;
-13   tree_set_species(new_tree, sp);
-14   tree_set_status(new_tree, st);
+10 {
+11   Tree* new_tree = malloc(sizeof(Tree));
+12   tree_set_species(new_tree, sp);
+13   tree_set_status(new_tree, st);
+14   new_tree->day_planted = NULL;
 15   tree_set_day_planted(new_tree, d);
 16 
 17   return new_tree;
 18 }
 .fi
 .PP
-References \fBTree::species\fP\&.
+References \fBTree::day_planted\fP\&.
+.SS "\fBTree\fP * tree_deserialise (char * s)"
+Deserialise a string into struct \fBTree\fP
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP A serialised string represents a tree
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A deserialised \fBTree\fP 
+.RE
+.PP
+
+.PP
+Definition at line \fB79\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+80 {
+81   char* species = malloc(1024);
+82   tree_state status;
+83   char* date = malloc(11);
+84   sscanf(s, "%[^,],%u,%[^,]", species, &status, date);
+85 
+86   Tree* t = tree_create(species, status, date);
+87 
+88   free(species);
+89   free(date);
+90   return t;
+91 }
+.fi
 .SS "void tree_free (\fBTree\fP * t)"
 Destroy a \fBTree\fP data class
 .PP
@@ -127,12 +165,13 @@ Definition at line \fB20\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
 21 {
-22   free(t->species);
-23   free(t);
-24 }
+22   free(t->day_planted);
+23   free(t->species);
+24   free(t);
+25 }
 .fi
 .PP
-References \fBTree::species\fP\&.
+References \fBTree::day_planted\fP, and \fBTree::species\fP\&.
 .SS "struct tm * tree_get_day_planted (const \fBTree\fP * t)"
 Get \fBTree\fP's the amount of days it has lived
 .PP
@@ -148,16 +187,16 @@ A pointer to struct tm indicates the day when the \fBTree\fP was planted
 .PP
 
 .PP
-Definition at line \fB36\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB37\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-37 {
-38   return t->day_planted;
-39 }
+38 {
+39   return t->day_planted;
+40 }
 .fi
 .PP
 References \fBTree::day_planted\fP\&.
-.SS "char * tree_get_species (const \fBTree\fP * t)"
+.SS "const char * tree_get_species (const \fBTree\fP * t)"
 Get \fBTree\fP's species name
 .PP
 \fBParameters\fP
@@ -172,12 +211,12 @@ A string that describes the \fBTree\fP's species name
 .PP
 
 .PP
-Definition at line \fB26\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB27\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-27 {
-28   return t->species;
-29 }
+28 {
+29   return t->species;
+30 }
 .fi
 .PP
 References \fBTree::species\fP\&.
@@ -196,37 +235,65 @@ A non-negative integer indicates the \fBTree\fP's current status
 .PP
 
 .PP
-Definition at line \fB31\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB32\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-32 {
-33   return t->status;
-34 }
+33 {
+34   return t->status;
+35 }
 .fi
 .PP
 References \fBTree::status\fP\&.
-.SS "void tree_set_day_planted (\fBTree\fP * t, time_t d)"
-Set \fBTree\fP's the amount of days it has lived
+.SS "void tree_serialise (\fBTree\fP * t, char * s)"
+Serialise struct \fBTree\fP into string
 .PP
 \fBParameters\fP
 .RS 4
-\fIt\fP A modified \fBTree\fP with changed days of lived 
+\fIt\fP A \fBTree\fP to be serialised 
 .br
-\fId\fP A time_t in seconds 
+\fIs\fP A serialised string represents the tree 
 .RE
 .PP
 
 .PP
-Definition at line \fB56\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB72\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-57 {
-58   if (tree_get_status(t) == DEAD) {
-59     t->day_planted = NULL;
-60   } else {
-61     t->day_planted = localtime(&d);
-62   }
-63 }
+73 {
+74   char* date = malloc(11);
+75   strftime(date, 11, "%F", t->day_planted);
+76   sprintf(buf, "%s,%u,%s", t->species, t->status, date);
+77 }
+.fi
+.PP
+References \fBTree::day_planted\fP, \fBTree::species\fP, and \fBTree::status\fP\&.
+.SS "void tree_set_day_planted (\fBTree\fP * t, const char * d)"
+Set \fBTree\fP's when it was planted
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A modified \fBTree\fP with changed planted day 
+.br
+\fId\fP A string specifies the planted day 
+.RE
+.PP
+
+.PP
+Definition at line \fB58\fP of file \fBtree\&.c\fP\&.
+.PP
+.nf
+59 {
+60   if (tree_get_status(t) == DEAD) {
+61     t->day_planted = NULL;
+62   } else {
+63     if (!t->day_planted) { // handle the case when day_planted haven't allocated
+64       // with memory
+65       t->day_planted = malloc(sizeof(struct tm));
+66     }
+67 
+68     strptime(d, "%F", t->day_planted);
+69   }
+70 }
 .fi
 .PP
 References \fBTree::day_planted\fP\&.
@@ -242,20 +309,21 @@ Set \fBTree\fP's species name
 .PP
 
 .PP
-Definition at line \fB41\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB42\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-42 {
-43   if (t->species) {
-44     free(t->species);
-45   }
-46 
-47   t->species = calloc(strlen(sp) + 1, sizeof(char));
-48   strncpy(t->species, sp, strlen(sp) + 1);
-49 }
+43 {
+44   if ((t->str_size = strlen(sp)) > 0) {
+45     t->species = calloc(t->str_size, sizeof(char));
+46     strncpy(t->species, sp, t->str_size);
+47   } else {
+48     t->str_size = 0;
+49     t->species = NULL;
+50   }
+51 }
 .fi
 .PP
-References \fBTree::species\fP\&.
+References \fBTree::species\fP, and \fBTree::str_size\fP\&.
 .SS "void tree_set_status (\fBTree\fP * t, \fBtree_state\fP st)"
 Set \fBTree\fP's current status
 .PP
@@ -268,12 +336,12 @@ Set \fBTree\fP's current status
 .PP
 
 .PP
-Definition at line \fB51\fP of file \fBtree\&.c\fP\&.
+Definition at line \fB53\fP of file \fBtree\&.c\fP\&.
 .PP
 .nf
-52 {
-53   t->status = st;
-54 }
+54 {
+55   t->status = st;
+56 }
 .fi
 .PP
 References \fBTree::status\fP\&.

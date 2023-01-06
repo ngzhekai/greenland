@@ -2,86 +2,104 @@
 \label{server_8c_source}\index{src/server.c@{src/server.c}}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00001}00001 \textcolor{preprocessor}{\#include <stdio.h>}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00002}00002 \textcolor{preprocessor}{\#include <stdlib.h>}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <string.h>}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <strings.h>}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <unistd.h>}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <sys/socket.h>}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00007}00007 \textcolor{preprocessor}{\#include <arpa/inet.h>}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00008}00008 \textcolor{preprocessor}{\#include "{}../lib/menuoption.h"{}}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00009}00009 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00010}00010 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{void})}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00011}00011 \{}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00012}00012   \textcolor{comment}{// user-\/defined server's ip and port}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00013}00013   \textcolor{comment}{/* Make sure both the client and server are having the same ip and port */}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00014}00014   \textcolor{keywordtype}{char} ip[] = \textcolor{stringliteral}{"{}127.0.0.1"{}};}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00015}00015   \textcolor{keywordtype}{int} port = 3939;}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00016}00016 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00017}00017   \textcolor{keywordtype}{int} server\_socket, client\_socket;}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00018}00018   \textcolor{keyword}{struct }sockaddr\_in server\_addr, client\_addr;}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00019}00019   socklen\_t addr\_size;}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00020}00020   \textcolor{keywordtype}{char} buffer[1024];}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00021}00021 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00022}00022   \textcolor{comment}{// create the server side socket}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00023}00023   server\_socket = socket(AF\_INET, SOCK\_STREAM, 0);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00024}00024 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00025}00025   \textcolor{keywordflow}{if} (server\_socket < 0) \{}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00026}00026     perror(\textcolor{stringliteral}{"{}[-\/] Socket error!"{}});}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00027}00027     exit(1);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00028}00028   \}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00001}00001 \textcolor{preprocessor}{\#include <asm-\/generic/socket.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00002}00002 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <strings.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00007}00007 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00008}00008 \textcolor{preprocessor}{\#include <sys/socket.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00009}00009 \textcolor{preprocessor}{\#include <arpa/inet.h>}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00010}00010 \textcolor{preprocessor}{\#include "{}../lib/menuoption.h"{}}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00012}00012 \textcolor{preprocessor}{\#define BUFSIZE 1024}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00014}00014 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00015}00015 \{}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00016}00016   \textcolor{comment}{// user-\/defined server's ip and port}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00017}00017   \textcolor{comment}{/* Make sure both the client and server are having the same ip and port */}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00018}00018   \textcolor{keywordtype}{char} ip[] = \textcolor{stringliteral}{"{}127.0.0.1"{}};}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00019}00019   \textcolor{keywordtype}{int} port = 3939;}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00021}00021   \textcolor{keywordtype}{int} server\_socket, client\_socket;}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00022}00022   \textcolor{keyword}{struct }sockaddr\_in server\_addr, client\_addr;}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00023}00023   socklen\_t addr\_size;}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00024}00024   \textcolor{keywordtype}{char} buffer[BUFSIZE];}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00025}00025   \textcolor{keywordtype}{int} yes = 1;}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00027}00027   \textcolor{comment}{// create the server side socket}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00028}00028   server\_socket = socket(AF\_INET, SOCK\_STREAM, 0);}
 \DoxyCodeLine{\Hypertarget{server_8c_source_l00029}00029 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00030}00030   printf(\textcolor{stringliteral}{"{}[+] TCP server socket created. \(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00031}00031 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00032}00032   \textcolor{comment}{// define the server address}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00033}00033   memset(\&server\_addr, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(server\_addr));}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00034}00034   server\_addr.sin\_family = AF\_INET;}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00035}00035   server\_addr.sin\_port = htons(port);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00036}00036   server\_addr.sin\_addr.s\_addr = inet\_addr(ip);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00037}00037   \textcolor{comment}{// inet\_addr() convert numbers and dots (readable IP) notation into binary format}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00038}00038 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00039}00039   \textcolor{comment}{// bind the server socket to the ip and port}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00040}00040   \textcolor{keywordtype}{int} bind\_status = bind(server\_socket, (\textcolor{keyword}{struct} sockaddr*)\&server\_addr,}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00041}00041                          \textcolor{keyword}{sizeof}(server\_addr));}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00042}00042 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00043}00043   \textcolor{keywordflow}{if} (bind\_status < 0) \{}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00044}00044     perror(\textcolor{stringliteral}{"{}[-\/] Bind error!"{}});}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00045}00045     exit(2);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00046}00046   \}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00047}00047 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00048}00048   printf(\textcolor{stringliteral}{"{}[+] Bind to the port number: \%d\(\backslash\)n"{}}, port);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00049}00049 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00050}00050   \textcolor{comment}{// 5 connection request that can be queue by the system in server\_socket}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00051}00051   listen(server\_socket, 5);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00052}00052   printf(\textcolor{stringliteral}{"{}Listening...\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00053}00053 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00054}00054   \textcolor{keywordflow}{while} (1) \{}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00055}00055     \textcolor{comment}{// infinite loop inside the while(), which will not end the server}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00056}00056     addr\_size = \textcolor{keyword}{sizeof}(client\_addr);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00057}00057     client\_socket = accept(server\_socket, (\textcolor{keyword}{struct} sockaddr*)\&client\_addr,}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00058}00058                            \&addr\_size);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00059}00059     printf(\textcolor{stringliteral}{"{}[+] Client connected.\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00060}00060 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00061}00061     \textcolor{comment}{// receive the message from the client socket}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00062}00062     bzero(buffer, 1024);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00063}00063     recv(client\_socket, buffer, \textcolor{keyword}{sizeof}(buffer), 0);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00064}00064     \mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{MenuOption}} client\_menuoption = strtol(buffer, NULL, 10);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00065}00065     printf(\textcolor{stringliteral}{"{}Client: Request Option \%d\(\backslash\)n"{}}, client\_menuoption);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00066}00066 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00067}00067     \textcolor{comment}{// handling menu option}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00068}00068     bzero(buffer, 1024);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00069}00069     snprintf(buffer, 1024, \textcolor{stringliteral}{"{}\%s"{}}, moption\_handle(client\_menuoption));}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00070}00070 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00071}00071     \textcolor{comment}{// send the message to the client socket}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00072}00072     printf(\textcolor{stringliteral}{"{}Server: \%s\(\backslash\)n"{}}, buffer);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00073}00073     send(client\_socket, buffer, strlen(buffer), 0);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00074}00074 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00075}00075     \textcolor{comment}{// close the connection with the client (socket)}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00076}00076     close(client\_socket);}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00077}00077     printf(\textcolor{stringliteral}{"{}[+] Client disconnected. \(\backslash\)n\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00078}00078   \}}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00079}00079 }
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00080}00080   \textcolor{keywordflow}{return} 0;}
-\DoxyCodeLine{\Hypertarget{server_8c_source_l00081}00081 \}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00030}00030   \textcolor{keywordflow}{if} (server\_socket < 0) \{}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00031}00031     perror(\textcolor{stringliteral}{"{}[-\/] Socket error!"{}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00032}00032     exit(1);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00033}00033   \}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00035}00035   \textcolor{comment}{// reuse the socket}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00036}00036   \textcolor{keywordflow}{if} (setsockopt(server\_socket, SOL\_SOCKET, SO\_REUSEADDR, \&yes,}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00037}00037                  \textcolor{keyword}{sizeof}(yes)) < 0) \{}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00038}00038     perror(\textcolor{stringliteral}{"{}[-\/] Socket option error!"{}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00039}00039     exit(1);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00040}00040   \}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00041}00041 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00042}00042   printf(\textcolor{stringliteral}{"{}[+] TCP server socket created. \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00044}00044   \textcolor{comment}{// define the server address}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00045}00045   memset(\&server\_addr, \textcolor{charliteral}{'\(\backslash\)0'}, \textcolor{keyword}{sizeof}(server\_addr));}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00046}00046   server\_addr.sin\_family = AF\_INET;}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00047}00047   server\_addr.sin\_port = htons(port);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00048}00048   server\_addr.sin\_addr.s\_addr = inet\_addr(ip);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00049}00049   \textcolor{comment}{// inet\_addr() convert numbers and dots (readable IP) notation into binary format}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00051}00051   \textcolor{comment}{// bind the server socket to the ip and port}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00052}00052   \textcolor{keywordtype}{int} bind\_status = bind(server\_socket, (\textcolor{keyword}{struct} sockaddr*)\&server\_addr,}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00053}00053                          \textcolor{keyword}{sizeof}(server\_addr));}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00055}00055   \textcolor{keywordflow}{if} (bind\_status < 0) \{}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00056}00056     perror(\textcolor{stringliteral}{"{}[-\/] Bind error!"{}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00057}00057     exit(2);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00058}00058   \}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00059}00059 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00060}00060   printf(\textcolor{stringliteral}{"{}[+] Bind to the port number: \%d\(\backslash\)n"{}}, port);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00061}00061 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00062}00062   \textcolor{comment}{// 5 connection request that can be queue by the system in server\_socket}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00063}00063   listen(server\_socket, 5);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00064}00064   printf(\textcolor{stringliteral}{"{}Listening...\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00065}00065 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00066}00066   \textcolor{keywordflow}{while} (1) \{}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00067}00067     \textcolor{comment}{// infinite loop inside the while(), which will not end the server}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00068}00068     addr\_size = \textcolor{keyword}{sizeof}(client\_addr);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00069}00069     client\_socket = accept(server\_socket, (\textcolor{keyword}{struct} sockaddr*)\&client\_addr,}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00070}00070                            \&addr\_size);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00071}00071     printf(\textcolor{stringliteral}{"{}[+] Client connected.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00072}00072 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00073}00073     \textcolor{comment}{// receive the message from the client socket}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00074}00074     bzero(buffer, BUFSIZE);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00075}00075     recv(client\_socket, buffer, BUFSIZE, 0);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00076}00076     \mbox{\hyperlink{structTree}{Tree}}* t = tree\_deserialise(buffer);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00077}00077     \textcolor{keywordtype}{char}* date = malloc(11);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00078}00078     strftime(date, 11, \textcolor{stringliteral}{"{}\%F"{}}, t-\/>\mbox{\hyperlink{structTree_a4e216d45ddb33692b49dffd18c7c693b}{day\_planted}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00079}00079     printf(\textcolor{stringliteral}{"{}received buffer: \%s"{}}, buffer);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00080}00080     printf(\textcolor{stringliteral}{"{}Tree received:\(\backslash\)n\(\backslash\)tspecies: \%s\(\backslash\)n\(\backslash\)tstatus: \%s\(\backslash\)n\(\backslash\)tday planted: \%s\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00081}00081            t-\/>\mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}}, trstat\_to\_string(t-\/>\mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}}), date);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00083}00083     \textcolor{comment}{// handling menu option}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00084}00084     bzero(buffer, BUFSIZE);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00085}00085     snprintf(buffer, BUFSIZE, \textcolor{stringliteral}{"{}Planting Tree"{}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00087}00087     \textcolor{comment}{// send the message to the client socket}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00088}00088     printf(\textcolor{stringliteral}{"{}Server: \%s\(\backslash\)n"{}}, buffer);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00089}00089     send(client\_socket, buffer, strlen(buffer), 0);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00091}00091     \textcolor{comment}{// close the connection with the client (socket)}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00092}00092     close(client\_socket);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00093}00093     printf(\textcolor{stringliteral}{"{}[+] Client disconnected. \(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00094}00094     free(date);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00095}00095     free(t);}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00096}00096   \}}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00098}00098   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{server_8c_source_l00099}00099 \}}
 
 \end{DoxyCode}

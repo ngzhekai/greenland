@@ -20,17 +20,17 @@
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00016}00016       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}TREAMENT"{}};}
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00017}00017 }
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00018}00018     \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00019}00019       \textcolor{keywordflow}{return} (\textcolor{keywordtype}{char}*) 0;}
+\DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00019}00019       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}UNKNOWN STATE"{}};}
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00020}00020   \}}
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00021}00021 \}}
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00022}00022 }
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00023}\mbox{\hyperlink{tree__state_8h_a9ff517b70239fd389043d491dbab8000}{00023}} \textcolor{keywordtype}{bool} trstat\_is\_valid(\mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\_state}} st)}
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00024}00024 \{}
-\DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00025}00025   \textcolor{keywordflow}{if} (!(trstat\_to\_string(st))) \{}
-\DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00026}00026     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00025}00025   \textcolor{keywordflow}{if} (st >= 0 \&\& st < 4) \{}
+\DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00026}00026     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00027}00027   \}}
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00028}00028 }
-\DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00029}00029   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00029}00029   \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{tree__state_8c_source_l00030}00030 \}}
 
 \end{DoxyCode}

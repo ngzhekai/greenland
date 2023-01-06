@@ -1,4 +1,4 @@
-.TH "lib/menuoption.h" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
+.TH "lib/menuoption.h" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,6 +6,9 @@ lib/menuoption.h
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'tree\&.h'\fP
+.br
+
 .SS "Typedefs"
 
 .in +1c
@@ -24,10 +27,13 @@ lib/menuoption.h
 
 .in +1c
 .ti -1c
-.RI "char * \fBmoption_handle\fP (\fBMenuOption\fP mo)"
+.RI "int \fBmoption_handle\fP (\fBMenuOption\fP mo, \fBTree\fP *t)"
 .br
 .ti -1c
 .RI "void \fBmoption_display\fP (\fBMenuOption\fP *opt)"
+.br
+.ti -1c
+.RI "\fBTree\fP * \fBmoption_plant_tree\fP (void)"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -51,10 +57,10 @@ MenuOption defines available options in the client menu
 .SS "enum \fBMenuOption\fP"
 MenuOption defines available options in the client menu 
 .PP
-Definition at line \fB11\fP of file \fBmenuoption\&.h\fP\&.
+Definition at line \fB13\fP of file \fBmenuoption\&.h\fP\&.
 .PP
 .nf
-11 { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
+13 { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
 .fi
 .SH "Function Documentation"
 .PP 
@@ -68,68 +74,153 @@ Display menu options
 .PP
 
 .PP
-Definition at line \fB22\fP of file \fBmenuoption\&.c\fP\&.
+Definition at line \fB41\fP of file \fBmenuoption\&.c\fP\&.
 .PP
 .nf
-23 {
-24   printf("  ________                               \&.__                       \&.___ \n");
-25   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
-26   printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
-27   printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
-28   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
-29   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
-30 
-31   printf("Welcome to greenland, a place to plant tree!\n\n");
-32   printf("We don't have any affiliation to the Greenland government, but if \n"
-33          "you can plant a tree there, we are more than welcome! :)\n");
-34 
-35   printf("################################\n");
-36   printf("#                              #\n");
-37   printf("#            MENU              #\n");
-38   printf("#                              #\n");
-39   printf("################################\n\n");
-40   printf("\t1\&. To plant a tree\n");
-41   printf("\t2\&. To query a tree\n");
-42   printf("\t3\&. To update a tree's status\n");
-43   printf("(Choose a service needed according to the number)\n\n");
-44   printf("Option: ");
-45   scanf("%d", (int*) opt);
-46   system("clear");
-47 }
+42 {
+43   printf("  ________                               \&.__                       \&.___ \n");
+44   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
+45   printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
+46   printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
+47   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
+48   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
+49 
+50   printf("Welcome to greenland, a place to plant tree!\n\n");
+51   printf("We don't have any affiliation to the Greenland government, but if \n"
+52          "you can plant a tree there, we are more than welcome! :)\n");
+53 
+54   printf("################################\n");
+55   printf("#                              #\n");
+56   printf("#            MENU              #\n");
+57   printf("#                              #\n");
+58   printf("################################\n\n");
+59   printf("\t1\&. To plant a tree\n");
+60   printf("\t2\&. To query a tree\n");
+61   printf("\t3\&. To update a tree's status\n");
+62   printf("(Choose a service needed according to the number)\n\n");
+63   printf("Option: ");
+64   scanf("%d", (int*) opt);
+65   system("clear");
+66 }
 .fi
-.SS "char * moption_handle (\fBMenuOption\fP mo)"
+.SS "int moption_handle (\fBMenuOption\fP mo, \fBTree\fP * t)"
 Handles menu option
 .PP
 \fBParameters\fP
 .RS 4
-\fImo\fP A MenuOption enum to be handle
+\fImo\fP A MenuOption enum to be handle 
+.br
+\fIt\fP A pointer to tree structure, could be uninitialised
 .RE
 .PP
 \fBReturns\fP
 .RS 4
-0 if the handling succeeded, -1 if failed 
+0 if the handling succeeded, -1 if failed with ENOSUP as errno 
 .RE
 .PP
 
 .PP
-Definition at line \fB5\fP of file \fBmenuoption\&.c\fP\&.
+Definition at line \fB15\fP of file \fBmenuoption\&.c\fP\&.
 .PP
 .nf
-6 {
-7   char* msg = malloc(1024);
-8 
-9   switch (mo) {
-10     case PLANT_TREE:
-11     case QUERY_TREE:
-12     case UPDATE_TREE:
-13       sprintf(msg, "Option %d soon to be supported\n", mo);
-14       return msg;
-15 
-16     default:
-17       sprintf(msg, "Option %d not supported\n", mo);
-18       return msg;
-19   }
-20 }
+16 {
+17   Tree* nt = (Tree*) 0;
+18 
+19   switch (mo) {
+20     case PLANT_TREE:
+21       nt = moption_plant_tree();
+22       t = realloc(t, sizeof(*nt));
+23       bcopy(nt, t, sizeof(*nt));
+24       break;
+25 
+26     case QUERY_TREE:
+27     case UPDATE_TREE:
+28       printf("Option %d soon to be supported\n", mo);
+29       break;
+30 
+31     default:
+32       errno = ENOTSUP;
+33       printf("Option %d not supported\n", mo);
+34       return -1;
+35   }
+36 
+37   free(nt);
+38   return 0;
+39 }
+.fi
+.SS "\fBTree\fP * moption_plant_tree (void)"
+Display Plant \fBTree\fP menu and prompt user for tree's information
+.PP
+\fBReturns\fP
+.RS 4
+A \fBTree\fP initialised with prompted user values 
+.RE
+.PP
+
+.PP
+Definition at line \fB68\fP of file \fBmenuoption\&.c\fP\&.
+.PP
+.nf
+69 {
+70   printf("################################\n");
+71   printf("#                              #\n");
+72   printf("#        PLANTING TREE         #\n");
+73   printf("#                              #\n");
+74   printf("################################\n\n");
+75   printf("Press <Enter> to agree to default value\n\n");
+76 
+77   char species[BUFSIZE], day_planted[BUFSIZE];
+78   char status[BUFSIZE] = "-1";
+79   int nbytes;
+80 
+81   write(STDOUT_FILENO, "Tree's species: ", 17);
+82 
+83   if ((nbytes = read(STDIN_FILENO, species, BUFSIZE)) < 0) {
+84     perror("[-] Input error!");
+85     exit(1);
+86   }
+87 
+88   species[nbytes - 1] = '\0';
+89 
+90   getchar();  // ignore new line
+91 
+92   while (!trstat_is_valid(atoi(status))) {
+93     printf("Tree's status: (default PLANTED) ");
+94     fgets(status, BUFSIZE, stdin);
+95 
+96     if (status[0] == '\n') {
+97       bzero(status, BUFSIZE);
+98       strcpy(status, "1");
+99     }
+100 
+101     status[strcspn(status, "\n")] = 0;
+102 
+103     if (!trstat_is_valid(atoi(status))) {
+104       printf("[-] Input error!: Status must be within range of 0 and 3\n");
+105     }
+106   }
+107 
+108   while (true) {
+109     printf("Day when the tree is planted: (default local time, in format YYYY-MM-DD) ");
+110     fgets(day_planted, BUFSIZE, stdin);
+111 
+112     if (day_planted[0] == '\n') {
+113       time_t current_time = time(NULL);
+114       strftime(day_planted, BUFSIZE, "%F", localtime(&current_time));
+115     }
+116 
+117     printf("day_planted: %s\n", day_planted);
+118     day_planted[strcspn(day_planted, "\n")] = 0;
+119 
+120     if (!date_is_valid(day_planted)) {
+121       printf("[-] Input error!: Date must be valid and in format of YYYY-MM-DD\n");
+122     } else {
+123       break;
+124     }
+125   }
+126 
+127   return tree_create(species, atoi(status), day_planted);
+128 }
 .fi
 .SH "Author"
 .PP 
