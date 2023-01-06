@@ -60,11 +60,12 @@ void tree_set_day_planted(Tree* t, const char* d)
   if (tree_get_status(t) == DEAD) {
     t->day_planted = NULL;
   } else {
-    if (!t->day_planted) {  // handle the case when day_planted haven't allocated with memory
+    if (!t->day_planted) { // handle the case when day_planted haven't allocated
+      // with memory
       t->day_planted = malloc(sizeof(struct tm));
     }
 
-    strptime(d, "%Y-%m-%d", t->day_planted);
+    strptime(d, "%F", t->day_planted);
   }
 }
 
