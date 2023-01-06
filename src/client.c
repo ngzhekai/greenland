@@ -157,7 +157,7 @@ int main(int argc, char const* argv[])
         exit(0);
 
       default:
-        printf("You entered %d! Please enter 1, 2, or 3 Only!\n", option);
+        printf("You entered %d! Please enter 1, 2, 3, 4 or 5 Only!\n", option);
         break;
     }
   }
