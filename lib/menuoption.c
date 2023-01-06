@@ -73,7 +73,7 @@ void moption_display(MenuOption* opt)
   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
 
-  printf("(implemented) Welcome to greenland, a place to plant tree!\n\n");
+  printf("Welcome to greenland, a place to plant tree!\n\n");
   printf("We don't have any affiliation to the Greenland government, but if \n"
          "you can plant a tree there, we are more than welcome! :)\n");
 
@@ -108,9 +108,8 @@ const char* getMenuOptionName(enum MenuOption op)
       return "Exit Program";
 
     default:
-      return (char*) 0;
+      return (char*)0;
   }
-
 }
 
 void sigchld_handler(int sig)
@@ -336,7 +335,6 @@ void plant_tree_server(const char* filename, Tree tree, int new_sockfd,
   update_detail(filename, tree, new_sockfd, buffer, store);
   /* end of critical section */
 
-
 } /* end of plant_tree_server() function */
 
 void update_tree_server(const char* filename, Tree tree, int new_sockfd,
@@ -443,11 +441,11 @@ int p(int semid)
 
   p_buf.sem_op =
     -1; /* the semaphore value is decremented by the absolute value of sem_op (-1)
-                           showing the locking operation of semaphore is done */
+                             showing the locking operation of semaphore is done */
 
   p_buf.sem_flg =
     SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
-                                  This allows processes to avoid deadlock problems. */
+                                    This allows processes to avoid deadlock problems. */
 
   if (semop(semid, &p_buf, 1) == -1) {
     /* add explanation here */
@@ -466,11 +464,11 @@ int v(int semid)
 
   v_buf.sem_op =
     1; /* the semaphore value is incremented by the absolute value of sem_op (1),
-                          showing the unlocking operation of semaphore is done. */
+                            showing the unlocking operation of semaphore is done. */
 
   v_buf.sem_flg =
     SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
-                                  This allows processes to avoid deadlock problems. */
+                                    This allows processes to avoid deadlock problems. */
 
   if (semop(semid, &v_buf, 1) == -1) {
     /* perform the semaphore operation as specified in v_buf struct on semaphore with the id (semid)

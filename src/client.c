@@ -53,10 +53,10 @@ int main(int argc, char const* argv[])
   }
 
   if ((he = gethostbyname(argv[1])) == (void*)0) /*
-                                                    check if the gethostbyname() function returns null
-                                                    What will gethostbyname() function returns:
-                                                    Return entry from host data base for host using the supplied argument [NAME]
-                                                    */
+                                                         check if the gethostbyname() function returns null
+                                                         What will gethostbyname() function returns:
+                                                         Return entry from host data base for host using the supplied argument [NAME]
+                                                         */
   {
     printf("\ngethostbyname() error!!!\n");
     exit(1);
@@ -82,43 +82,70 @@ int main(int argc, char const* argv[])
 
   // sigprocmask(SIG_SETMASK, &set1, NULL); // activates the signal block
   MenuOption option;
-  moption_display(&option);
 
-  switch (option) {
-    case 1:
-      // invoke plant_tree() method
-      sprintf(buffer, "%d", option); // convert int (option) to string
-      // send the string to the server
-      send(sockfd, buffer, BUFFER_SIZE, 0);
-      plant_tree(sockfd, buffer);
-      break;
+  while (1) {
+    moption_display(&option);
 
-    case 2:
-      // invoke query_tree() method
-      sprintf(buffer, "%d", option); // convert int (option) to string
-      // send the string to the server
-      send(sockfd, buffer, BUFFER_SIZE, 0);
-      query_tree(sockfd, buffer);
-      break;
+    switch (option) {
+      case 1:
+        // invoke plant_tree() method
+        sprintf(buffer, "%d", option); // convert int (option) to string
+        // send the string to the server
+        send(sockfd, buffer, BUFFER_SIZE, 0);
+        plant_tree(sockfd, buffer);
+        printf("\n%s Operation Success!\n", getMenuOptionName(option));
 
-    case 3:
-      // invoke update_tree() method
-      sprintf(buffer, "%d", option); // convert int (option) to string
-      // send the string to the server
-      send(sockfd, buffer, BUFFER_SIZE, 0);
-      update_tree(sockfd, buffer);
-      break;
+        while ('\n' != getchar())
+          ;
 
-    case 4:
-      // invoke update_tree() method
-      sprintf(buffer, "%d", option); // convert int (option) to string
-      // send the string to the server
-      send(sockfd, buffer, BUFFER_SIZE, 0);
-      exit(0);
+        printf("Press [ENTER] to return to menu...\n");
+        getchar();
+        system("clear");
+        break;
 
-    default:
-      printf("You entered %d! Please enter 1, 2, or 3 Only!\n", option);
-      break;
+      case 2:
+        // invoke query_tree() method
+        sprintf(buffer, "%d", option); // convert int (option) to string
+        // send the string to the server
+        send(sockfd, buffer, BUFFER_SIZE, 0);
+        query_tree(sockfd, buffer);
+        printf("\n%s Operation Success!\n", getMenuOptionName(option));
+
+        while ('\n' != getchar())
+          ;
+
+        printf("Press [ENTER] to return to menu...\n");
+        getchar();
+        system("clear");
+        break;
+
+      case 3:
+        // invoke update_tree() method
+        sprintf(buffer, "%d", option); // convert int (option) to string
+        // send the string to the server
+        send(sockfd, buffer, BUFFER_SIZE, 0);
+        update_tree(sockfd, buffer);
+        printf("\n%s Operation Success!\n", getMenuOptionName(option));
+
+        while ('\n' != getchar())
+          ;
+
+        printf("Press [ENTER] to return to menu...\n");
+        getchar();
+        system("clear");
+        break;
+
+      case 4:
+        // invoke update_tree() method
+        sprintf(buffer, "%d", option); // convert int (option) to string
+        // send the string to the server
+        send(sockfd, buffer, BUFFER_SIZE, 0);
+        exit(0);
+
+      default:
+        printf("You entered %d! Please enter 1, 2, or 3 Only!\n", option);
+        break;
+    }
   }
 
   // sigprocmask(SIG_UNBLOCK, &set1, NULL); // activates the signal block

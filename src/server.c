@@ -65,7 +65,8 @@ int main(int argc, char const* argv[])
   //     exit(1);
   // }
 
-  for (;;) { /* main accept() loop */
+  for (;;) {
+    /* main accept() loop */
     socklen_t sin_size = sizeof(struct sockaddr_in);
 
     if ((new_sockfd = accept(sockfd, (struct sockaddr*)&their_addr,
@@ -85,30 +86,34 @@ int main(int argc, char const* argv[])
     char* cli_addr = inet_ntoa(their_addr.sin_addr);
     printf("Client address: %s\n", cli_addr);
 
-    if (!fork()) { /* !1 means 0, child process  (if it is confusing 0 is equivalent to false) */
+    if (!fork()) {
+      /* !1 means 0, child process  (if it is confusing 0 is equivalent to false) */
       close(sockfd);
       int semid;
       // pid_t pid = getpid();
 
       if ((semid = initsem(semkey)) <
-          0) { /* call the initsem() function and if return value is less than 0 shows semget fails. */
+          0) {
+        /* call the initsem() function and if return value is less than 0 shows semget fails. */
         exit(1);
       }
 
-      // receive option from client
-      recv(new_sockfd, buffer, BUFFER_SIZE, 0);
+      MenuOption client_menuoption;
 
-      MenuOption client_menuoption = strtol(buffer, NULL, 10);
-      printf("\nClient [%s] Requested Option %d [%s]\n", cli_addr, client_menuoption,
-             getMenuOptionName(client_menuoption));
+      do {
+        // receive option from client
+        recv(new_sockfd, buffer, BUFFER_SIZE, 0);
+        client_menuoption = strtol(buffer, NULL, 10);
+        printf("\nClient [%s] requested option %d [%s]\n", cli_addr, client_menuoption,
+               getMenuOptionName(client_menuoption));
 
-      // handling menu option
-      bzero(buffer, 1024);
-      snprintf(buffer, 1024, "%s", moption_handle(new_sockfd, semid, cli_addr,
-               client_menuoption));
+        // handling menu option
+        bzero(buffer, 1024);
+        snprintf(buffer, 1024, "%s\n", moption_handle(new_sockfd, semid, cli_addr,
+                 client_menuoption));
+        printf("\n%s\n", buffer);
+      } while (client_menuoption != EXIT_PROGRAM);
 
-      // send the message to the client socket
-      printf("\n%s\n", buffer);
       close(new_sockfd);
       exit(0);
     }
