@@ -36,13 +36,15 @@ char* moption_handle(int new_sockfd, int semid, char* cli_addr, MenuOption mo)
     case PLANT_TREE:
       p(semid); // lock the semaphore for writing
       plant_tree_server(FILENAME, tree, new_sockfd, buffer);
-      p(semid); // lock the semaphore for writing
+      v(semid); // unlock the semaphore after writing
       sprintf(msg, "Client [%s]: Plant tree process done.", cli_addr);
       return msg;
+
     case QUERY_TREE:
       query_tree_server(FILENAME, tree, new_sockfd, buffer);
       sprintf(msg, "Client [%s]: Query tree process done.", cli_addr);
       return msg;
+
     case UPDATE_TREE:
       p(semid); // lock the semaphore for writing
       /* critical section */
@@ -51,9 +53,11 @@ char* moption_handle(int new_sockfd, int semid, char* cli_addr, MenuOption mo)
       v(semid); // unlock the semaphore after writing
       sprintf(msg, "Client [%s]: Update tree process done.", cli_addr);
       return msg;
+
     case EXIT_PROGRAM:
       sprintf(msg, "Client [%s]: Exited program.", cli_addr);
       return msg;
+
     default:
       sprintf(msg, "Option %d not supported\n", mo);
       return msg;
@@ -398,7 +402,6 @@ void query_tree_server(const char* filename, Tree tree, int new_sockfd,
     coordinates = get_coordinates(new_sockfd, buffer);
     find_result = check_tree_exist(filename, &tree, &treeIndex, &coordinates,
                                    &store);
-    printf("findresult: %d", find_result);
 
     if (find_result) {
       send(new_sockfd, "1", BUFFER_SIZE, 0);
