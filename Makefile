@@ -10,10 +10,9 @@ TESTDIR=test
 DOCDIR=doc
 BIN=greenland_*
 
-make: test client server
+make: client server
 	doxygen Doxyfile
-	astyle --project $(LIBDIR)/*.c $(LIBDIR)/*.h $(SRCDIR)/*.c $(TESTDIR)/*.c
-	./tests
+	astyle --project $(LIBDIR)/*.c $(LIBDIR)/*.h $(SRCDIR)/*.c
 
 # test: species.o tree.o menuoption.o test.o tree_coordinate.o
 # 	$(CC) $(CFLAGS) -pthread -lcheck unit_tests.o menuoption.o tree.o tree_state.o species.o tree_coordinate.o -o tests
@@ -21,8 +20,8 @@ make: test client server
 # test.o: $(TESTDIR)/unit_tests.c
 # 	$(CC) $(CFLAGS) -c $(TESTDIR)/*.c
 
-client: tree.o menuoption.o client.o
-	$(CC) $(CFLAGS) client.o menuoption.o tree.o tree_state.o -o greenland_client
+client: tree.o menuoption.o client.o tree_coordinate.o
+	$(CC) $(CFLAGS) client.o menuoption.o tree.o tree_state.o tree_coordinate.o -o greenland_client
 
 client.o: $(SRCDIR)/client.c
 	$(CC) $(CFLAGS) -c $(SRCDIR)/client.c
