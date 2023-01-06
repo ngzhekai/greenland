@@ -9,3 +9,5 @@ Coordinates     Species         Date        Status
 123,454		Deciduous		21/12/2022	    Dead
 123,567		Deciduous		20/12/2022	    Dead
 123,445		Coniferous      08/01/2001  	Dead
+32,32		Deciduous		2023-01-01		1
+32,11		Deciduous		2023-12		3

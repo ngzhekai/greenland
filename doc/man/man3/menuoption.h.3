@@ -1,4 +1,4 @@
-.TH "lib/menuoption.h" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
+.TH "lib/menuoption.h" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -17,17 +17,20 @@ lib/menuoption.h
 
 .in +1c
 .ti -1c
-.RI "enum \fBMenuOption\fP { \fBPLANT_TREE\fP = 1, \fBQUERY_TREE\fP, \fBUPDATE_TREE\fP }"
+.RI "enum \fBMenuOption\fP { \fBPLANT_TREE\fP = 1, \fBQUERY_TREE\fP, \fBUPDATE_TREE\fP, \fBEXIT_PROGRAM\fP }"
 .br
 .in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "char * \fBmoption_handle\fP (\fBMenuOption\fP mo)"
+.RI "char * \fBmoption_handle\fP (int new_sockfd, int semid, char *cli_addr, \fBMenuOption\fP mo)"
 .br
 .ti -1c
 .RI "void \fBmoption_display\fP (\fBMenuOption\fP *opt)"
+.br
+.ti -1c
+.RI "const char * \fBgetMenuOptionName\fP (enum \fBMenuOption\fP op)"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -51,10 +54,10 @@ MenuOption defines available options in the client menu
 .SS "enum \fBMenuOption\fP"
 MenuOption defines available options in the client menu 
 .PP
-Definition at line \fB11\fP of file \fBmenuoption\&.h\fP\&.
+Definition at line 11 of file menuoption\&.h\&.
 .PP
 .nf
-11 { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
+11 { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE, EXIT_PROGRAM } MenuOption;
 .fi
 .SH "Function Documentation"
 .PP 
@@ -68,40 +71,45 @@ Display menu options
 .PP
 
 .PP
-Definition at line \fB22\fP of file \fBmenuoption\&.c\fP\&.
+Definition at line 71 of file menuoption\&.c\&.
 .PP
 .nf
-23 {
-24   printf("  ________                               \&.__                       \&.___ \n");
-25   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
-26   printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
-27   printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
-28   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
-29   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
-30 
-31   printf("Welcome to greenland, a place to plant tree!\n\n");
-32   printf("We don't have any affiliation to the Greenland government, but if \n"
-33          "you can plant a tree there, we are more than welcome! :)\n");
-34 
-35   printf("################################\n");
-36   printf("#                              #\n");
-37   printf("#            MENU              #\n");
-38   printf("#                              #\n");
-39   printf("################################\n\n");
-40   printf("\t1\&. To plant a tree\n");
-41   printf("\t2\&. To query a tree\n");
-42   printf("\t3\&. To update a tree's status\n");
-43   printf("(Choose a service needed according to the number)\n\n");
-44   printf("Option: ");
-45   scanf("%d", (int*) opt);
-46   system("clear");
-47 }
+72 {
+73   printf("  ________                               \&.__                       \&.___ \n");
+74   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
+75   printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
+76   printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
+77   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
+78   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
+79 
+80   printf("(implemented) Welcome to greenland, a place to plant tree!\n\n");
+81   printf("We don't have any affiliation to the Greenland government, but if \n"
+82          "you can plant a tree there, we are more than welcome! :)\n");
+83 
+84   printf("################################\n");
+85   printf("#                              #\n");
+86   printf("#            MENU              #\n");
+87   printf("#                              #\n");
+88   printf("################################\n\n");
+89   printf("\t1\&. To plant a tree\n");
+90   printf("\t2\&. To query a tree\n");
+91   printf("\t3\&. To update a tree's status\n");
+92   printf("\t4\&. Exit\n");
+93   printf("(Choose a service needed according to the number)\n\n");
+94   printf("Option: ");
+95   scanf("%d", (int*)opt);
+96   system("clear");
+97 }
 .fi
-.SS "char * moption_handle (\fBMenuOption\fP mo)"
+.SS "char* moption_handle (int new_sockfd, int semid, char * cli_addr, \fBMenuOption\fP mo)"
 Handles menu option
 .PP
 \fBParameters\fP
 .RS 4
+\fIsockfd\fP Socket number of client 
+.br
+\fIsemid\fP Semaphore's id 
+.br
 \fImo\fP A MenuOption enum to be handle
 .RE
 .PP
@@ -112,24 +120,49 @@ Handles menu option
 .PP
 
 .PP
-Definition at line \fB5\fP of file \fBmenuoption\&.c\fP\&.
+Definition at line 29 of file menuoption\&.c\&.
 .PP
 .nf
-6 {
-7   char* msg = malloc(1024);
-8 
-9   switch (mo) {
-10     case PLANT_TREE:
-11     case QUERY_TREE:
-12     case UPDATE_TREE:
-13       sprintf(msg, "Option %d soon to be supported\n", mo);
-14       return msg;
-15 
-16     default:
-17       sprintf(msg, "Option %d not supported\n", mo);
-18       return msg;
-19   }
-20 }
+30 {
+31   char buffer[BUFFER_SIZE];
+32   char* msg = malloc(1024);
+33   Tree tree;
+34 
+35   switch (mo) {
+36     case PLANT_TREE:
+37       p(semid); // lock the semaphore for writing
+38       plant_tree_server(FILENAME, tree, new_sockfd, buffer);
+39       p(semid); // lock the semaphore for writing
+40       sprintf(msg, "Client [%s]: Plant tree process done\&.", cli_addr);
+41       return msg;
+42       break;
+43 
+44     case QUERY_TREE:
+45       query_tree_server(FILENAME, tree, new_sockfd, buffer);
+46       sprintf(msg, "Client [%s]: Query tree process done\&.", cli_addr);
+47       return msg;
+48       break;
+49 
+50     case UPDATE_TREE:
+51       p(semid); // lock the semaphore for writing
+52       /* critical section */
+53       /* invoke update_tree_server function */
+54       update_tree_server(FILENAME, tree, new_sockfd, buffer);
+55       v(semid); // unlock the semaphore after writing
+56       sprintf(msg, "Client [%s]: Update tree process done\&.", cli_addr);
+57       return msg;
+58       break;
+59 
+60     case EXIT_PROGRAM:
+61       sprintf(msg, "Client [%s]: Exited program\&.", cli_addr);
+62       return msg;
+63       break;
+64 
+65     default:
+66       sprintf(msg, "Option %d not supported\n", mo);
+67       return msg;
+68   }
+69 }
 .fi
 .SH "Author"
 .PP 

@@ -11,7 +11,7 @@
 /**
  * An enum define the state of a Tree
  */
-typedef enum tree_state { DEAD, PLANTED, SICK, TREAMENT } tree_state;
+typedef enum tree_state { DEAD, ALIVE, SICK, TREAMENT } tree_state;
 
 /**
  * Convert tree state into readable string

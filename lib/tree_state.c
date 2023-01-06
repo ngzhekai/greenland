@@ -6,8 +6,8 @@ const char* trstat_to_string(tree_state st)
     case DEAD:
       return "DEAD";
 
-    case PLANTED:
-      return "PLANTED";
+    case ALIVE:
+      return "ALIVE";
 
     case SICK:
       return "SICK";
