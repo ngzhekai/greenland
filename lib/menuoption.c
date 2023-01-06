@@ -240,19 +240,8 @@ void update_detail(const char* filename, Tree tree, int sockfd, char* buffer,
 
   fclose(of);
 
-  if (tree.status == 0) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t0 (DEAD)\n", c.x, c.y, tree.species,
-            time);
-  } else if (tree.status == 1) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t1 (ALIVE)\n", c.x, c.y, tree.species,
-            time);
-  } else if (tree.status == 2) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t2 (Sick)\n", c.x, c.y, tree.species,
-            time);
-  } else {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t3 (Treatment)\n", c.x, c.y,
-            tree.species, time);
-  }
+  sprintf(buffer, "%d,%d\t\t%s\t%s\t%d (%s)\n", c.x, c.y,
+          tree.species, time, tree.status, trstat_to_string(tree.status));
 
   send(sockfd, buffer, BUFFER_SIZE, 0);
 } /* end of update_detail() function */
@@ -365,19 +354,8 @@ void update_tree_server(const char* filename, Tree tree, int new_sockfd,
   strftime(date, BUFFER_SIZE, "%Y-%m-%d",
            tree.day_planted); // refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti
 
-  if (tree.status == 0) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t0 (DEAD)\n", coordinates.x, coordinates.y,
-            tree.species, date);
-  } else if (tree.status == 1) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t1 (ALIVE)\n", coordinates.x, coordinates.y,
-            tree.species, date);
-  } else if (tree.status == 2) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t2 (Sick)\n", coordinates.x, coordinates.y,
-            tree.species, date);
-  } else {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t3 (Treatment)\n", coordinates.x,
-            coordinates.y, tree.species, date);
-  }
+  sprintf(buffer, "%d,%d\t\t%s\t%s\t%d (%s)\n", coordinates.x, coordinates.y,
+          tree.species, date, tree.status, trstat_to_string(tree.status));
 
   send(new_sockfd, buffer, BUFFER_SIZE, 0);
 
@@ -416,19 +394,8 @@ void query_tree_server(const char* filename, Tree tree, int new_sockfd,
   strftime(date, BUFFER_SIZE, "%Y-%m-%d",
            tree.day_planted); // refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti
 
-  if (tree.status == 0) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t0 (DEAD)\n", coordinates.x, coordinates.y,
-            tree.species, date);
-  } else if (tree.status == 1) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t1 (ALIVE)\n", coordinates.x, coordinates.y,
-            tree.species, date);
-  } else if (tree.status == 2) {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t2 (Sick)\n", coordinates.x, coordinates.y,
-            tree.species, date);
-  } else {
-    sprintf(buffer, "%d,%d\t\t%s\t%s\t3 (Treatment)\n", coordinates.x,
-            coordinates.y, tree.species, date);
-  }
+  sprintf(buffer, "%d,%d\t\t%s\t%s\t%d (%s)\n", coordinates.x, coordinates.y,
+          tree.species, date, tree.status, trstat_to_string(tree.status));
 
   send(new_sockfd, buffer, BUFFER_SIZE, 0);
 } /* end of query_tree_server() function */
@@ -441,11 +408,11 @@ int p(int semid)
 
   p_buf.sem_op =
     -1; /* the semaphore value is decremented by the absolute value of sem_op (-1)
-                             showing the locking operation of semaphore is done */
+                               showing the locking operation of semaphore is done */
 
   p_buf.sem_flg =
     SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
-                                    This allows processes to avoid deadlock problems. */
+                                      This allows processes to avoid deadlock problems. */
 
   if (semop(semid, &p_buf, 1) == -1) {
     /* add explanation here */
@@ -464,11 +431,11 @@ int v(int semid)
 
   v_buf.sem_op =
     1; /* the semaphore value is incremented by the absolute value of sem_op (1),
-                            showing the unlocking operation of semaphore is done. */
+                              showing the unlocking operation of semaphore is done. */
 
   v_buf.sem_flg =
     SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
-                                    This allows processes to avoid deadlock problems. */
+                                      This allows processes to avoid deadlock problems. */
 
   if (semop(semid, &v_buf, 1) == -1) {
     /* perform the semaphore operation as specified in v_buf struct on semaphore with the id (semid)
