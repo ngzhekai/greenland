@@ -137,98 +137,103 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment">//     exit(1);</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">// }</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordflow">for</span> (;;) { <span class="comment">/* main accept() loop */</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    socklen_t sin_size = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>sockaddr_in);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> ((new_sockfd = accept(sockfd, (<span class="keyword">struct</span> sockaddr*)&amp;their_addr,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                             &amp;sin_size)) == -1) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      printf(<span class="stringliteral">&quot;\naccept() error!!!\n&quot;</span>);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      exit(1);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    printf(<span class="stringliteral">&quot;Connection from %s in socket %d accepted\n&quot;</span>,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;           inet_ntoa(their_addr.sin_addr),</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;           new_sockfd);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    socklen_t len_size = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>sockaddr_in);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    getsockname(sockfd, (<span class="keyword">struct</span> sockaddr*)&amp;my_addr, &amp;len_size);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    printf(<span class="stringliteral">&quot;\nServer address: %s\n&quot;</span>, inet_ntoa(my_addr.sin_addr));</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    len_size = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>sockaddr_in);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    getpeername(sockfd, (<span class="keyword">struct</span> sockaddr*)&amp;their_addr, &amp;len_size);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">char</span>* cli_addr = inet_ntoa(their_addr.sin_addr);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    printf(<span class="stringliteral">&quot;Client address: %s\n&quot;</span>, cli_addr);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span> (!fork()) { <span class="comment">/* !1 means 0, child process  (if it is confusing 0 is equivalent to false) */</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      close(sockfd);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="keywordtype">int</span> semid;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="comment">// pid_t pid = getpid();</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="keywordflow">if</span> ((semid = initsem(semkey)) &lt;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;          0) { <span class="comment">/* call the initsem() function and if return value is less than 0 shows semget fails. */</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        exit(1);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      }</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      <span class="comment">// receive option from client</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      recv(new_sockfd, buffer, BUFFER_SIZE, 0);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordflow">for</span> (;;) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">/* main accept() loop */</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    socklen_t sin_size = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>sockaddr_in);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span> ((new_sockfd = accept(sockfd, (<span class="keyword">struct</span> sockaddr*)&amp;their_addr,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                             &amp;sin_size)) == -1) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      printf(<span class="stringliteral">&quot;\naccept() error!!!\n&quot;</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      exit(1);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    printf(<span class="stringliteral">&quot;Connection from %s in socket %d accepted\n&quot;</span>,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;           inet_ntoa(their_addr.sin_addr),</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;           new_sockfd);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    socklen_t len_size = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>sockaddr_in);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    getsockname(sockfd, (<span class="keyword">struct</span> sockaddr*)&amp;my_addr, &amp;len_size);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    printf(<span class="stringliteral">&quot;\nServer address: %s\n&quot;</span>, inet_ntoa(my_addr.sin_addr));</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    len_size = <span class="keyword">sizeof</span>(<span class="keyword">struct </span>sockaddr_in);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    getpeername(sockfd, (<span class="keyword">struct</span> sockaddr*)&amp;their_addr, &amp;len_size);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">char</span>* cli_addr = inet_ntoa(their_addr.sin_addr);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    printf(<span class="stringliteral">&quot;Client address: %s\n&quot;</span>, cli_addr);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> (!fork()) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="comment">/* !1 means 0, child process  (if it is confusing 0 is equivalent to false) */</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      close(sockfd);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keywordtype">int</span> semid;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <span class="comment">// pid_t pid = getpid();</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordflow">if</span> ((semid = initsem(semkey)) &lt;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;          0) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="comment">/* call the initsem() function and if return value is less than 0 shows semget fails. */</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        exit(1);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      }</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <a class="code" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> client_menuoption = strtol(buffer, NULL, 10);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      printf(<span class="stringliteral">&quot;\nClient [%s] Requested Option %d [%s]\n&quot;</span>, cli_addr, client_menuoption,</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;             <a class="code" href="menuoption_8h.html#a43ea43aa23e5cf4da54a2be35f7f0fce">getMenuOptionName</a>(client_menuoption));</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <span class="comment">// handling menu option</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;      bzero(buffer, 1024);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      snprintf(buffer, 1024, <span class="stringliteral">&quot;%s&quot;</span>, <a class="code" href="menuoption_8h.html#a496d61fead00c3a207d72fbd780a561b">moption_handle</a>(new_sockfd, semid, cli_addr,</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;               client_menuoption));</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <a class="code" href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a> client_menuoption;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="comment">// receive option from client</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        recv(new_sockfd, buffer, BUFFER_SIZE, 0);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        client_menuoption = strtol(buffer, NULL, 10);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        printf(<span class="stringliteral">&quot;\nClient [%s] requested option %d [%s]\n&quot;</span>, cli_addr, client_menuoption,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;               <a class="code" href="menuoption_8h.html#a43ea43aa23e5cf4da54a2be35f7f0fce">getMenuOptionName</a>(client_menuoption));</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      <span class="comment">// send the message to the client socket</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      printf(<span class="stringliteral">&quot;\n%s\n&quot;</span>, buffer);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      close(new_sockfd);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      exit(0);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="comment">// wait((int *)0);</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    close(new_sockfd);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordtype">int</span> initsem(key_t semkey)</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;{</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordtype">int</span> status = 0, semid;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <a class="code" href="union__semun.html">semun</a> arg;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="comment">// handling menu option</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        bzero(buffer, 1024);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        snprintf(buffer, 1024, <span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code" href="menuoption_8h.html#a496d61fead00c3a207d72fbd780a561b">moption_handle</a>(new_sockfd, semid, cli_addr,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                 client_menuoption));</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        printf(<span class="stringliteral">&quot;\n%s\n&quot;</span>, buffer);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      } <span class="keywordflow">while</span> (client_menuoption != EXIT_PROGRAM);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      close(new_sockfd);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      exit(0);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="comment">// wait((int *)0);</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    close(new_sockfd);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordflow">if</span> ((semid = semget(semkey, 1, SEMPERM | IPC_CREAT | IPC_EXCL)) == -1) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="comment">/* create semaphore using semget() function with the key (semkey) and set 1 semaphore in the set.</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">      Flags:</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">      - SEMPERM -&gt; file Permission of 0660</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">      - IPC_CREAT -&gt; create semaphore if not yet exist</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">      - IPC_EXCL -&gt;  return -1 with errno EEXIST if semaphore already exist (basically it causes the semget() function to fail if semaphore already exist)</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">      */</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">if</span> (errno ==</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        EEXIST) {</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      <span class="comment">/* check if error/failure of semget() fuction is because of semaphore already exists. */</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;      semid = semget(semkey, 1, 0);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    } <span class="comment">/* access to semaphore with key (semkey) and with 1 semaphore in teh set</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment">                                            and the last argument &#39;0&#39; which is the semflg that apply the following:</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() has read and/or write permissions to it, then semget() returns the associated semaphore identifier.</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() does not have read and/or write permissions to it, then semget() returns-1 and sets errno to EACCES.</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">                                                + If a semaphore identifier has not been created with key earlier, then semget() returns -1 and sets errno to ENOENT.</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">                                            [Refer here for more info](https://www.ibm.com/docs/en/zos/2.2.0?topic=functions-semget-get-set-semaphores)</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">                                            */</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    arg.val = 1; <span class="comment">/* initialize arg.val to 1 */</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    status = semctl(semid, 0, SETVAL,</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                    arg); <span class="comment">/* set the semaphore value (semval) of semaphore number &#39;0&#39; with id equals semid to 1 (arg) using SETVAL */</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  }</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">if</span> (semid == -1 || status == -1) {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    perror(<span class="stringliteral">&quot;Initsem() fails&quot;</span>);</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">return</span> (-1);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keywordtype">int</span> initsem(key_t semkey)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordtype">int</span> status = 0, semid;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <a class="code" href="union__semun.html">semun</a> arg;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keywordflow">if</span> ((semid = semget(semkey, 1, SEMPERM | IPC_CREAT | IPC_EXCL)) == -1) {</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="comment">/* create semaphore using semget() function with the key (semkey) and set 1 semaphore in the set.</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">      Flags:</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">      - SEMPERM -&gt; file Permission of 0660</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">      - IPC_CREAT -&gt; create semaphore if not yet exist</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">      - IPC_EXCL -&gt;  return -1 with errno EEXIST if semaphore already exist (basically it causes the semget() function to fail if semaphore already exist)</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">      */</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">if</span> (errno ==</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        EEXIST) {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;      <span class="comment">/* check if error/failure of semget() fuction is because of semaphore already exists. */</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      semid = semget(semkey, 1, 0);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    } <span class="comment">/* access to semaphore with key (semkey) and with 1 semaphore in teh set</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">                                            and the last argument &#39;0&#39; which is the semflg that apply the following:</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() has read and/or write permissions to it, then semget() returns the associated semaphore identifier.</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">                                                + If a semaphore identifier has already been created with key earlier, and the calling process of this semget() does not have read and/or write permissions to it, then semget() returns-1 and sets errno to EACCES.</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">                                                + If a semaphore identifier has not been created with key earlier, then semget() returns -1 and sets errno to ENOENT.</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">                                            [Refer here for more info](https://www.ibm.com/docs/en/zos/2.2.0?topic=functions-semget-get-set-semaphores)</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">                                            */</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    arg.val = 1; <span class="comment">/* initialize arg.val to 1 */</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    status = semctl(semid, 0, SETVAL,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                    arg); <span class="comment">/* set the semaphore value (semval) of semaphore number &#39;0&#39; with id equals semid to 1 (arg) using SETVAL */</span></div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  }</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordflow">return</span> (semid);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;} <span class="comment">/* end of initsem() function */</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordflow">if</span> (semid == -1 || status == -1) {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    perror(<span class="stringliteral">&quot;Initsem() fails&quot;</span>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordflow">return</span> (-1);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="keywordflow">return</span> (semid);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;} <span class="comment">/* end of initsem() function */</span></div>
 <div class="ttc" id="amenuoption_8h_html_a43ea43aa23e5cf4da54a2be35f7f0fce"><div class="ttname"><a href="menuoption_8h.html#a43ea43aa23e5cf4da54a2be35f7f0fce">getMenuOptionName</a></div><div class="ttdeci">const char * getMenuOptionName(enum MenuOption op)</div><div class="ttdef"><b>Definition:</b> <a href="menuoption_8c_source.html#l00104">menuoption.c:104</a></div></div>
 <div class="ttc" id="amenuoption_8h_html_a496d61fead00c3a207d72fbd780a561b"><div class="ttname"><a href="menuoption_8h.html#a496d61fead00c3a207d72fbd780a561b">moption_handle</a></div><div class="ttdeci">char * moption_handle(int new_sockfd, int semid, char *cli_addr, MenuOption mo)</div><div class="ttdef"><b>Definition:</b> <a href="menuoption_8c_source.html#l00031">menuoption.c:31</a></div></div>
 <div class="ttc" id="amenuoption_8h_html_a5be5e47a3042bc91460d05e47f32120d"><div class="ttname"><a href="menuoption_8h.html#a5be5e47a3042bc91460d05e47f32120d">MenuOption</a></div><div class="ttdeci">MenuOption</div><div class="ttdef"><b>Definition:</b> <a href="menuoption_8h_source.html#l00011">menuoption.h:11</a></div></div>
