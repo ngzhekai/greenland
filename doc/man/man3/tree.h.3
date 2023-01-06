@@ -241,8 +241,6 @@ Definition at line 72 of file tree\&.c\&.
 .fi
 .PP
 References Tree::status\&.
-.PP
-Referenced by tree_set_day_planted()\&.
 .SS "void tree_set_coordinate (\fBTree\fP * t, \fBtree_coordinate\fP c)"
 Set \fBTree\fP's coordinate where it was planted
 .PP
@@ -255,12 +253,12 @@ Set \fBTree\fP's coordinate where it was planted
 .PP
 
 .PP
-Definition at line 117 of file tree\&.c\&.
+Definition at line 113 of file tree\&.c\&.
 .PP
 .nf
-118 {
-119   t->coordinate = c;
-120 }
+114 {
+115   t->coordinate = c;
+116 }
 .fi
 .PP
 References Tree::coordinate\&.
@@ -282,20 +280,16 @@ Definition at line 103 of file tree\&.c\&.
 .PP
 .nf
 104 {
-105   if (tree_get_status(t) == DEAD) {
-106     t->day_planted = NULL;
-107   } else {
-108     if (!t->day_planted) {
-109       // handle the case when day_planted haven't allocated with memory
-110       t->day_planted = malloc(sizeof(struct tm));
-111     }
-112 
-113     strptime(d, "%F", t->day_planted);
-114   }
-115 }
+105   if (!t->day_planted) {
+106     // handle the case when day_planted haven't allocated with memory
+107     t->day_planted = malloc(sizeof(struct tm));
+108 
+109     strptime(d, "%F", t->day_planted);
+110   }
+111 }
 .fi
 .PP
-References tree_get_status()\&.
+References Tree::day_planted\&.
 .PP
 Referenced by tree_create()\&.
 .SS "void tree_set_species (\fBTree\fP * t, const char * sp)"

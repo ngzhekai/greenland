@@ -475,7 +475,7 @@ $(function() {
 <div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;  <span class="comment">// send to client</span></div>
 <div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;  <span class="keywordtype">char</span> date[BUFFER_SIZE];</div>
 <div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;  <span class="keywordflow">if</span> (tree.<a class="code" href="structTree.html#a79d3179f998392f5231d84717dad743c">status</a> != DEAD) {</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;  <span class="keywordflow">if</span> (tree.<a class="code" href="structTree.html#a4e216d45ddb33692b49dffd18c7c693b">day_planted</a> != NULL) {</div>
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    strftime(date, BUFFER_SIZE, <span class="stringliteral">&quot;%Y-%m-%d&quot;</span>,</div>
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;             tree.<a class="code" href="structTree.html#a4e216d45ddb33692b49dffd18c7c693b">day_planted</a>); <span class="comment">// refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti</span></div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  } <span class="keywordflow">else</span> {</div>

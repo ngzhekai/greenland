@@ -102,13 +102,9 @@ void tree_set_status(Tree* t, tree_state st)
 
 void tree_set_day_planted(Tree* t, const char* d)
 {
-  if (tree_get_status(t) == DEAD) {
-    t->day_planted = NULL;
-  } else {
-    if (!t->day_planted) {
-      // handle the case when day_planted haven't allocated with memory
-      t->day_planted = malloc(sizeof(struct tm));
-    }
+  if (!t->day_planted) {
+    // handle the case when day_planted haven't allocated with memory
+    t->day_planted = malloc(sizeof(struct tm));
 
     strptime(d, "%F", t->day_planted);
   }

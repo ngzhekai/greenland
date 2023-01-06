@@ -403,7 +403,7 @@ void query_tree_server(const char* filename, Tree tree, int new_sockfd,
   // send to client
   char date[BUFFER_SIZE];
 
-  if (tree.status != DEAD) {
+  if (tree.day_planted != NULL) {
     strftime(date, BUFFER_SIZE, "%Y-%m-%d",
              tree.day_planted); // refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti
   } else {
