@@ -93,8 +93,8 @@ void moption_display(MenuOption *opt)
   printf("\t1. To plant a tree\n");
   printf("\t2. To query a tree\n");
   printf("\t3. To update a tree's status\n");
-  printf("\t4. Exit\n");
-  printf("\t5. To display all the tree\n");
+  printf("\t4. To display all the tree\n");
+  printf("\t5. Exit\n");
   printf("(Choose a service needed according to the number)\n\n");
   printf("Option: ");
   scanf("%d", (int *)opt);
