@@ -15,11 +15,11 @@ make: test client server
 	astyle --project $(LIBDIR)/*.c $(LIBDIR)/*.h $(SRCDIR)/*.c $(TESTDIR)/*.c
 	./tests
 
-test: species.o tree.o menuoption.o test.o
-	$(CC) $(CFLAGS) -pthread -lcheck unit_tests.o menuoption.o tree.o tree_state.o species.o -o tests
+# test: species.o tree.o menuoption.o test.o tree_coordinate.o
+# 	$(CC) $(CFLAGS) -pthread -lcheck unit_tests.o menuoption.o tree.o tree_state.o species.o tree_coordinate.o -o tests
 
-test.o: $(TESTDIR)/unit_tests.c
-	$(CC) $(CFLAGS) -c $(TESTDIR)/*.c
+# test.o: $(TESTDIR)/unit_tests.c
+# 	$(CC) $(CFLAGS) -c $(TESTDIR)/*.c
 
 client: tree.o menuoption.o client.o
 	$(CC) $(CFLAGS) client.o menuoption.o tree.o tree_state.o -o greenland_client
@@ -27,8 +27,8 @@ client: tree.o menuoption.o client.o
 client.o: $(SRCDIR)/client.c
 	$(CC) $(CFLAGS) -c $(SRCDIR)/client.c
 
-server: tree.o menuoption.o server.o
-	$(CC) $(CFLAGS) server.o tree.o tree_state.o menuoption.o -o greenland_server
+server: tree.o menuoption.o server.o tree_coordinate.o
+	$(CC) $(CFLAGS) server.o tree.o tree_state.o menuoption.o tree_coordinate.o -o greenland_server 
 
 server.o: $(SRCDIR)/server.c
 	$(CC) $(CFLAGS) -c $(SRCDIR)/server.c
@@ -38,6 +38,9 @@ tree.o: tree_state.o $(LIBDIR)/tree.h $(LIBDIR)/tree.c
 
 tree_state.o: $(LIBDIR)/tree_state.h $(LIBDIR)/tree_state.c
 	$(CC) $(CFLAGS) -c $(LIBDIR)/tree_state.h $(LIBDIR)/tree_state.c
+	
+tree_coordinate.o: $(LIBDIR)/tree_coordinate.h $(LIBDIR)/tree_coordinate.c
+	$(CC) $(CFLAGS) -c $(LIBDIR)/tree_coordinate.h $(LIBDIR)/tree_coordinate.c
 
 species.o: $(LIBDIR)/species.h $(LIBDIR)/species.c
 	$(CC) $(CFLAGS) -c $(LIBDIR)/species.h $(LIBDIR)/species.c

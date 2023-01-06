@@ -2,24 +2,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char* moption_handle(MenuOption mo)
+char *moption_handle(MenuOption mo)
 {
-  char* msg = malloc(1024);
+  char *msg = malloc(1024);
 
-  switch (mo) {
-    case PLANT_TREE:
-    case QUERY_TREE:
-    case UPDATE_TREE:
-      sprintf(msg, "Option %d soon to be supported\n", mo);
-      return msg;
+  switch (mo)
+  {
+  case PLANT_TREE:
+  case QUERY_TREE:
+  case UPDATE_TREE:
+    sprintf(msg, "Option %d soon to be supported\n", mo);
+    return msg;
 
-    default:
-      sprintf(msg, "Option %d not supported\n", mo);
-      return msg;
+  default:
+    sprintf(msg, "Option %d not supported\n", mo);
+    return msg;
   }
 }
 
-void moption_display(MenuOption* opt)
+void moption_display(MenuOption *opt)
 {
   printf("  ________                               .__                       .___ \n");
   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
@@ -40,8 +41,9 @@ void moption_display(MenuOption* opt)
   printf("\t1. To plant a tree\n");
   printf("\t2. To query a tree\n");
   printf("\t3. To update a tree's status\n");
+  printf("\t4. Exit\n");
   printf("(Choose a service needed according to the number)\n\n");
   printf("Option: ");
-  scanf("%d", (int*) opt);
+  scanf("%d", (int *)opt);
   system("clear");
 }

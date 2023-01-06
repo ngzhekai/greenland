@@ -7,22 +7,40 @@
 \doxysubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
+unsigned long \mbox{\hyperlink{structTree_a720d78dd0d2d02aa8f0d2bafc4dd7dd8}{str\+\_\+size}}
+\item 
 char $\ast$ \mbox{\hyperlink{structTree_aec2b035f6c14984af20fa5d87058e437}{species}}
 \item 
 \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\+\_\+state}} \mbox{\hyperlink{structTree_a79d3179f998392f5231d84717dad743c}{status}}
 \item 
 struct tm $\ast$ \mbox{\hyperlink{structTree_a4e216d45ddb33692b49dffd18c7c693b}{day\+\_\+planted}}
+\item 
+\mbox{\hyperlink{structtree__coordinate}{tree\+\_\+coordinate}} \mbox{\hyperlink{structTree_a8beee6c9237b99e887b011d30c882fb3}{coordinate}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{structTree}{Tree}} data class that stores information about a tree including its species, its status, and the amount of days it has lived. 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00016}{16}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 30 of file tree.\+h.
 
 
 
 \doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structTree_a8beee6c9237b99e887b011d30c882fb3}\label{structTree_a8beee6c9237b99e887b011d30c882fb3}} 
+\index{Tree@{Tree}!coordinate@{coordinate}}
+\index{coordinate@{coordinate}!Tree@{Tree}}
+\doxysubsubsection{\texorpdfstring{coordinate}{coordinate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtree__coordinate}{tree\+\_\+coordinate}} Tree\+::coordinate}
+
+The coordinate where the tree was planted 
+
+Definition at line 41 of file tree.\+h.
+
+
+
+Referenced by tree\+\_\+get\+\_\+coordinate(), and tree\+\_\+set\+\_\+coordinate().
+
 \mbox{\Hypertarget{structTree_a4e216d45ddb33692b49dffd18c7c693b}\label{structTree_a4e216d45ddb33692b49dffd18c7c693b}} 
 \index{Tree@{Tree}!day\_planted@{day\_planted}}
 \index{day\_planted@{day\_planted}!Tree@{Tree}}
@@ -31,11 +49,11 @@ Definition at line \mbox{\hyperlink{tree_8h_source_l00016}{16}} of file \mbox{\h
 
 The day when the tree was planted 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00022}{22}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 39 of file tree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{tree_8c_source_l00036}{tree\+\_\+get\+\_\+day\+\_\+planted()}}, and \mbox{\hyperlink{tree_8c_source_l00056}{tree\+\_\+set\+\_\+day\+\_\+planted()}}.
+Referenced by tree\+\_\+create(), tree\+\_\+free(), and tree\+\_\+get\+\_\+day\+\_\+planted().
 
 \mbox{\Hypertarget{structTree_aec2b035f6c14984af20fa5d87058e437}\label{structTree_aec2b035f6c14984af20fa5d87058e437}} 
 \index{Tree@{Tree}!species@{species}}
@@ -45,11 +63,11 @@ Referenced by \mbox{\hyperlink{tree_8c_source_l00036}{tree\+\_\+get\+\_\+day\+\_
 
 Species name of the tree 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00018}{18}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 35 of file tree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{tree_8c_source_l00008}{tree\+\_\+create()}}, \mbox{\hyperlink{tree_8c_source_l00020}{tree\+\_\+free()}}, \mbox{\hyperlink{tree_8c_source_l00026}{tree\+\_\+get\+\_\+species()}}, and \mbox{\hyperlink{tree_8c_source_l00041}{tree\+\_\+set\+\_\+species()}}.
+Referenced by tree\+\_\+free(), tree\+\_\+get\+\_\+species(), and tree\+\_\+set\+\_\+species().
 
 \mbox{\Hypertarget{structTree_a79d3179f998392f5231d84717dad743c}\label{structTree_a79d3179f998392f5231d84717dad743c}} 
 \index{Tree@{Tree}!status@{status}}
@@ -59,11 +77,25 @@ Referenced by \mbox{\hyperlink{tree_8c_source_l00008}{tree\+\_\+create()}}, \mbo
 
 Status of the tree 
 
-Definition at line \mbox{\hyperlink{tree_8h_source_l00020}{20}} of file \mbox{\hyperlink{tree_8h_source}{tree.\+h}}.
+Definition at line 37 of file tree.\+h.
 
 
 
-Referenced by \mbox{\hyperlink{tree_8c_source_l00031}{tree\+\_\+get\+\_\+status()}}, and \mbox{\hyperlink{tree_8c_source_l00051}{tree\+\_\+set\+\_\+status()}}.
+Referenced by tree\+\_\+get\+\_\+status(), and tree\+\_\+set\+\_\+status().
+
+\mbox{\Hypertarget{structTree_a720d78dd0d2d02aa8f0d2bafc4dd7dd8}\label{structTree_a720d78dd0d2d02aa8f0d2bafc4dd7dd8}} 
+\index{Tree@{Tree}!str\_size@{str\_size}}
+\index{str\_size@{str\_size}!Tree@{Tree}}
+\doxysubsubsection{\texorpdfstring{str\_size}{str\_size}}
+{\footnotesize\ttfamily unsigned long Tree\+::str\+\_\+size}
+
+String size of species string 
+
+Definition at line 33 of file tree.\+h.
+
+
+
+Referenced by tree\+\_\+set\+\_\+species().
 
 
 

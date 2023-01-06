@@ -1,4 +1,4 @@
-.TH "lib/menuoption.h" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
+.TH "lib/menuoption.h" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -51,7 +51,7 @@ MenuOption defines available options in the client menu
 .SS "enum \fBMenuOption\fP"
 MenuOption defines available options in the client menu 
 .PP
-Definition at line \fB11\fP of file \fBmenuoption\&.h\fP\&.
+Definition at line 11 of file menuoption\&.h\&.
 .PP
 .nf
 11 { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE } MenuOption;
@@ -68,36 +68,37 @@ Display menu options
 .PP
 
 .PP
-Definition at line \fB22\fP of file \fBmenuoption\&.c\fP\&.
+Definition at line 23 of file menuoption\&.c\&.
 .PP
 .nf
-23 {
-24   printf("  ________                               \&.__                       \&.___ \n");
-25   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
-26   printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
-27   printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
-28   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
-29   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
-30 
-31   printf("Welcome to greenland, a place to plant tree!\n\n");
-32   printf("We don't have any affiliation to the Greenland government, but if \n"
-33          "you can plant a tree there, we are more than welcome! :)\n");
-34 
-35   printf("################################\n");
-36   printf("#                              #\n");
-37   printf("#            MENU              #\n");
-38   printf("#                              #\n");
-39   printf("################################\n\n");
-40   printf("\t1\&. To plant a tree\n");
-41   printf("\t2\&. To query a tree\n");
-42   printf("\t3\&. To update a tree's status\n");
-43   printf("(Choose a service needed according to the number)\n\n");
-44   printf("Option: ");
-45   scanf("%d", (int*) opt);
-46   system("clear");
-47 }
+24 {
+25   printf("  ________                               \&.__                       \&.___ \n");
+26   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
+27   printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
+28   printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
+29   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
+30   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
+31 
+32   printf("Welcome to greenland, a place to plant tree!\n\n");
+33   printf("We don't have any affiliation to the Greenland government, but if \n"
+34          "you can plant a tree there, we are more than welcome! :)\n");
+35 
+36   printf("################################\n");
+37   printf("#                              #\n");
+38   printf("#            MENU              #\n");
+39   printf("#                              #\n");
+40   printf("################################\n\n");
+41   printf("\t1\&. To plant a tree\n");
+42   printf("\t2\&. To query a tree\n");
+43   printf("\t3\&. To update a tree's status\n");
+44   printf("\t4\&. Exit\n");
+45   printf("(Choose a service needed according to the number)\n\n");
+46   printf("Option: ");
+47   scanf("%d", (int *)opt);
+48   system("clear");
+49 }
 .fi
-.SS "char * moption_handle (\fBMenuOption\fP mo)"
+.SS "char* moption_handle (\fBMenuOption\fP mo)"
 Handles menu option
 .PP
 \fBParameters\fP
@@ -112,24 +113,25 @@ Handles menu option
 .PP
 
 .PP
-Definition at line \fB5\fP of file \fBmenuoption\&.c\fP\&.
+Definition at line 5 of file menuoption\&.c\&.
 .PP
 .nf
 6 {
-7   char* msg = malloc(1024);
+7   char *msg = malloc(1024);
 8 
-9   switch (mo) {
-10     case PLANT_TREE:
-11     case QUERY_TREE:
-12     case UPDATE_TREE:
-13       sprintf(msg, "Option %d soon to be supported\n", mo);
-14       return msg;
-15 
-16     default:
-17       sprintf(msg, "Option %d not supported\n", mo);
-18       return msg;
-19   }
-20 }
+9   switch (mo)
+10   {
+11   case PLANT_TREE:
+12   case QUERY_TREE:
+13   case UPDATE_TREE:
+14     sprintf(msg, "Option %d soon to be supported\n", mo);
+15     return msg;
+16 
+17   default:
+18     sprintf(msg, "Option %d not supported\n", mo);
+19     return msg;
+20   }
+21 }
 .fi
 .SH "Author"
 .PP 

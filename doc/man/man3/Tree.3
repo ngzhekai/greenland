@@ -1,4 +1,4 @@
-.TH "Tree" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
+.TH "Tree" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,6 +12,9 @@ Tree
 
 .in +1c
 .ti -1c
+.RI "unsigned long \fBstr_size\fP"
+.br
+.ti -1c
 .RI "char * \fBspecies\fP"
 .br
 .ti -1c
@@ -20,32 +23,47 @@ Tree
 .ti -1c
 .RI "struct tm * \fBday_planted\fP"
 .br
+.ti -1c
+.RI "\fBtree_coordinate\fP \fBcoordinate\fP"
+.br
 .in -1c
 .SH "Detailed Description"
 .PP 
 \fBTree\fP data class that stores information about a tree including its species, its status, and the amount of days it has lived\&. 
 .PP
-Definition at line \fB16\fP of file \fBtree\&.h\fP\&.
+Definition at line 30 of file tree\&.h\&.
 .SH "Field Documentation"
 .PP 
+.SS "\fBtree_coordinate\fP Tree::coordinate"
+The coordinate where the tree was planted 
+.PP
+Definition at line 41 of file tree\&.h\&.
+.PP
+Referenced by tree_get_coordinate(), and tree_set_coordinate()\&.
 .SS "struct tm* Tree::day_planted"
 The day when the tree was planted 
 .PP
-Definition at line \fB22\fP of file \fBtree\&.h\fP\&.
+Definition at line 39 of file tree\&.h\&.
 .PP
-Referenced by \fBtree_get_day_planted()\fP, and \fBtree_set_day_planted()\fP\&.
+Referenced by tree_create(), tree_free(), and tree_get_day_planted()\&.
 .SS "char* Tree::species"
 Species name of the tree 
 .PP
-Definition at line \fB18\fP of file \fBtree\&.h\fP\&.
+Definition at line 35 of file tree\&.h\&.
 .PP
-Referenced by \fBtree_create()\fP, \fBtree_free()\fP, \fBtree_get_species()\fP, and \fBtree_set_species()\fP\&.
+Referenced by tree_free(), tree_get_species(), and tree_set_species()\&.
 .SS "\fBtree_state\fP Tree::status"
 Status of the tree 
 .PP
-Definition at line \fB20\fP of file \fBtree\&.h\fP\&.
+Definition at line 37 of file tree\&.h\&.
 .PP
-Referenced by \fBtree_get_status()\fP, and \fBtree_set_status()\fP\&.
+Referenced by tree_get_status(), and tree_set_status()\&.
+.SS "unsigned long Tree::str_size"
+String size of species string 
+.PP
+Definition at line 33 of file tree\&.h\&.
+.PP
+Referenced by tree_set_species()\&.
 
 .SH "Author"
 .PP 

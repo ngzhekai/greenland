@@ -1,4 +1,4 @@
-.TH "lib/tree_state.h" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
+.TH "lib/tree_state.h" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -56,7 +56,7 @@ An enum define the state of a \fBTree\fP
 .SS "enum \fBtree_state\fP"
 An enum define the state of a \fBTree\fP 
 .PP
-Definition at line \fB14\fP of file \fBtree_state\&.h\fP\&.
+Definition at line 14 of file tree_state\&.h\&.
 .PP
 .nf
 14 { DEAD, PLANTED, SICK, TREAMENT } tree_state;
@@ -78,7 +78,7 @@ true the tree state is valid, false if it is not
 .PP
 
 .PP
-Definition at line \fB23\fP of file \fBtree_state\&.c\fP\&.
+Definition at line 23 of file tree_state\&.c\&.
 .PP
 .nf
 24 {
@@ -89,7 +89,9 @@ Definition at line \fB23\fP of file \fBtree_state\&.c\fP\&.
 29   return true;
 30 }
 .fi
-.SS "const char * trstat_to_string (\fBtree_state\fP st)"
+.PP
+References trstat_to_string()\&.
+.SS "const char* trstat_to_string (\fBtree_state\fP st)"
 Convert tree state into readable string
 .PP
 \fBParameters\fP
@@ -104,7 +106,7 @@ A string that specifies the state of the \fBTree\fP, NULL if the state is unknow
 .PP
 
 .PP
-Definition at line \fB3\fP of file \fBtree_state\&.c\fP\&.
+Definition at line 3 of file tree_state\&.c\&.
 .PP
 .nf
 4 {
@@ -126,6 +128,8 @@ Definition at line \fB3\fP of file \fBtree_state\&.c\fP\&.
 20   }
 21 }
 .fi
+.PP
+Referenced by trstat_is_valid()\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for greenland from the source code\&.

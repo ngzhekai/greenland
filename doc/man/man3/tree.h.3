@@ -1,4 +1,4 @@
-.TH "lib/tree.h" 3 "Sun Dec 4 2022" "greenland" \" -*- nroff -*-
+.TH "lib/tree.h" 3 "Fri Jan 6 2023" "greenland" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,11 +6,15 @@ lib/tree.h
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <stddef\&.h>\fP
+.br
 \fC#include <stdint\&.h>\fP
 .br
 \fC#include <time\&.h>\fP
 .br
 \fC#include 'tree_state\&.h'\fP
+.br
+\fC#include 'tree_coordinate\&.h'\fP
 .br
 
 .SS "Data Structures"
@@ -31,7 +35,7 @@ lib/tree.h
 
 .in +1c
 .ti -1c
-.RI "struct \fBTree\fP * \fBtree_create\fP (const char *sp, \fBtree_state\fP st, time_t d)"
+.RI "struct \fBTree\fP * \fBtree_create\fP (const char *sp, \fBtree_state\fP st, const char *d, \fBtree_coordinate\fP c)"
 .br
 .ti -1c
 .RI "void \fBtree_free\fP (\fBTree\fP *t)"
@@ -46,13 +50,19 @@ lib/tree.h
 .RI "struct tm * \fBtree_get_day_planted\fP (const \fBTree\fP *t)"
 .br
 .ti -1c
+.RI "\fBtree_coordinate\fP \fBtree_get_coordinate\fP (const \fBTree\fP *t)"
+.br
+.ti -1c
 .RI "void \fBtree_set_species\fP (\fBTree\fP *t, const char *sp)"
 .br
 .ti -1c
 .RI "void \fBtree_set_status\fP (\fBTree\fP *t, \fBtree_state\fP st)"
 .br
 .ti -1c
-.RI "void \fBtree_set_day_planted\fP (\fBTree\fP *t, time_t d)"
+.RI "void \fBtree_set_day_planted\fP (\fBTree\fP *t, const char *d)"
+.br
+.ti -1c
+.RI "void \fBtree_set_coordinate\fP (\fBTree\fP *t, \fBtree_coordinate\fP c)"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -73,7 +83,7 @@ Definition in file \fBtree\&.h\fP\&.
 \fBTree\fP data class that stores information about a tree including its species, its status, and the amount of days it has lived\&. 
 .SH "Function Documentation"
 .PP 
-.SS "struct \fBTree\fP * tree_create (const char * sp, \fBtree_state\fP st, time_t d)"
+.SS "struct \fBTree\fP* tree_create (const char * sp, \fBtree_state\fP st, const char * d, \fBtree_coordinate\fP c)"
 Create a \fBTree\fP data class
 .PP
 \fBParameters\fP
@@ -82,7 +92,9 @@ Create a \fBTree\fP data class
 .br
 \fIst\fP A \fBTree\fP State enum specifies the current status for the \fBTree\fP 
 .br
-\fId\fP A time_t in seconds specifies the days alived of the \fBTree\fP
+\fId\fP A string specifies the days alived of the \fBTree\fP in format Y-m-d, e\&.g\&. 2022-12-05
+.br
+\fIc\fP A \fBTree\fP coordinate struct that specify the longitude and latitude coordinate of the planted tree 
 .RE
 .PP
 \fBReturns\fP
@@ -97,22 +109,21 @@ st must be valid
 .PP
 
 .PP
-Definition at line \fB8\fP of file \fBtree\&.c\fP\&.
+Definition at line 11 of file tree\&.c\&.
 .PP
 .nf
-9 {
-10   Tree* new_tree = malloc(sizeof(Tree));
-11   assert(trstat_is_valid(st));
-12   new_tree->species = NULL;
-13   tree_set_species(new_tree, sp);
-14   tree_set_status(new_tree, st);
-15   tree_set_day_planted(new_tree, d);
-16 
-17   return new_tree;
-18 }
+12 {
+13   Tree *new_tree = malloc(sizeof(Tree));
+14   tree_set_species(new_tree, sp);
+15   tree_set_status(new_tree, st);
+16   new_tree->day_planted = NULL;
+17   tree_set_day_planted(new_tree, d);
+18   tree_set_coordinate(new_tree, c);
+19   return new_tree;
+20 }
 .fi
 .PP
-References \fBTree::species\fP\&.
+References Tree::day_planted, tree_set_coordinate(), tree_set_day_planted(), tree_set_species(), and tree_set_status()\&.
 .SS "void tree_free (\fBTree\fP * t)"
 Destroy a \fBTree\fP data class
 .PP
@@ -123,17 +134,42 @@ Destroy a \fBTree\fP data class
 .PP
 
 .PP
-Definition at line \fB20\fP of file \fBtree\&.c\fP\&.
+Definition at line 59 of file tree\&.c\&.
 .PP
 .nf
-21 {
-22   free(t->species);
-23   free(t);
-24 }
+60 {
+61   free(t->day_planted);
+62   free(t->species);
+63   free(t);
+64 }
 .fi
 .PP
-References \fBTree::species\fP\&.
-.SS "struct tm * tree_get_day_planted (const \fBTree\fP * t)"
+References Tree::day_planted, and Tree::species\&.
+.SS "\fBtree_coordinate\fP tree_get_coordinate (const \fBTree\fP * t)"
+Get \fBTree\fP's the current coordinate
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A pointer to a \fBTree\fP
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A pointer to struct \fBtree_coordinate\fP indicates the coordinate where the \fBTree\fP was planted 
+.RE
+.PP
+
+.PP
+Definition at line 81 of file tree\&.c\&.
+.PP
+.nf
+82 {
+83   return t->coordinate;
+84 }
+.fi
+.PP
+References Tree::coordinate\&.
+.SS "struct tm* tree_get_day_planted (const \fBTree\fP * t)"
 Get \fBTree\fP's the amount of days it has lived
 .PP
 \fBParameters\fP
@@ -148,16 +184,16 @@ A pointer to struct tm indicates the day when the \fBTree\fP was planted
 .PP
 
 .PP
-Definition at line \fB36\fP of file \fBtree\&.c\fP\&.
+Definition at line 76 of file tree\&.c\&.
 .PP
 .nf
-37 {
-38   return t->day_planted;
-39 }
+77 {
+78   return t->day_planted;
+79 }
 .fi
 .PP
-References \fBTree::day_planted\fP\&.
-.SS "char * tree_get_species (const \fBTree\fP * t)"
+References Tree::day_planted\&.
+.SS "char* tree_get_species (const \fBTree\fP * t)"
 Get \fBTree\fP's species name
 .PP
 \fBParameters\fP
@@ -172,15 +208,15 @@ A string that describes the \fBTree\fP's species name
 .PP
 
 .PP
-Definition at line \fB26\fP of file \fBtree\&.c\fP\&.
+Definition at line 66 of file tree\&.c\&.
 .PP
 .nf
-27 {
-28   return t->species;
-29 }
+67 {
+68   return t->species;
+69 }
 .fi
 .PP
-References \fBTree::species\fP\&.
+References Tree::species\&.
 .SS "\fBtree_state\fP tree_get_status (const \fBTree\fP * t)"
 Get \fBTree\fP's current status
 .PP
@@ -196,40 +232,78 @@ A non-negative integer indicates the \fBTree\fP's current status
 .PP
 
 .PP
-Definition at line \fB31\fP of file \fBtree\&.c\fP\&.
+Definition at line 71 of file tree\&.c\&.
 .PP
 .nf
-32 {
-33   return t->status;
-34 }
+72 {
+73   return t->status;
+74 }
 .fi
 .PP
-References \fBTree::status\fP\&.
-.SS "void tree_set_day_planted (\fBTree\fP * t, time_t d)"
-Set \fBTree\fP's the amount of days it has lived
+References Tree::status\&.
+.PP
+Referenced by tree_set_day_planted()\&.
+.SS "void tree_set_coordinate (\fBTree\fP * t, \fBtree_coordinate\fP c)"
+Set \fBTree\fP's coordinate where it was planted
 .PP
 \fBParameters\fP
 .RS 4
-\fIt\fP A modified \fBTree\fP with changed days of lived 
+\fIt\fP A modified \fBTree\fP with changed planted coordinate 
 .br
-\fId\fP A time_t in seconds 
+\fId\fP A struct specifies the coordinate 
 .RE
 .PP
 
 .PP
-Definition at line \fB56\fP of file \fBtree\&.c\fP\&.
+Definition at line 125 of file tree\&.c\&.
 .PP
 .nf
-57 {
-58   if (tree_get_status(t) == DEAD) {
-59     t->day_planted = NULL;
-60   } else {
-61     t->day_planted = localtime(&d);
-62   }
-63 }
+126 {
+127   t->coordinate = c;
+128 }
 .fi
 .PP
-References \fBTree::day_planted\fP\&.
+References Tree::coordinate\&.
+.PP
+Referenced by tree_create()\&.
+.SS "void tree_set_day_planted (\fBTree\fP * t, const char * d)"
+Set \fBTree\fP's when it was planted
+.PP
+\fBParameters\fP
+.RS 4
+\fIt\fP A modified \fBTree\fP with changed planted day 
+.br
+\fId\fP A string specifies the planted day 
+.RE
+.PP
+
+.PP
+Definition at line 105 of file tree\&.c\&.
+.PP
+.nf
+106 {
+107   if (tree_get_status(t) == DEAD)
+108   {
+109     printf("debug: it is dead\n");
+110     t->day_planted = NULL;
+111   }
+112   else
+113   {
+114     printf("debug: it is alive\n");
+115     if (!t->day_planted)
+116     { // handle the case when day_planted haven't allocated with memory
+117       printf("debug: day_planted is null\n");
+118       t->day_planted = malloc(sizeof(struct tm));
+119     }
+120     printf("debug: date: %s\n", d);
+121     strptime(d, "%F", t->day_planted);
+122   }
+123 }
+.fi
+.PP
+References tree_get_status()\&.
+.PP
+Referenced by tree_create()\&.
 .SS "void tree_set_species (\fBTree\fP * t, const char * sp)"
 Set \fBTree\fP's species name
 .PP
@@ -242,20 +316,26 @@ Set \fBTree\fP's species name
 .PP
 
 .PP
-Definition at line \fB41\fP of file \fBtree\&.c\fP\&.
+Definition at line 86 of file tree\&.c\&.
 .PP
 .nf
-42 {
-43   if (t->species) {
-44     free(t->species);
-45   }
-46 
-47   t->species = calloc(strlen(sp) + 1, sizeof(char));
-48   strncpy(t->species, sp, strlen(sp) + 1);
-49 }
+87 {
+88   if ((t->str_size = strlen(sp) + 1) > 0)
+89   {
+90     t->species = calloc(t->str_size, sizeof(char));
+91     strncpy(t->species, sp, t->str_size);
+92   }
+93   else
+94   {
+95     t->str_size = 0;
+96     t->species = NULL;
+97   }
+98 }
 .fi
 .PP
-References \fBTree::species\fP\&.
+References Tree::species, and Tree::str_size\&.
+.PP
+Referenced by tree_create()\&.
 .SS "void tree_set_status (\fBTree\fP * t, \fBtree_state\fP st)"
 Set \fBTree\fP's current status
 .PP
@@ -268,15 +348,17 @@ Set \fBTree\fP's current status
 .PP
 
 .PP
-Definition at line \fB51\fP of file \fBtree\&.c\fP\&.
+Definition at line 100 of file tree\&.c\&.
 .PP
 .nf
-52 {
-53   t->status = st;
-54 }
+101 {
+102   t->status = st;
+103 }
 .fi
 .PP
-References \fBTree::status\fP\&.
+References Tree::status\&.
+.PP
+Referenced by tree_create()\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for greenland from the source code\&.
