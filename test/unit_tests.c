@@ -2,6 +2,7 @@
 #include "../lib/tree.h"
 #include "../lib/menuoption.h"
 #include "../lib/species.h"
+#include "../lib/date.h"
 #include <check.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -111,11 +112,19 @@ START_TEST(test_menuoption_handle)
   // ck_assert_str_eq(moption_handle(QUERY_TREE), 0);
   // ck_assert_str_eq(moption_handle(UPDATE_TREE), 0);
   ck_assert_str_eq(moption_handle(-1), "Option -1 not supported\n");
+START_TEST(test_date_is_valid)
+{
+  ck_assert_int_eq(date_is_valid("2000-01-01"), true);
+  ck_assert_int_eq(date_is_valid("2000-00-01"), false);
+  ck_assert_int_eq(date_is_valid("2000-13-01"), false);
+  ck_assert_int_eq(date_is_valid("2000-01-32"), false);
+  ck_assert_int_eq(date_is_valid("2000-04-31"), false);
 }
 END_TEST
 
 Suite* tree_suit(void);
 Suite* menu_suit(void);
+Suite* date_suit(void);
 
 int main(void)
 {
@@ -160,6 +169,20 @@ Suite* menu_suit(void)
   tc_core = tcase_create("Core");
 
   tcase_add_test(tc_core, test_menuoption_handle);
+  suite_add_tcase(s, tc_core);
+
+  return s;
+}
+
+Suite* date_suit(void)
+{
+  Suite* s;
+  TCase* tc_core;
+
+  s = suite_create("Date");
+  tc_core = tcase_create("Utilities");
+
+  tcase_add_test(tc_core, test_date_is_valid);
   suite_add_tcase(s, tc_core);
 
   return s;
