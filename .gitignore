@@ -57,5 +57,8 @@ dkms.conf
 *.orig
 
 # (Note) Desmond: Temporarily ignore documentation changes
-doc/*
+doc/
+doc/html/
+doc/latex/
+doc/man
 .vscode/settings.json
