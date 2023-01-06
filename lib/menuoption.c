@@ -401,8 +401,7 @@ void query_tree_server(const char* filename, Tree tree, int new_sockfd,
 
   sprintf(buffer, "%d,%d\t\t%s\t%s\t%d (%s)\n", coordinates.x, coordinates.y,
           tree.species, date, tree.status, trstat_to_string(tree.status));
-  printf("\n\ndebug: [%s]\n\n", buffer);
-
+          
   send(new_sockfd, buffer, BUFFER_SIZE, 0);
 } /* end of query_tree_server() function */
 
