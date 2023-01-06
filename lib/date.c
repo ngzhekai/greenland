@@ -1,6 +1,7 @@
 #include "date.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 bool isleap(unsigned);
 bool date_is_valid_f(unsigned, unsigned, unsigned);
@@ -51,6 +52,10 @@ bool date_is_valid(const char* date)
   char* month_s = calloc(3, sizeof(char));
   char* day_s = calloc(3, sizeof(char));
   sscanf(date, "%[^-]-%[^-]-%[^-]", year_s, month_s, day_s);
+
+  if (strlen(year_s) != 4 || strlen(month_s) != 2 || strlen(day_s) != 2) {
+    return false;
+  }
 
   unsigned year = atoi(year_s);
   unsigned month = atoi(month_s);

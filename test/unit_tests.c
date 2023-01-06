@@ -119,6 +119,11 @@ START_TEST(test_date_is_valid)
   ck_assert_int_eq(date_is_valid("2000-13-01"), false);
   ck_assert_int_eq(date_is_valid("2000-01-32"), false);
   ck_assert_int_eq(date_is_valid("2000-04-31"), false);
+  ck_assert_int_eq(date_is_valid("20000-01-01"), false);
+  ck_assert_int_eq(date_is_valid("2000-010-01"), false);
+  ck_assert_int_eq(date_is_valid("2000-01-010"), false);
+  ck_assert_int_eq(date_is_valid("2000-1-01"), false);
+  ck_assert_int_eq(date_is_valid("2000-01-1"), false);
 }
 END_TEST
 
@@ -129,11 +134,10 @@ Suite* date_suit(void);
 int main(void)
 {
   int num_failed;
-  Suite* s;
   SRunner* sr;
 
-  s = tree_suit();
-  sr = srunner_create(s);
+  sr = srunner_create(tree_suit());
+  srunner_add_suite(sr, date_suit());
 
   srunner_run_all(sr, CK_NORMAL);
   num_failed = srunner_ntests_failed(sr);
