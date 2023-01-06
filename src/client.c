@@ -145,10 +145,8 @@ int main(int argc, char const *argv[])
       sprintf(buffer, "%d", option); // convert int (option) to string
       // send the string to the server
       send(sockfd, buffer, BUFFER_SIZE, 0);
-
-      // read from server
-
-      printf("\n%s Operation Success!\n", getMenuOptionName(option));
+      recv(sockfd, buffer, BUFFER_SIZE, 0);
+      printf("%s\n", buffer);
       while ('\n' != getchar())
         ;
 
