@@ -8,7 +8,7 @@
 /**
  * MenuOption defines available options in the client menu
  */
-typedef enum MenuOption { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE, EXIT_PROGRAM } MenuOption;
+typedef enum MenuOption { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE, EXIT_PROGRAM, DISPLAY_ALL_TREES} MenuOption;
 
 /**
  * Handles menu option

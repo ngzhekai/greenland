@@ -255,12 +255,12 @@ Set \fBTree\fP's coordinate where it was planted
 .PP
 
 .PP
-Definition at line 116 of file tree\&.c\&.
+Definition at line 117 of file tree\&.c\&.
 .PP
 .nf
-117 {
-118   t->coordinate = c;
-119 }
+118 {
+119   t->coordinate = c;
+120 }
 .fi
 .PP
 References Tree::coordinate\&.
@@ -289,9 +289,10 @@ Definition at line 103 of file tree\&.c\&.
 109       // handle the case when day_planted haven't allocated with memory
 110       t->day_planted = malloc(sizeof(struct tm));
 111     }
-112     strptime(d, "%F", t->day_planted);
-113   }
-114 }
+112 
+113     strptime(d, "%F", t->day_planted);
+114   }
+115 }
 .fi
 .PP
 References tree_get_status()\&.

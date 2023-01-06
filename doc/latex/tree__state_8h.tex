@@ -10,10 +10,10 @@ typedef enum \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\+\_\+state}} \{ {\bfseries D\+E\+AD}, 
-{\bfseries A\+L\+I\+VE}, 
-{\bfseries S\+I\+CK}, 
-{\bfseries T\+R\+E\+A\+M\+E\+NT}
+enum \mbox{\hyperlink{tree__state_8h_a000b9251040da7bc6d3ae447d420bb48}{tree\+\_\+state}} \{ {\bfseries DEAD}
+, {\bfseries ALIVE}
+, {\bfseries SICK}
+, {\bfseries TREAMENT}
  \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
@@ -108,7 +108,7 @@ Convert tree state into readable string
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A string that specifies the state of the \mbox{\hyperlink{structTree}{Tree}}, N\+U\+LL if the state is unknown 
+A string that specifies the state of the \mbox{\hyperlink{structTree}{Tree}}, NULL if the state is unknown 
 \end{DoxyReturn}
 
 
@@ -119,16 +119,16 @@ Definition at line 3 of file tree\+\_\+state.\+c.
 \DoxyCodeLine{4 \{}
 \DoxyCodeLine{5   \textcolor{keywordflow}{switch} (st) \{}
 \DoxyCodeLine{6     \textcolor{keywordflow}{case} DEAD:}
-\DoxyCodeLine{7       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"DEAD"};}
+\DoxyCodeLine{7       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}DEAD"{}};}
 \DoxyCodeLine{8 }
 \DoxyCodeLine{9     \textcolor{keywordflow}{case} ALIVE:}
-\DoxyCodeLine{10       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ALIVE"};}
+\DoxyCodeLine{10       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}ALIVE"{}};}
 \DoxyCodeLine{11 }
 \DoxyCodeLine{12     \textcolor{keywordflow}{case} SICK:}
-\DoxyCodeLine{13       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"SICK"};}
+\DoxyCodeLine{13       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}SICK"{}};}
 \DoxyCodeLine{14 }
 \DoxyCodeLine{15     \textcolor{keywordflow}{case} TREAMENT:}
-\DoxyCodeLine{16       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TREAMENT"};}
+\DoxyCodeLine{16       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}TREAMENT"{}};}
 \DoxyCodeLine{17 }
 \DoxyCodeLine{18     \textcolor{keywordflow}{default}:}
 \DoxyCodeLine{19       \textcolor{keywordflow}{return} (\textcolor{keywordtype}{char}*) 0;}

@@ -116,6 +116,13 @@ int main(int argc, char const* argv[])
       send(sockfd, buffer, BUFFER_SIZE, 0);
       exit(0);
 
+    case 5:
+      // invoke display_all_tree() method
+      sprintf(buffer, "%d", option); // convert int (option) to string
+      // send the string to the server
+      send(sockfd, buffer, BUFFER_SIZE, 0);
+      exit(0);
+
     default:
       printf("You entered %d! Please enter 1, 2, or 3 Only!\n", option);
       break;
