@@ -139,10 +139,9 @@ int main(int argc, char const* argv[])
         // invoke display_all_tree() method
         sprintf(buffer, "%d", option); // convert int (option) to string
         // send the string to the server
-        char* temp = 0;
         send(sockfd, buffer, BUFFER_SIZE, 0);
-        recv(sockfd, temp, BUFFER_SIZE, 0);
-        printf("%s\n", temp);
+        recv(sockfd, buffer, BUFFER_SIZE, 0);
+        printf("%s\n", buffer);
 
         while ('\n' != getchar())
           ;

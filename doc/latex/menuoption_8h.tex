@@ -9,12 +9,12 @@ typedef enum \mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{M
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{menuoption_8h_a5be5e47a3042bc91460d05e47f32120d}{Menu\+Option}} \{ \newline
-{\bfseries P\+L\+A\+N\+T\+\_\+\+T\+R\+EE} = 1, 
-{\bfseries Q\+U\+E\+R\+Y\+\_\+\+T\+R\+EE}, 
-{\bfseries U\+P\+D\+A\+T\+E\+\_\+\+T\+R\+EE}, 
-{\bfseries D\+I\+S\+P\+L\+A\+Y\+\_\+\+A\+L\+L\+\_\+\+T\+R\+E\+ES}, 
-\newline
-{\bfseries E\+X\+I\+T\+\_\+\+P\+R\+O\+G\+R\+AM}
+{\bfseries PLANT\+\_\+\+TREE} = 1
+, {\bfseries QUERY\+\_\+\+TREE}
+, {\bfseries UPDATE\+\_\+\+TREE}
+, {\bfseries DISPLAY\+\_\+\+ALL\+\_\+\+TREES}
+, \newline
+{\bfseries EXIT\+\_\+\+PROGRAM}
  \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
@@ -82,7 +82,7 @@ Get menu option into readable string
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A string that specifies the name of menu option, N\+U\+LL if the state is unknown 
+A string that specifies the name of menu option, NULL if the state is unknown 
 \end{DoxyReturn}
 
 
@@ -93,19 +93,19 @@ Definition at line 103 of file menuoption.\+c.
 \DoxyCodeLine{104 \{}
 \DoxyCodeLine{105   \textcolor{keywordflow}{switch} (op) \{}
 \DoxyCodeLine{106     \textcolor{keywordflow}{case} PLANT\_TREE:}
-\DoxyCodeLine{107       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Plant Tree"};}
+\DoxyCodeLine{107       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Plant Tree"{}};}
 \DoxyCodeLine{108 }
 \DoxyCodeLine{109     \textcolor{keywordflow}{case} QUERY\_TREE:}
-\DoxyCodeLine{110       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Query Tree"};}
+\DoxyCodeLine{110       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Query Tree"{}};}
 \DoxyCodeLine{111 }
 \DoxyCodeLine{112     \textcolor{keywordflow}{case} UPDATE\_TREE:}
-\DoxyCodeLine{113       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Update Tree"};}
+\DoxyCodeLine{113       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Update Tree"{}};}
 \DoxyCodeLine{114 }
 \DoxyCodeLine{115     \textcolor{keywordflow}{case} DISPLAY\_ALL\_TREES:}
-\DoxyCodeLine{116       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Display All Trees"};}
+\DoxyCodeLine{116       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Display All Trees"{}};}
 \DoxyCodeLine{117 }
 \DoxyCodeLine{118     \textcolor{keywordflow}{case} EXIT\_PROGRAM:}
-\DoxyCodeLine{119       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Exit Program"};}
+\DoxyCodeLine{119       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Exit Program"{}};}
 \DoxyCodeLine{120 }
 \DoxyCodeLine{121     \textcolor{keywordflow}{default}:}
 \DoxyCodeLine{122       \textcolor{keywordflow}{return} (\textcolor{keywordtype}{char}*)0;}
@@ -133,31 +133,31 @@ Definition at line 74 of file menuoption.\+c.
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{75 \{}
-\DoxyCodeLine{76   printf(\textcolor{stringliteral}{"  \_\_\_\_\_\_\_\_                               .\_\_                       .\_\_\_ \(\backslash\)n"});}
-\DoxyCodeLine{77   printf(\textcolor{stringliteral}{" /  \_\_\_\_\_/\_\_\_\_\_\_\_   \_\_\_\_   \_\_\_\_    \_\_\_\_  |  |  \_\_\_\_\_     \_\_\_\_    \_\_| \_/ \(\backslash\)n"});}
-\DoxyCodeLine{78   printf(\textcolor{stringliteral}{"/   \(\backslash\)\(\backslash\)  \_\_\_\(\backslash\)\(\backslash\)\_  \_\_ \(\backslash\)\(\backslash\)\_/ \_\_ \(\backslash\)\(\backslash\)\_/ \_\_ \(\backslash\)\(\backslash\)  /    \(\backslash\)\(\backslash\) |  |  \(\backslash\)\(\backslash\)\_\_  \(\backslash\)\(\backslash\)   /    \(\backslash\)\(\backslash\)  / \_\_ |  \(\backslash\)n"});}
-\DoxyCodeLine{79   printf(\textcolor{stringliteral}{"\(\backslash\)\(\backslash\)    \(\backslash\)\(\backslash\)\_\(\backslash\)\(\backslash\)  \(\backslash\)\(\backslash\)|  | \(\backslash\)\(\backslash\)/\(\backslash\)\(\backslash\)  \_\_\_/\(\backslash\)\(\backslash\)  \_\_\_/ |   |  \(\backslash\)\(\backslash\)|  |\_\_ / \_\_ \(\backslash\)\(\backslash\)\_|   |  \(\backslash\)\(\backslash\)/ /\_/ |  \(\backslash\)n"});}
-\DoxyCodeLine{80   printf(\textcolor{stringliteral}{" \(\backslash\)\(\backslash\)\_\_\_\_\_\_  /|\_\_|    \(\backslash\)\(\backslash\)\_\_\_  >\(\backslash\)\(\backslash\)\_\_\_  >|\_\_\_|  /|\_\_\_\_/(\_\_\_\_  /|\_\_\_|  /\(\backslash\)\(\backslash\)\_\_\_\_ |  \(\backslash\)n"});}
-\DoxyCodeLine{81   printf(\textcolor{stringliteral}{"        \(\backslash\)\(\backslash\)/             \(\backslash\)\(\backslash\)/     \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/            \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/  \(\backslash\)n\(\backslash\)n"});}
+\DoxyCodeLine{76   printf(\textcolor{stringliteral}{"{}  \_\_\_\_\_\_\_\_                               .\_\_                       .\_\_\_ \(\backslash\)n"{}});}
+\DoxyCodeLine{77   printf(\textcolor{stringliteral}{"{} /  \_\_\_\_\_/\_\_\_\_\_\_\_   \_\_\_\_   \_\_\_\_    \_\_\_\_  |  |  \_\_\_\_\_     \_\_\_\_    \_\_| \_/ \(\backslash\)n"{}});}
+\DoxyCodeLine{78   printf(\textcolor{stringliteral}{"{}/   \(\backslash\)\(\backslash\)  \_\_\_\(\backslash\)\(\backslash\)\_  \_\_ \(\backslash\)\(\backslash\)\_/ \_\_ \(\backslash\)\(\backslash\)\_/ \_\_ \(\backslash\)\(\backslash\)  /    \(\backslash\)\(\backslash\) |  |  \(\backslash\)\(\backslash\)\_\_  \(\backslash\)\(\backslash\)   /    \(\backslash\)\(\backslash\)  / \_\_ |  \(\backslash\)n"{}});}
+\DoxyCodeLine{79   printf(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)    \(\backslash\)\(\backslash\)\_\(\backslash\)\(\backslash\)  \(\backslash\)\(\backslash\)|  | \(\backslash\)\(\backslash\)/\(\backslash\)\(\backslash\)  \_\_\_/\(\backslash\)\(\backslash\)  \_\_\_/ |   |  \(\backslash\)\(\backslash\)|  |\_\_ / \_\_ \(\backslash\)\(\backslash\)\_|   |  \(\backslash\)\(\backslash\)/ /\_/ |  \(\backslash\)n"{}});}
+\DoxyCodeLine{80   printf(\textcolor{stringliteral}{"{} \(\backslash\)\(\backslash\)\_\_\_\_\_\_  /|\_\_|    \(\backslash\)\(\backslash\)\_\_\_  >\(\backslash\)\(\backslash\)\_\_\_  >|\_\_\_|  /|\_\_\_\_/(\_\_\_\_  /|\_\_\_|  /\(\backslash\)\(\backslash\)\_\_\_\_ |  \(\backslash\)n"{}});}
+\DoxyCodeLine{81   printf(\textcolor{stringliteral}{"{}        \(\backslash\)\(\backslash\)/             \(\backslash\)\(\backslash\)/     \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/            \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/      \(\backslash\)\(\backslash\)/  \(\backslash\)n\(\backslash\)n"{}});}
 \DoxyCodeLine{82 }
-\DoxyCodeLine{83   printf(\textcolor{stringliteral}{"Welcome to greenland, a place to plant tree!\(\backslash\)n\(\backslash\)n"});}
-\DoxyCodeLine{84   printf(\textcolor{stringliteral}{"We don't have any affiliation to the Greenland government, but if \(\backslash\)n"}}
-\DoxyCodeLine{85          \textcolor{stringliteral}{"you can plant a tree there, we are more than welcome! :)\(\backslash\)n"});}
+\DoxyCodeLine{83   printf(\textcolor{stringliteral}{"{}Welcome to greenland, a place to plant tree!\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{84   printf(\textcolor{stringliteral}{"{}We don't have any affiliation to the Greenland government, but if \(\backslash\)n"{}}}
+\DoxyCodeLine{85          \textcolor{stringliteral}{"{}you can plant a tree there, we are more than welcome! :)\(\backslash\)n"{}});}
 \DoxyCodeLine{86 }
-\DoxyCodeLine{87   printf(\textcolor{stringliteral}{"\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n"});}
-\DoxyCodeLine{88   printf(\textcolor{stringliteral}{"\#                              \#\(\backslash\)n"});}
-\DoxyCodeLine{89   printf(\textcolor{stringliteral}{"\#            MENU              \#\(\backslash\)n"});}
-\DoxyCodeLine{90   printf(\textcolor{stringliteral}{"\#                              \#\(\backslash\)n"});}
-\DoxyCodeLine{91   printf(\textcolor{stringliteral}{"\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n\(\backslash\)n"});}
-\DoxyCodeLine{92   printf(\textcolor{stringliteral}{"\(\backslash\)t1. To plant a tree\(\backslash\)n"});}
-\DoxyCodeLine{93   printf(\textcolor{stringliteral}{"\(\backslash\)t2. To query a tree\(\backslash\)n"});}
-\DoxyCodeLine{94   printf(\textcolor{stringliteral}{"\(\backslash\)t3. To update a tree's status\(\backslash\)n"});}
-\DoxyCodeLine{95   printf(\textcolor{stringliteral}{"\(\backslash\)t4. To display all the tree\(\backslash\)n"});}
-\DoxyCodeLine{96   printf(\textcolor{stringliteral}{"\(\backslash\)t5. Exit\(\backslash\)n"});}
-\DoxyCodeLine{97   printf(\textcolor{stringliteral}{"(Choose a service needed according to the number)\(\backslash\)n\(\backslash\)n"});}
-\DoxyCodeLine{98   printf(\textcolor{stringliteral}{"Option: "});}
-\DoxyCodeLine{99   scanf(\textcolor{stringliteral}{"\%d"}, (\textcolor{keywordtype}{int}*)opt);}
-\DoxyCodeLine{100   system(\textcolor{stringliteral}{"clear"});}
+\DoxyCodeLine{87   printf(\textcolor{stringliteral}{"{}\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n"{}});}
+\DoxyCodeLine{88   printf(\textcolor{stringliteral}{"{}\#                              \#\(\backslash\)n"{}});}
+\DoxyCodeLine{89   printf(\textcolor{stringliteral}{"{}\#            MENU              \#\(\backslash\)n"{}});}
+\DoxyCodeLine{90   printf(\textcolor{stringliteral}{"{}\#                              \#\(\backslash\)n"{}});}
+\DoxyCodeLine{91   printf(\textcolor{stringliteral}{"{}\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{92   printf(\textcolor{stringliteral}{"{}\(\backslash\)t1. To plant a tree\(\backslash\)n"{}});}
+\DoxyCodeLine{93   printf(\textcolor{stringliteral}{"{}\(\backslash\)t2. To query a tree\(\backslash\)n"{}});}
+\DoxyCodeLine{94   printf(\textcolor{stringliteral}{"{}\(\backslash\)t3. To update a tree's status\(\backslash\)n"{}});}
+\DoxyCodeLine{95   printf(\textcolor{stringliteral}{"{}\(\backslash\)t4. To display all the tree\(\backslash\)n"{}});}
+\DoxyCodeLine{96   printf(\textcolor{stringliteral}{"{}\(\backslash\)t5. Exit\(\backslash\)n"{}});}
+\DoxyCodeLine{97   printf(\textcolor{stringliteral}{"{}(Choose a service needed according to the number)\(\backslash\)n\(\backslash\)n"{}});}
+\DoxyCodeLine{98   printf(\textcolor{stringliteral}{"{}Option: "{}});}
+\DoxyCodeLine{99   scanf(\textcolor{stringliteral}{"{}\%d"{}}, (\textcolor{keywordtype}{int}*)opt);}
+\DoxyCodeLine{100   system(\textcolor{stringliteral}{"{}clear"{}});}
 \DoxyCodeLine{101 \}}
 
 \end{DoxyCode}
@@ -197,12 +197,12 @@ Definition at line 31 of file menuoption.\+c.
 \DoxyCodeLine{39       p(semid); \textcolor{comment}{// lock the semaphore for writing}}
 \DoxyCodeLine{40       plant\_tree\_server(FILENAME, tree, new\_sockfd, buffer);}
 \DoxyCodeLine{41       v(semid); \textcolor{comment}{// unlock the semaphore after writing}}
-\DoxyCodeLine{42       sprintf(msg, \textcolor{stringliteral}{"Client [\%s]: \%s Process Done."}, cli\_addr, \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{getMenuOptionName}}(mo));}
+\DoxyCodeLine{42       sprintf(msg, \textcolor{stringliteral}{"{}Client [\%s]: \%s Process Done."{}}, cli\_addr, \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{getMenuOptionName}}(mo));}
 \DoxyCodeLine{43       \textcolor{keywordflow}{return} msg;}
 \DoxyCodeLine{44 }
 \DoxyCodeLine{45     \textcolor{keywordflow}{case} QUERY\_TREE:}
 \DoxyCodeLine{46       query\_tree\_server(FILENAME, tree, new\_sockfd, buffer);}
-\DoxyCodeLine{47       sprintf(msg, \textcolor{stringliteral}{"Client [\%s]: \%s Process Done."}, cli\_addr, \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{getMenuOptionName}}(mo));}
+\DoxyCodeLine{47       sprintf(msg, \textcolor{stringliteral}{"{}Client [\%s]: \%s Process Done."{}}, cli\_addr, \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{getMenuOptionName}}(mo));}
 \DoxyCodeLine{48       \textcolor{keywordflow}{return} msg;}
 \DoxyCodeLine{49 }
 \DoxyCodeLine{50     \textcolor{keywordflow}{case} UPDATE\_TREE:}
@@ -211,20 +211,20 @@ Definition at line 31 of file menuoption.\+c.
 \DoxyCodeLine{53       \textcolor{comment}{/* invoke update\_tree\_server function */}}
 \DoxyCodeLine{54       update\_tree\_server(FILENAME, tree, new\_sockfd, buffer);}
 \DoxyCodeLine{55       v(semid); \textcolor{comment}{// unlock the semaphore after writing}}
-\DoxyCodeLine{56       sprintf(msg, \textcolor{stringliteral}{"Client [\%s]: \%s Process Done."}, cli\_addr, \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{getMenuOptionName}}(mo));}
+\DoxyCodeLine{56       sprintf(msg, \textcolor{stringliteral}{"{}Client [\%s]: \%s Process Done."{}}, cli\_addr, \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{getMenuOptionName}}(mo));}
 \DoxyCodeLine{57       \textcolor{keywordflow}{return} msg;}
 \DoxyCodeLine{58 }
 \DoxyCodeLine{59     \textcolor{keywordflow}{case} DISPLAY\_ALL\_TREES:}
 \DoxyCodeLine{60       display\_all\_tree(FILENAME, new\_sockfd, buffer);}
-\DoxyCodeLine{61       sprintf(msg, \textcolor{stringliteral}{"Client [\%s]: \%s Process Done."}, cli\_addr, \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{getMenuOptionName}}(mo));}
+\DoxyCodeLine{61       sprintf(msg, \textcolor{stringliteral}{"{}Client [\%s]: \%s Process Done."{}}, cli\_addr, \mbox{\hyperlink{menuoption_8h_a43ea43aa23e5cf4da54a2be35f7f0fce}{getMenuOptionName}}(mo));}
 \DoxyCodeLine{62       \textcolor{keywordflow}{return} msg;}
 \DoxyCodeLine{63 }
 \DoxyCodeLine{64     \textcolor{keywordflow}{case} EXIT\_PROGRAM:}
-\DoxyCodeLine{65       sprintf(msg, \textcolor{stringliteral}{"Client [\%s]: Exited program."}, cli\_addr);}
+\DoxyCodeLine{65       sprintf(msg, \textcolor{stringliteral}{"{}Client [\%s]: Exited program."{}}, cli\_addr);}
 \DoxyCodeLine{66       \textcolor{keywordflow}{return} msg;}
 \DoxyCodeLine{67 }
 \DoxyCodeLine{68     \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{69       sprintf(msg, \textcolor{stringliteral}{"Option \%d not supported\(\backslash\)n"}, mo);}
+\DoxyCodeLine{69       sprintf(msg, \textcolor{stringliteral}{"{}Option \%d not supported\(\backslash\)n"{}}, mo);}
 \DoxyCodeLine{70       \textcolor{keywordflow}{return} msg;}
 \DoxyCodeLine{71   \}}
 \DoxyCodeLine{72 \}}
