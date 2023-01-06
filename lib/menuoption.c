@@ -391,11 +391,17 @@ void query_tree_server(const char* filename, Tree tree, int new_sockfd,
 
   // send to client
   char date[BUFFER_SIZE];
-  strftime(date, BUFFER_SIZE, "%Y-%m-%d",
-           tree.day_planted); // refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti
+
+  if (tree.status != DEAD) {
+    strftime(date, BUFFER_SIZE, "%Y-%m-%d",
+             tree.day_planted); // refer here: https://www.ibm.com/docs/en/i/7.3?topic=functions-strftime-convert-datetime-string#strfti
+  } else {
+    sprintf(date, "NO DATE\t");
+  }
 
   sprintf(buffer, "%d,%d\t\t%s\t%s\t%d (%s)\n", coordinates.x, coordinates.y,
           tree.species, date, tree.status, trstat_to_string(tree.status));
+  printf("\n\ndebug: [%s]\n\n", buffer);
 
   send(new_sockfd, buffer, BUFFER_SIZE, 0);
 } /* end of query_tree_server() function */
@@ -408,11 +414,11 @@ int p(int semid)
 
   p_buf.sem_op =
     -1; /* the semaphore value is decremented by the absolute value of sem_op (-1)
-                               showing the locking operation of semaphore is done */
+                                 showing the locking operation of semaphore is done */
 
   p_buf.sem_flg =
     SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
-                                      This allows processes to avoid deadlock problems. */
+                                        This allows processes to avoid deadlock problems. */
 
   if (semop(semid, &p_buf, 1) == -1) {
     /* add explanation here */
@@ -431,11 +437,11 @@ int v(int semid)
 
   v_buf.sem_op =
     1; /* the semaphore value is incremented by the absolute value of sem_op (1),
-                              showing the unlocking operation of semaphore is done. */
+                                showing the unlocking operation of semaphore is done. */
 
   v_buf.sem_flg =
     SEM_UNDO; /* SEM_UNDO operation flag is used to tell the system to undo the process's semaphore changes automaticall, when the process exits.
-                                      This allows processes to avoid deadlock problems. */
+                                        This allows processes to avoid deadlock problems. */
 
   if (semop(semid, &v_buf, 1) == -1) {
     /* perform the semaphore operation as specified in v_buf struct on semaphore with the id (semid)
