@@ -8,13 +8,12 @@
 /**
  * MenuOption defines available options in the client menu
  */
-typedef enum MenuOption
-{
-    PLANT_TREE = 1,
-    QUERY_TREE,
-    UPDATE_TREE,
-    DISPLAY_ALL_TREES,
-    EXIT_PROGRAM
+typedef enum MenuOption {
+  PLANT_TREE = 1,
+  QUERY_TREE,
+  UPDATE_TREE,
+  DISPLAY_ALL_TREES,
+  EXIT_PROGRAM
 } MenuOption;
 
 /**
@@ -26,7 +25,7 @@ typedef enum MenuOption
  *
  * @return 0 if the handling succeeded, -1 if failed
  */
-char *moption_handle(int new_sockfd, int semid, char *cli_addr, MenuOption mo);
+char* moption_handle(int new_sockfd, int semid, char* cli_addr, MenuOption mo);
 
 /**
  * Display menu options
@@ -34,7 +33,7 @@ char *moption_handle(int new_sockfd, int semid, char *cli_addr, MenuOption mo);
  * @param[out] opt A MenuOption got from user's input
  *
  */
-void moption_display(MenuOption *opt);
+void moption_display(MenuOption* opt);
 
 /**
  * Get menu option into readable string
@@ -44,6 +43,6 @@ void moption_display(MenuOption *opt);
  * @return A string that specifies the name of menu option, NULL if the state is
  *         unknown
  */
-const char *getMenuOptionName(enum MenuOption op);
+const char* getMenuOptionName(enum MenuOption op);
 
 #endif

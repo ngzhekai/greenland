@@ -17,7 +17,7 @@ lib/menuoption.h
 
 .in +1c
 .ti -1c
-.RI "enum \fBMenuOption\fP { \fBPLANT_TREE\fP = 1, \fBQUERY_TREE\fP, \fBUPDATE_TREE\fP, \fBEXIT_PROGRAM\fP, \fBDISPLAY_ALL_TREES\fP }"
+.RI "enum \fBMenuOption\fP { \fBPLANT_TREE\fP = 1, \fBQUERY_TREE\fP, \fBUPDATE_TREE\fP, \fBDISPLAY_ALL_TREES\fP, \fBEXIT_PROGRAM\fP }"
 .br
 .in -1c
 .SS "Functions"
@@ -57,7 +57,13 @@ MenuOption defines available options in the client menu
 Definition at line 11 of file menuoption\&.h\&.
 .PP
 .nf
-11 { PLANT_TREE = 1, QUERY_TREE, UPDATE_TREE, EXIT_PROGRAM, DISPLAY_ALL_TREES} MenuOption;
+11                         {
+12   PLANT_TREE = 1,
+13   QUERY_TREE,
+14   UPDATE_TREE,
+15   DISPLAY_ALL_TREES,
+16   EXIT_PROGRAM
+17 } MenuOption;
 .fi
 .SH "Function Documentation"
 .PP 
@@ -76,31 +82,30 @@ A string that specifies the name of menu option, NULL if the state is unknown
 .PP
 
 .PP
-Definition at line 104 of file menuoption\&.c\&.
+Definition at line 103 of file menuoption\&.c\&.
 .PP
 .nf
-105 {
-106   switch (op)
-107   {
-108   case PLANT_TREE:
-109     return "Plant Tree";
-110 
-111   case QUERY_TREE:
-112     return "Query Tree";
-113 
-114   case UPDATE_TREE:
-115     return "Update Tree";
-116 
-117   case EXIT_PROGRAM:
-118     return "Exit Program";
-119 
-120   case DISPLAY_ALL_TREES:
-121     return "Display All Trees";
-122 
-123   default:
-124     return (char *)0;
-125   }
-126 }
+104 {
+105   switch (op) {
+106     case PLANT_TREE:
+107       return "Plant Tree";
+108 
+109     case QUERY_TREE:
+110       return "Query Tree";
+111 
+112     case UPDATE_TREE:
+113       return "Update Tree";
+114 
+115     case DISPLAY_ALL_TREES:
+116       return "Display All Trees";
+117 
+118     case EXIT_PROGRAM:
+119       return "Exit Program";
+120 
+121     default:
+122       return (char*)0;
+123   }
+124 }
 .fi
 .SS "void moption_display (\fBMenuOption\fP * opt)"
 Display menu options
@@ -112,36 +117,36 @@ Display menu options
 .PP
 
 .PP
-Definition at line 75 of file menuoption\&.c\&.
+Definition at line 74 of file menuoption\&.c\&.
 .PP
 .nf
-76 {
-77   printf("  ________                               \&.__                       \&.___ \n");
-78   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
-79   printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
-80   printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
-81   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
-82   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
-83 
-84   printf("Welcome to greenland, a place to plant tree!\n\n");
-85   printf("We don't have any affiliation to the Greenland government, but if \n"
-86          "you can plant a tree there, we are more than welcome! :)\n");
-87 
-88   printf("################################\n");
-89   printf("#                              #\n");
-90   printf("#            MENU              #\n");
-91   printf("#                              #\n");
-92   printf("################################\n\n");
-93   printf("\t1\&. To plant a tree\n");
-94   printf("\t2\&. To query a tree\n");
-95   printf("\t3\&. To update a tree's status\n");
-96   printf("\t4\&. Exit\n");
-97   printf("\t5\&. To display all the tree\n");
-98   printf("(Choose a service needed according to the number)\n\n");
-99   printf("Option: ");
-100   scanf("%d", (int *)opt);
-101   system("clear");
-102 }
+75 {
+76   printf("  ________                               \&.__                       \&.___ \n");
+77   printf(" /  _____/_______   ____   ____    ____  |  |  _____     ____    __| _/ \n");
+78   printf("/   \\  ___\\_  __ \\_/ __ \\_/ __ \\  /    \\ |  |  \\__  \\   /    \\  / __ |  \n");
+79   printf("\\    \\_\\  \\|  | \\/\\  ___/\\  ___/ |   |  \\|  |__ / __ \\_|   |  \\/ /_/ |  \n");
+80   printf(" \\______  /|__|    \\___  >\\___  >|___|  /|____/(____  /|___|  /\\____ |  \n");
+81   printf("        \\/             \\/     \\/      \\/            \\/      \\/      \\/  \n\n");
+82 
+83   printf("Welcome to greenland, a place to plant tree!\n\n");
+84   printf("We don't have any affiliation to the Greenland government, but if \n"
+85          "you can plant a tree there, we are more than welcome! :)\n");
+86 
+87   printf("################################\n");
+88   printf("#                              #\n");
+89   printf("#            MENU              #\n");
+90   printf("#                              #\n");
+91   printf("################################\n\n");
+92   printf("\t1\&. To plant a tree\n");
+93   printf("\t2\&. To query a tree\n");
+94   printf("\t3\&. To update a tree's status\n");
+95   printf("\t4\&. To display all the tree\n");
+96   printf("\t5\&. Exit\n");
+97   printf("(Choose a service needed according to the number)\n\n");
+98   printf("Option: ");
+99   scanf("%d", (int*)opt);
+100   system("clear");
+101 }
 .fi
 .SS "char* moption_handle (int new_sockfd, int semid, char * cli_addr, \fBMenuOption\fP mo)"
 Handles menu option
@@ -167,46 +172,45 @@ Definition at line 31 of file menuoption\&.c\&.
 .nf
 32 {
 33   char buffer[BUFFER_SIZE];
-34   char *msg = malloc(1024);
+34   char* msg = malloc(1024);
 35   Tree tree;
 36 
-37   switch (mo)
-38   {
-39   case PLANT_TREE:
-40     p(semid); // lock the semaphore for writing
-41     plant_tree_server(FILENAME, tree, new_sockfd, buffer);
-42     v(semid); // unlock the semaphore after writing
-43     sprintf(msg, "Client [%s]: Plant tree process done\&.", cli_addr);
-44     return msg;
-45 
-46   case QUERY_TREE:
-47     query_tree_server(FILENAME, tree, new_sockfd, buffer);
-48     sprintf(msg, "Client [%s]: Query tree process done\&.", cli_addr);
-49     return msg;
-50 
-51   case UPDATE_TREE:
-52     p(semid); // lock the semaphore for writing
-53     /* critical section */
-54     /* invoke update_tree_server function */
-55     update_tree_server(FILENAME, tree, new_sockfd, buffer);
-56     v(semid); // unlock the semaphore after writing
-57     sprintf(msg, "Client [%s]: Update tree process done\&.", cli_addr);
-58     return msg;
-59 
-60   case EXIT_PROGRAM:
-61     sprintf(msg, "Client [%s]: Exited program\&.", cli_addr);
-62     return msg;
+37   switch (mo) {
+38     case PLANT_TREE:
+39       p(semid); // lock the semaphore for writing
+40       plant_tree_server(FILENAME, tree, new_sockfd, buffer);
+41       v(semid); // unlock the semaphore after writing
+42       sprintf(msg, "Client [%s]: %s Process Done\&.", cli_addr, getMenuOptionName(mo));
+43       return msg;
+44 
+45     case QUERY_TREE:
+46       query_tree_server(FILENAME, tree, new_sockfd, buffer);
+47       sprintf(msg, "Client [%s]: %s Process Done\&.", cli_addr, getMenuOptionName(mo));
+48       return msg;
+49 
+50     case UPDATE_TREE:
+51       p(semid); // lock the semaphore for writing
+52       /* critical section */
+53       /* invoke update_tree_server function */
+54       update_tree_server(FILENAME, tree, new_sockfd, buffer);
+55       v(semid); // unlock the semaphore after writing
+56       sprintf(msg, "Client [%s]: %s Process Done\&.", cli_addr, getMenuOptionName(mo));
+57       return msg;
+58 
+59     case DISPLAY_ALL_TREES:
+60       display_all_tree(FILENAME, new_sockfd, buffer);
+61       sprintf(msg, "Client [%s]: %s Process Done\&.", cli_addr, getMenuOptionName(mo));
+62       return msg;
 63 
-64   case DISPLAY_ALL_TREES:
-65     display_all_tree(FILENAME, new_sockfd, buffer);
-66     sprintf(msg, "Client [%s]: Display tree process done\&.", cli_addr);
-67     return msg;
-68 
-69   default:
-70     sprintf(msg, "Option %d not supported\n", mo);
-71     return msg;
-72   }
-73 }
+64     case EXIT_PROGRAM:
+65       sprintf(msg, "Client [%s]: Exited program\&.", cli_addr);
+66       return msg;
+67 
+68     default:
+69       sprintf(msg, "Option %d not supported\n", mo);
+70       return msg;
+71   }
+72 }
 .fi
 .SH "Author"
 .PP 
