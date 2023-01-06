@@ -16,7 +16,7 @@ START_TEST(test_tree_create_dead)
 
   t = tree_create("foo", DEAD, "2022-12-05");
 
-  ck_assert_uint_eq(t->str_size, 4);
+  ck_assert_uint_eq(t->str_size, strlen("foo"));
   ck_assert_str_eq(tree_get_species(t), "foo");
   ck_assert(tree_get_status(t) == DEAD);
   ck_assert(t->day_planted == NULL);
@@ -34,7 +34,7 @@ START_TEST(test_tree_create_normal)
   char* d = malloc(sizeof(char) * 11);
   strftime(d, sizeof(char) * 11, "%F", tree_get_day_planted(t));
 
-  ck_assert_uint_eq(t->str_size, 4);
+  ck_assert_uint_eq(t->str_size, strlen("foo"));
   ck_assert_str_eq(tree_get_species(t), "foo");
   ck_assert(tree_get_status(t) == PLANTED);
   ck_assert_str_eq(d, "2022-12-05");

@@ -41,7 +41,7 @@ struct tm* tree_get_day_planted(const Tree* t)
 
 void tree_set_species(Tree* t, const char* sp)
 {
-  if ((t->str_size = strlen(sp) + 1) > 0) {
+  if ((t->str_size = strlen(sp)) > 0) {
     t->species = calloc(t->str_size, sizeof(char));
     strncpy(t->species, sp, t->str_size);
   } else {
